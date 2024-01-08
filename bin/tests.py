@@ -5,6 +5,7 @@ def main():
     able.string_reader.main()
     able.string_updater.main()
     able.string_deleter.main()
+    able.appendable.main()
 
     print('good enough')
 
