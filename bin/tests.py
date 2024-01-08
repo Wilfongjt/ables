@@ -6,7 +6,7 @@ def main():
     able.string_updater.main()
     able.string_deleter.main()
     able.appendable.main()
-
+    able.classnameable.main()
     print('good enough')
 
 if __name__ == "__main__":
