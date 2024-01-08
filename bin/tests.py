@@ -9,6 +9,8 @@ def main():
     able.classnameable.main()
     able.projectable.main()
     able.datable.main()
+    # able.envable.main()
+    able.failable.main()
     print('good enough')
 
 if __name__ == "__main__":
