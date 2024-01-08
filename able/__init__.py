@@ -9,3 +9,5 @@ from .classnameable import ClassNameable
 from .projectable import Projectable
 from .datable import Datable
 from .failable import Failable
+from .inputable import Inputable
+from .mergeable import Mergeable

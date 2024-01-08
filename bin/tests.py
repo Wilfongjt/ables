@@ -11,6 +11,10 @@ def main():
     able.datable.main()
     # able.envable.main()
     able.failable.main()
+    #able.fileable.main()
+    #able.folderable.main()
+    able.inputable.main()
+    able.mergeable.main()
     print('good enough')
 
 if __name__ == "__main__":
