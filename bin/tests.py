@@ -15,6 +15,7 @@ def main():
     #able.folderable.main()
     able.inputable.main()
     able.mergeable.main()
+    able.recordable.main()
     print('good enough')
 
 if __name__ == "__main__":

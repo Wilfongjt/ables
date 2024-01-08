@@ -9,6 +9,7 @@ class TestProjectable(unittest.TestCase):
         # setup
         self.folder = '{}/Development/client/workspace/project'.format(os.environ['HOME'])
         os.makedirs(self.folder, exist_ok=True)
+        self.project_name = 'project'
 
     def test_init(self):
         class Example(Projectable):
@@ -26,6 +27,8 @@ class TestProjectable(unittest.TestCase):
         assert (Example().setProjectFolder(self.folder)
                 .getDevelopmentFolder() == '{}/Development'.format(
             os.environ['HOME']))
+
+        assert (Example().setProjectFolder(self.folder).getProjectName()==self.project_name)
 
     def tearDown(self) -> None:
         # tearDown

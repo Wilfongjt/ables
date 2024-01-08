@@ -14,6 +14,10 @@ class Projectable():
         self.project_folder = project_folder
         return self
 
+    def getProjectName(self):
+        ##* retrive the GitHub project name from the project_folder
+        return self.project_folder.split('/')[-1]
+
     def getDevelopmentFolder(self):
         ##__Enable reference to the development folder__
         ##* get "Development" folder on request
@@ -41,10 +45,10 @@ def main():
     # setup
     folder = '{}/Development/client/workspace/project'.format(os.environ['HOME'])
     expected = '{}/Development/client'.format(os.environ['HOME'])
-
+    project_name = 'project'
     os.makedirs(folder, exist_ok=True)
 
-    print('folder', folder)
+    #print('folder', folder)
     # test
     class Example(Projectable):
         def __init__(self):
@@ -54,6 +58,8 @@ def main():
     assert (Example().setProjectFolder(folder).getWorkspaceFolder()=='{}/Development/client/workspace'.format(os.environ['HOME']))
     assert (Example().setProjectFolder(folder).getClientFolder()=='{}/Development/client'.format(os.environ['HOME']))
     assert (Example().setProjectFolder(folder).getDevelopmentFolder()=='{}/Development'.format(os.environ['HOME']))
+
+    assert (Example().setProjectFolder(folder).getProjectName()==project_name)
 
     # tearDown
     if os.path.isdir('{}'.format(folder)):
