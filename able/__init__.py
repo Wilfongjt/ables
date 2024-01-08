@@ -4,3 +4,4 @@ from .string_reader import ReaderString
 from .string_updater import UpdaterString
 from .string_deleter import DeleterString
 
+from .appendable import Appendable
