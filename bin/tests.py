@@ -8,6 +8,7 @@ def main():
     able.appendable.main()
     able.classnameable.main()
     able.projectable.main()
+    able.datable.main()
     print('good enough')
 
 if __name__ == "__main__":
