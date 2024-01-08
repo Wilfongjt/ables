@@ -8,3 +8,4 @@ from .appendable import Appendable
 from .classnameable import ClassNameable
 from .projectable import Projectable
 from .datable import Datable
+from .failable import Failable
