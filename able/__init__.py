@@ -6,3 +6,4 @@ from .string_deleter import DeleterString
 
 from .appendable import Appendable
 from .classnameable import ClassNameable
+from .projectable import Projectable
