@@ -1,21 +1,25 @@
 import able
 
 def main():
-    able.string_creator.main()
-    able.string_reader.main()
-    able.string_updater.main()
-    able.string_deleter.main()
+
     able.appendable.main()
     able.classnameable.main()
-    able.projectable.main()
     able.datable.main()
     # able.envable.main()
     able.failable.main()
-    #able.fileable.main()
-    #able.folderable.main()
+    able.folderfileable.main()
+    # able.folderable.main()
     able.inputable.main()
+    # lb_util
     able.mergeable.main()
-    able.recordable.main()
+    able.projectable.main()
+    # able.recordable.main()
+    able.string_creator.main()
+    able.string_deleter.main()
+    able.string_reader.main()
+    able.string_updater.main()
+    able.taskable.main()
+
     print('good enough')
 
 if __name__ == "__main__":
