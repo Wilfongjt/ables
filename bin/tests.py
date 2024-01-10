@@ -5,7 +5,7 @@ def main():
     able.appendable.main()
     able.classnameable.main()
     able.datable.main()
-    # able.envable.main()
+    able.file_env.main()
     able.failable.main()
     able.folderfileable.main()
     # able.folderable.main()

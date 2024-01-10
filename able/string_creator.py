@@ -1,51 +1,63 @@
 import os
+import shutil
+
 
 class CreatorString(str):
     ##__FileReadable__
     ##* enable standalone version for testing and ad hoc cases
-    def __init__(self, folder_filename, string_value):
-        #super().__init__(self)
+    def __init__(self, folder_filename, default_contents, overwrite=False):
+        ##* default_contents eg 'A' or 'A=a\nB=b'
+
         self.folder_filename=folder_filename
 
-    def __new__(cls, folder_filename, string_value):
-        ##* Fail when file exists
+    def __new__(cls, folder_filename, default_contents, overwrite=False):
+        ##* Fail when file exists and overwrite is False
         fileExists = os.path.isfile(folder_filename)
-        #print('file', folder_filename)
-        #print('exists', fileExists)
-        if fileExists:
-            raise Exception('Failed, file exists: {}'.format(folder_filename))
-        with open(folder_filename, 'w') as f:
-            f.write(string_value)
-            contents = string_value
-        instance = super().__new__(cls, contents)
-        return instance
 
+        if fileExists:
+            # file exists
+            if overwrite:
+                # overwrite is true
+                with open(folder_filename, 'w') as f:
+                    f.write(default_contents)
+            else:
+                # overwrite is false
+                raise Exception('Create file failed, file exists and no overwrite: {}'.format(folder_filename))
+        else:
+            # file doesnt exist
+            with open(folder_filename, 'w') as f:
+                f.write(default_contents)
+        instance = super().__new__(cls, default_contents)
+        return instance
 
 def main():
     from able.lb_util import LbUtil
     #from file_createable import FileCreateable
-    folder = '{}/Development/Temp/writer_string'.format(os.environ['HOME'])
-    folder_file = '{}/writer.txt'.format(folder)
+    folder = '{}/Development/Temp/create_string'.format(os.environ['HOME'])
+    folder_file = '{}/create_string.txt'.format(folder)
 
     # setup
     contents = 'A=a\nB=b'
-    LbUtil().create_folders(folder)
-    #FileCreateable().create_file(folder_filename=folder_file,default_contents=new_contents)
-    #assert (LbUtil().folderfile_exists(folder_file))
+    os.makedirs(folder, exist_ok=True)
 
     # test
-    try:
-        #print('writer',CreatorString(folder_file, new_contents))
-        assert (CreatorString(folder_file, contents) == contents)
-        #print('read_file', ReaderString(folder_file))
-    except:
-        print('running clean up')
+    assert (CreatorString(folder_file, contents, overwrite=True) == contents)
+    assert (os.path.isfile(folder_file))
+    #assert (CreatorString(folder_file, contents, overwrite=True) == contents)
+
+
+    #try:
+    #    #print('writer',CreatorString(folder_file, new_contents))
+    #    assert (CreatorString(folder_file, contents) == contents)
+    #    assert (os.path.isfile(folder_file))
+    #    #print('read_file', ReaderString(folder_file))
+    #except as ex:
+    #    print('running clean up', ex)
 
     # cleanup
-    LbUtil().delete_folderfilename(folder_file)
+    if os.path.isfile(folder_file):
+        shutil.rmtree(folder)
 
-    #testFileReadable_mixin_str()
-    #testFileReadable_mixin_list()
 
 if __name__ == "__main__":
     # execute as docker
