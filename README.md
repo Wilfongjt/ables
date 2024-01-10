@@ -1,47 +1,46 @@
 # ables
 Useful Python Mixins
-## Import package from GitHub
 
-### 1. Create a python project
-Add setup.py 
+### 1.1 Create a python project
+
 ```python
+# main.py 
+# This is a sample Python script.
 
+__version__ = '0.1.0'
+from able.mergeable import Mergeable
 
-```
-### 2. Enable project 
-```bash
-python3 -m venv ./.venv
-```
-```bash
-pip install -U pip setuptools
-```
-```bash
-pip install -e .
-```
+def main():
+    template = 'Hi from <<A>>, looking at <<B>>.'
+    nv_list = [{'name': '<<A>>', 'value': 'a'}, {'name': '<<B>>', 'value': 'b'}]
+    example = Mergeable().merge(template, nv_list)
+    print('example',example)
 
-### 2. Confirm package import
-
-```bash
-
-python3 -c "from able.appendable import Appendable"
-python3 -c "from able.classnameable import ClassNameable"
-python3 -c "from able.datable import Datable"
-python3 -c "from able.failable import Failable"
-python3 -c "from able.file_env import FileEnv"
-python3 -c "from able.folderfileable import FolderFileable"
-python3 -c "from able.inputable import Inputable"
-python3 -c "from able.lb_util import Lb_Util"
-python3 -c "from able.mergeable import Mergeable"
-python3 -c "from able.projectable import Projectable"
-python3 -c "from able.recordable import Recordable"
-python3 -c "from able.resultable import Resultable"
-python3 -c "from able.string_creator import CreatorString"
-python3 -c "from able.string_deleter import DeleterString"
-python3 -c "from able.string_updater import UpdaterString"
-python3 -c "from able.taskable import Taskable"
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    main()
 
 ```
-## Install package
+
+### 1. Add setup.py to your project 
+```python
+# setup.py goes in root of your application
+
+from setuptools import setup, find_packages
+
+from able.__init__ import __version__
+setup(
+    name='able',
+    version=__version__,
+    url='https://github.com/Wilfongjt/abilities',
+    author='James Wilfong',
+    author_email='wilfongjt@gmail.com',
+    packages=find_packages()
+)
+
+```
+
+### 1.3 Install package
 Syntax: pip install "Package" @ git+"URL of the repository"
 
 ```bash
