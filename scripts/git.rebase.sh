@@ -69,6 +69,7 @@ echo "-- checkout"
 git checkout ${GH_BRANCH}
 echo "-- branch"
 git branch
+echo "-- branched"
 # rebase
 echo "-- rebase"
 git rebase ${GH_BRANCH}

@@ -48,7 +48,6 @@ def main():
     project_name = 'project'
     os.makedirs(folder, exist_ok=True)
 
-    #print('folder', folder)
     # test
     class Example(Projectable):
         def __init__(self):

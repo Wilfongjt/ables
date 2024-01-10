@@ -23,7 +23,6 @@ def main():
         def __init__(self):
             Mergeable.__init__(self)
 
-    #print (Example().merge(template, nv_list))
     assert (Example().merge(template, nv_list)=='Hi from a, looking at b.')
 
 if __name__ == "__main__":

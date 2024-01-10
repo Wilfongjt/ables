@@ -49,6 +49,17 @@ class LbUtil():
 
         return exists
 
+    def formulate(self, form, title=None):
+        ##* Convert JSON Object to String
+        ##* eg {a:1, b:2} to (a, b)
+        keys = []
+        for key in form:
+            keys.append(key)
+        if title:
+            return '({}({}))'.format(title, ','.join(keys))
+
+        return '({})'.format(','.join(keys))
+
     def folder_exists(self, folder):
         ##* Test if a given project_folder exists on request
         ##* project_folder exists when found on drive ... [x] has test
@@ -67,6 +78,7 @@ class LbUtil():
 
 def main():
     assert(LbUtil())
+    assert(LbUtil().formulate({'A': 'a', 'B': 'b'})=='(A,B)')
 
 if __name__ == "__main__":
     # execute as docker

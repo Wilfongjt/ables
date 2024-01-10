@@ -13,4 +13,5 @@ from .string_creator import CreatorString
 from .string_deleter import DeleterString
 from .string_reader import ReaderString
 from .string_updater import UpdaterString
+from .recordable import Recordable 
 from .taskable import Taskable

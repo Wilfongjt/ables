@@ -8,7 +8,6 @@ from able import ReaderString
 class TestReaderString(unittest.TestCase):
 
     def setUp(self):
-        #print('A')
         self.folder = '{}/Development/Temp/reader_string'.format(os.environ['HOME'])
         self.folder_filename = '{}/reader.txt'.format(self.folder)
         self.contents = 'A=a\nB=b'
