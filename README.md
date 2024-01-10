@@ -45,7 +45,7 @@ python3 -c "from able.taskable import Taskable"
 Syntax: pip install "Package" @ git+"URL of the repository"
 
 ```bash
-pip install lb_lib@git+https://github.com/Wilfongjt/lb_lib#egg=lb-lib-0.1.2
+pip install able@git+https://github.com/Wilfongjt/abilities#egg=able-0.1.0
 ```
 
 see the /scripts folder
