@@ -67,6 +67,7 @@ git pull origin ${GH_TRUNK}
 # change back to my changes
 echo "-- checkout"
 git checkout ${GH_BRANCH}
+echo "-- branch"
 git branch
 # rebase
 echo "-- rebase"
