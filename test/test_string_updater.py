@@ -7,7 +7,7 @@ from able import UpdaterString, ReaderString
 class TestUpdaterString(unittest.TestCase):
 
     def setUp(self):
-        #print('A')
+
         self.folder = '{}/Development/Temp/updater_string'.format(os.environ['HOME'])
         self.folder_filename = '{}/updater.txt'.format(self.folder)
         self.contents = 'A=a\nB=b'

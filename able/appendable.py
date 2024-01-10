@@ -5,7 +5,6 @@ class Appendable():
     ## Provide the abilty to append new lines to a document
     ##
     def __init__(self):
-        #print('appendable init')
         self.appendable=False
 
     def isAppendable(self):

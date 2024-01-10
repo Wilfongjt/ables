@@ -34,7 +34,6 @@ def main():
 
     # test
     actual = DeleterString(folder_filename)
-    # print('actual', actual.replace('\n',''))
     assert (actual==contents)
 
     # cleanup

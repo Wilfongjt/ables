@@ -47,10 +47,8 @@ def main():
 
 
     #try:
-    #    #print('writer',CreatorString(folder_file, new_contents))
     #    assert (CreatorString(folder_file, contents) == contents)
     #    assert (os.path.isfile(folder_file))
-    #    #print('read_file', ReaderString(folder_file))
     #except as ex:
     #    print('running clean up', ex)
 

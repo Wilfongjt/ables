@@ -16,7 +16,6 @@ class TestFileEnv(unittest.TestCase):
         self.default_contents += '# format example, delete next line when not needed\n'
         self.default_contents += 'SAMPLE_VALUE=abc'
         with open(self.folder_filename, 'w') as f:
-            #print('create test file', self.folder_filename)
             f.write(self.default_contents)
 
     def test_init(self):
