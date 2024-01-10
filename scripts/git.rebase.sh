@@ -62,10 +62,12 @@ git commit -m "${GH_MESSAGE}"
 #exit 0
 # download any repo changes made by another
 git checkout ${GH_TRUNK} 
-echo "----"
+echo "-- pull origin"
 git pull origin ${GH_TRUNK}    
 # change back to my changes
+echo "-- checkout"
 git checkout ${GH_BRANCH}
+echo "-- branch"
 git branch
 # rebase
 echo "-- rebase"
