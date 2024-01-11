@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from able.__init__ import __version__
+from able import __version__
 setup(
     name='able',
     version=__version__,
