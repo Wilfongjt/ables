@@ -1,5 +1,7 @@
 import os
 import shutil
+from os import listdir
+from os.path import isfile, join
 
 class LbUtil():
 
@@ -74,11 +76,69 @@ class LbUtil():
         exists = os.path.isfile(folder_filename)
 
         return exists
+    def get_file_list(self, path, ext=None, withpath=False):
+        #### Get List of File Names on request
+        onlyfiles = []
+
+        ##* return [] when project_folder is None ... [x] has test
+        if not path:
+            return []
+
+        ##* returns [] when project_folder NOT found ... [x] has test
+        if not self.folder_exists(path):
+            return []
+        # get list of files
+        lst = listdir(path)
+        ##* returns [] when no files found ... [ ] has test
+
+        if lst == []:
+            return []
+        ##* return all files when ext = "*" ... [x] has test
+        onlyfiles = [f for f in lst if isfile(join(path, f))]
+
+        ##* return files when file has specified extention ... [x] has test
+        if ext != None and ext != '*':
+            onlyfiles = [f for f in onlyfiles if f.startswith(ext) or f.endswith(ext)]
+        onlyfiles =  [fn for fn in onlyfiles if '.DS_Store' not in fn]
+        ##* prefix with a project_folder name
+        if withpath:
+            onlyfiles = ['{}/{}'.format(path, fn) for fn in onlyfiles]
+
+        ##* return list of filenames when files found [x] has test
+        return onlyfiles
+
+    def get_folder_list(self, path):
+        #### Get List of Folder Names on request
+
+        onlyfolders = []
+        ##* return [] when project_folder is None ... [x] has test
+        if not path:
+            return []
+
+        ##* returns [] when project_folder NOT found ... [x] has test
+        if not self.folder_exists(path):
+            return []
+
+        # get list of folders and files
+        lst = listdir(path)
+
+        ##* returns [] when no folders found ... [x] has test
+        if lst == []:
+            return []
+
+        onlyfolders = ['{}/{}'.format(path, f) for f in lst if not isfile(join(path, f))]
+
+        ## return list ... [x] has test
+        return [fn for fn in onlyfolders]
 
 
 def main():
+    folder= os.getcwd().replace('/able','')
+    print('folder', folder)
     assert(LbUtil())
     assert(LbUtil().formulate({'A': 'a', 'B': 'b'})=='(A,B)')
+    assert(LbUtil().get_folder_list(folder) != [])
+    assert(LbUtil().get_file_list(folder, withpath=True)!=[])
 
 if __name__ == "__main__":
     # execute as docker
