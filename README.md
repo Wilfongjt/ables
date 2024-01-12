@@ -7,7 +7,7 @@ Useful Python Mixins
 # main.py 
 # This is a sample Python script.
 
-__version__ = '0.1.0'
+__version__ = '0.1.3'
 from able.mergeable import Mergeable
 
 def main():
