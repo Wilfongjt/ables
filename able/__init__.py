@@ -1,4 +1,4 @@
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
@@ -13,6 +13,8 @@ from .resultable import Resultable
 from .string_creator import CreatorString
 from .string_deleter import DeleterString
 from .string_reader import ReaderString
-from .string_updater import UpdaterString
+from .string_updater import UpdaterString # update entire string
+from .string_updater_namevalue import UpdaterString_NameValue # update a single line
+from .string_updater_namevaluelist import NameValueList_UpdaterString # update multiple lines
 from .recordable import Recordable 
 from .taskable import Taskable
