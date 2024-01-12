@@ -1,65 +1,59 @@
-import os
-import shutil
 
 class UpdaterString(str):
-    ##__FileReadable__
-    ##* enable standalone version for testing and ad hoc cases
+    ##
+    ##__UpdaterString__
+    ##
+    ## Update with another string
+    ##
+    def update(self, string_value):
+        ##* Update entire string with a new string
+        return UpdaterString(string_value)
+'''    
+class UpdaterString(str):
+    ##
+    ##__UpdaterString__
+    ##
+    def update(self, key, new_line):
+        ## Replace line containing key with a new line
+        ##* eg "A big dog" -> "A big cat"
+        key = str(key).strip()
 
-    def __new__(cls, folder_filename, search_line, new_content):
-        ##* Fail when file doesnt exist
-        fileExists = os.path.isfile(folder_filename)
-        if not fileExists:
-            raise Exception('File Not Found {}'.format(folder_filename))
-        # get existing content
-        with open(folder_filename, 'r') as f:
-            contents = f.read()
-        # find and replace search_line with new_content
-        temp_content=[]
-        found=False
-        for ln in contents.split('\n'):
-            if ln.startswith(search_line):
-                found=True
-                temp_content.append(new_content)
+        temp_content = []
+        found = False
+        for ln in self.split('\n'):
+            if key in ln:
+                found = True
+                temp_content.append(new_line)
             else:
                 temp_content.append(ln)
         if not found:
             # insert at end
-            temp_content.append(new_content)
+            temp_content.append(new_line)
 
         contents = '\n'.join(temp_content)
-        # save
-        with open(folder_filename, 'w') as f:
-            f.write(contents)
 
-        instance = super().__new__(cls, contents)
-        return instance
+        return UpdaterString(contents)
+
+    '''
+
 
 def main():
-    from able import ReaderString
-    folder = '{}/Development/Temp/updater_string'.format(os.environ['HOME'])
-    folder_filename = '{}/updater.txt'.format(folder)
+    str_value = '''
+    #
+    # Environment
 
-    # setup
-    contents = 'A=a\nB=b'
-    os.makedirs(folder, exist_ok=True)
+    '''.replace('  ', '')  # remove leading spaces
+    expected_1 = str_value
+    new_value = '''
+        #
+        # File system
 
-    # create a file to read
-    with open(folder_filename, 'w') as f:
-        f.write(contents)
+        '''.replace('  ', '')  # remove leading spaces
+    expected_2=new_value
+    assert(UpdaterString(str_value) == expected_1)
+    assert(UpdaterString(str_value).update(new_value) == expected_2)
 
-    # test
 
-    assert (UpdaterString(folder_filename,'A=','A=A')=='A=A\nB=b')
-    assert (ReaderString(folder_filename)=='A=A\nB=b')
-    assert (UpdaterString(folder_filename,'B=','B=B')=='A=A\nB=B')
-    assert (ReaderString(folder_filename)=='A=A\nB=B')
-    assert (UpdaterString(folder_filename,'C=','C=C')=='A=A\nB=B\nC=C')
-    assert (ReaderString(folder_filename)=='A=A\nB=B\nC=C')
-
-    # cleanup
-    fileExists = os.path.isfile(folder_filename)
-    if fileExists:
-        shutil.rmtree(folder)
 
 if __name__ == "__main__":
     # execute as docker

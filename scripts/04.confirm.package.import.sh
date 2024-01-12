@@ -16,6 +16,8 @@ python3 -c "from able.resultable import Resultable"
 python3 -c "from able.string_creator import CreatorString"
 python3 -c "from able.string_deleter import DeleterString"
 python3 -c "from able.string_updater import UpdaterString"
+python3 -c "from able.string_updater_namevalue import UpdaterString_NameValue"
+python3 -c "from able.string_updater_namevaluelist import UpdaterString_NameValueList"
 python3 -c "from able.taskable import Taskable"
 
 
