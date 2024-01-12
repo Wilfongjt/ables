@@ -15,6 +15,6 @@ from .string_deleter import DeleterString
 from .string_reader import ReaderString
 from .string_updater import UpdaterString # update entire string
 from .string_updater_namevalue import UpdaterString_NameValue # update a single line
-from .string_updater_namevaluelist import NameValueList_UpdaterString # update multiple lines
+from .string_updater_namevaluelist import UpdaterString_NameValueList # update multiple lines
 from .recordable import Recordable 
 from .taskable import Taskable

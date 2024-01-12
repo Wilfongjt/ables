@@ -2,7 +2,7 @@ import os
 import unittest
 import shutil
 
-from able import NameValueList_UpdaterString #UpdaterString, ReaderString
+from able import UpdaterString_NameValueList #UpdaterString, ReaderString
 
 class TestUpdaterString_NameValueList(unittest.TestCase):
 
@@ -13,8 +13,8 @@ class TestUpdaterString_NameValueList(unittest.TestCase):
         self.str_value = "# sample"
 
     def test_init(self):
-        assert(NameValueList_UpdaterString(self.str_value)==self.str_value)
-        assert(NameValueList_UpdaterString('# sample').update(self.nv_list) == '# sample\nA=a\nB=b\nC=c')
+        assert(UpdaterString_NameValueList(self.str_value) == self.str_value)
+        assert(UpdaterString_NameValueList('# sample').update(self.nv_list) == '# sample\nA=a\nB=b\nC=c')
 
 
 if __name__ == '__main__':
