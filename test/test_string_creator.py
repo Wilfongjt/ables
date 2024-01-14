@@ -23,7 +23,7 @@ class TestCreatorString(unittest.TestCase):
     def test_init(self):
         self.assertTrue(CreatorString(self.folder_filename,self.contents)==self.contents)
         self.assertTrue(os.path.isfile(self.folder_filename))
-
+        self.assertTrue(CreatorString(self.folder_filename,self.contents,hardfail=False)==self.contents)
 
 if __name__ == '__main__':
     unittest.main()

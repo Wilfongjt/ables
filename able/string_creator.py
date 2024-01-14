@@ -5,12 +5,11 @@ import shutil
 class CreatorString(str):
     ##__FileReadable__
     ##* enable standalone version for testing and ad hoc cases
-    def __init__(self, folder_filename, default_contents, overwrite=False):
+    def __init__(self, folder_filename, default_contents, overwrite=False,hardfail=True):
         ##* default_contents eg 'A' or 'A=a\nB=b'
-
         self.folder_filename=folder_filename
 
-    def __new__(cls, folder_filename, default_contents, overwrite=False):
+    def __new__(cls, folder_filename, default_contents, overwrite=False,hardfail=True):
         ##* Fail when file exists and overwrite is False
         fileExists = os.path.isfile(folder_filename)
 
@@ -22,7 +21,8 @@ class CreatorString(str):
                     f.write(default_contents)
             else:
                 # overwrite is false
-                raise Exception('Create file failed, file exists and no overwrite: {}'.format(folder_filename))
+                if hardfail:
+                    raise Exception('Create file failed, file exists and no overwrite: {}'.format(folder_filename))
         else:
             # file doesnt exist
             with open(folder_filename, 'w') as f:
