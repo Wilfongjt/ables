@@ -25,35 +25,43 @@ class TestUpdaterString(unittest.TestCase):
         ##*__UpdaterString__ initialization test
         assert (UpdaterString(self.str_value) == self.expected_1)
         ##*__UpdaterString__ update entire string test
-        assert (UpdaterString(self.str_value).update(self.new_value) == self.expected_2)
-'''
-from able import UpdaterString, ReaderString
+    def test_updateAll(self):
+        # updateAll
+        str_value = '''
+        #
+        # Environment
 
-class TestUpdaterString(unittest.TestCase):
+        '''.replace('  ', '')  # remove leading spaces
+        expected_1 = str_value
+        new_value = '''
+            #
+            # File system
 
-    def setUp(self):
+            '''.replace('  ', '')  # remove leading spaces
+        expected_2 = new_value
+        assert (UpdaterString(str_value) == expected_1)
+        assert (UpdaterString(self.str_value).updateAll(self.new_value) == self.expected_2)
 
-        self.folder = '{}/Development/Temp/updater_string'.format(os.environ['HOME'])
-        self.folder_filename = '{}/updater.txt'.format(self.folder)
-        self.contents = 'A=a\nB=b'
-        os.makedirs(self.folder, exist_ok=True)
-        with open(self.folder_filename, 'w') as f:
-            f.write(self.contents)
+    def test_update(self):
+        # update
+        str_value = "A=A\nB=B"
+        expected1 = "A=a\nB=B"
+        expected2 = "A=A\nB=b"
+        expected3 = "A=A\nB=B\nC=C"
+        assert (UpdaterString(str_value).update('A', 'a') == expected1)
+        assert (UpdaterString(str_value).update('B', 'b') == expected2)
+        assert (UpdaterString(str_value).update('C', 'C') == expected3)
 
-    def tearDown(self):
-        fileExists = os.path.isfile(self.folder_filename)
-        if fileExists:
-            shutil.rmtree(self.folder)
+    def test_updates(self):
+        # updates
+        nv_list = [{'name': 'A', 'value': 'a'},
+                   {'name': 'B', 'value': 'b'},
+                   {'name': 'C', 'value': 'c'}]
+        # print('updates', UpdaterString('# sample').updates(nv_list))
+        assert (UpdaterString('# sample').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
+        assert (UpdaterString('# sample\nA=A').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
+        assert (UpdaterString('# sample\nA=A\nB=B').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
 
-    def test_init(self):
-        assert (UpdaterString(self.folder_filename, 'A=', 'A=A') == 'A=A\nB=b')
-        assert (ReaderString(self.folder_filename) == 'A=A\nB=b')
-        assert (UpdaterString(self.folder_filename, 'B=', 'B=B') == 'A=A\nB=B')
-        assert (ReaderString(self.folder_filename) == 'A=A\nB=B')
-        assert (UpdaterString(self.folder_filename, 'C=', 'C=C') == 'A=A\nB=B\nC=C')
-        assert (ReaderString(self.folder_filename) == 'A=A\nB=B\nC=C')
-
-'''
 
 if __name__ == '__main__':
     unittest.main()

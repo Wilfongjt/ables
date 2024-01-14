@@ -19,8 +19,6 @@ def main():
     able.string_env.main()
     able.string_reader.main()
     able.string_updater.main()
-    able.string_updater_namevalue.main()
-    able.string_updater_namevaluelist.main()
     able.taskable.main()
 
     print('good enough')
