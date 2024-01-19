@@ -26,7 +26,6 @@ set +o allexport
 #cd ..
 
 ls
-echo $(pwd)
 
 # confirm values
 export GH_TRUNK=main
@@ -56,7 +55,7 @@ echo "Continuing"
 ls
 # rebase
 # prepare to save branch changes
-cd ${GH_PROJECT}/   
+#cd ${GH_PROJECT}/
 git checkout ${GH_BRANCH}
 git add .
 git commit -m "${GH_MESSAGE}"
