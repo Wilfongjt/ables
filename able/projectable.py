@@ -6,8 +6,8 @@ class Projectable():
     ##
     ##* project folder eg Development/client/workspace/project
 
-    def __init__(self):
-        self.project_folder=None
+    def __init__(self, project_folder=None):
+        self.project_folder=project_folder
 
     def setProjectFolder(self, project_folder):
         ##* set project folder on request
