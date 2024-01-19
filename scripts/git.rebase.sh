@@ -26,6 +26,7 @@ set +o allexport
 #cd ..
 
 ls
+echo $(pwd)
 
 # confirm values
 export GH_TRUNK=main
