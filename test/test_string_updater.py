@@ -48,9 +48,9 @@ class TestUpdaterString(unittest.TestCase):
         expected1 = "A=a\nB=B"
         expected2 = "A=A\nB=b"
         expected3 = "A=A\nB=B\nC=C"
-        assert (UpdaterString(str_value).update('A', 'a') == expected1)
-        assert (UpdaterString(str_value).update('B', 'b') == expected2)
-        assert (UpdaterString(str_value).update('C', 'C') == expected3)
+        assert (UpdaterString(str_value).update('A=', 'A=a') == expected1)
+        assert (UpdaterString(str_value).update('B=', 'B=b') == expected2)
+        assert (UpdaterString(str_value).update('C=', 'C=C') == expected3)
 
     def test_updates(self):
         # updates
