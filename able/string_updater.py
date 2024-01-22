@@ -16,6 +16,30 @@ class UpdaterString(str):
         ##* Update entire string with a new string
         return UpdaterString(string_value)
 
+    def update(self, startswith_value, new_line_value):
+        ## replace a line that starts with a specific value
+        key = str(startswith_value).strip()
+
+        temp_content = []
+        found = False
+        for ln in self.split('\n'):
+            ##* find key and replace with a new line
+            if ln.strip().startswith(key):
+                found = True
+                # temp_content.append('{}={}'.format(key, value))
+                temp_content.append(new_line_value)
+            else:
+                temp_content.append(ln)
+        if not found:
+            ##* append when key is not found
+            # insert at end
+            # temp_content.append('{}={}'.format(key, value))
+            temp_content.append(new_line_value)
+
+        contents = '\n'.join(temp_content)
+
+        return UpdaterString(contents)
+    '''
     def update(self, key, value):
         ## Update a single line with a name-value pair
         key = str(key).strip()
@@ -37,18 +61,31 @@ class UpdaterString(str):
         contents = '\n'.join(temp_content)
 
         return UpdaterString(contents)
-
+    '''
     def updates(self, nv_list):
         ## Update multiple name-value pairs
 
         contents = UpdaterString(self)
 
         for chg in nv_list:
-            contents = contents.update(chg['name'],chg['value'])
+            startswith_value = '{}='.format(chg['name'])
+            new_line_value = '{}={}'.format(chg['name'], chg['value'])
+            contents = contents.update(startswith_value, new_line_value)
+            # contents = contents.update(chg['name'],chg['value'])
 
         #contents = '\n'.join(contents)
         return UpdaterString(contents)
+'''
+## Updater Use Cases
+##|        | state                            | op | find startswith | replace line | to | outcome          |
+##| ------ | -------------------------------- | -- | --------------- | ------------ | -- | ---------------- |
+##| append | []                               | +  | 'abc 123'       | 'abc 123'    | -> | ['abc 123']  |
+##| ignore | ['abc 123']                      | +  | 'abc 123'       | 'abc 123'    | -> | ['abc 123']  |
+##| update | ['abc 123']                      | +  | 'abc'           | 'abc=123'    | -> | ['abc=123']  |
+##| update | ['abc=123']                      | +  | 'abc'           | 'ABC=123'    | -> | ['ABC=123']  |
+##| append | ['ABC=123']                      | +  | 'de'            | 'de=xxx'     | -> | ['ABC=123', 'de=xxx']  |
 
+'''
 
 def main():
 
@@ -73,9 +110,9 @@ def main():
     expected1 = "A=a\nB=B"
     expected2 = "A=A\nB=b"
     expected3 = "A=A\nB=B\nC=C"
-    assert(UpdaterString(str_value).update('A', 'a') == expected1)
-    assert(UpdaterString(str_value).update('B', 'b') == expected2)
-    assert(UpdaterString(str_value).update('C', 'C') == expected3)
+    assert(UpdaterString(str_value).update('A=', 'A=a') == expected1)
+    assert(UpdaterString(str_value).update('B=', 'B=b') == expected2)
+    assert(UpdaterString(str_value).update('C=', 'C=C') == expected3)
 
     # updates
     nv_list = [{'name':'A', 'value': 'a'},
@@ -85,6 +122,7 @@ def main():
     assert(UpdaterString('# sample').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
     assert(UpdaterString('# sample\nA=A').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
     assert(UpdaterString('# sample\nA=A\nB=B').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
+
 
 if __name__ == "__main__":
     # execute as docker
