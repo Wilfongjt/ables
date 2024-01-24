@@ -1,30 +1,40 @@
 import os
 import shutil
+# create an unmerged template file in the target folder
+# create target file from a template in target folder when target file doesnt exist
+# create target file from a template in target folder when overwrite is True
 
+# if State(template_hard_filename, target_filename).isDeleteable(): # delete file when it exists "---D"
+# if State(template_hard_filename, target_filename).isCreateable(): # create a file when it doesnt exist "C---"
+# if State(template_hard_filename, target_filename).isUpdateable(): # update a line when line starts with a given string "--U-"
 
 class CreatorString(str):
-    ##__FileReadable__
+    ##__CreatorString__
+    ## create an unmerged template file in the target folder
     ##* enable standalone version for testing and ad hoc cases
     def __init__(self, folder_filename, default_contents, overwrite=False,hardfail=True):
         ##* default_contents eg 'A' or 'A=a\nB=b'
         self.folder_filename=folder_filename
 
     def __new__(cls, folder_filename, default_contents, overwrite=False,hardfail=True):
-        ##* Fail when file exists and overwrite is False
         fileExists = os.path.isfile(folder_filename)
 
         if fileExists:
             # file exists
+
             if overwrite:
                 # overwrite is true
+                ##* Create target file when overwrite is True
                 with open(folder_filename, 'w') as f:
                     f.write(default_contents)
             else:
-                # overwrite is false
+
                 if hardfail:
+                    ##* stop when hardfail is True and not overwrite
+
                     raise Exception('Create file failed, file exists and no overwrite: {}'.format(folder_filename))
         else:
-            # file doesnt exist
+            ##* Create target file in target folder when target file doesnt exist
             with open(folder_filename, 'w') as f:
                 f.write(default_contents)
         instance = super().__new__(cls, default_contents)

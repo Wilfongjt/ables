@@ -1,4 +1,4 @@
-from able.string_reader import ReaderString
+from able.string_reader import StringReader
 import os
 import shutil
 import re
