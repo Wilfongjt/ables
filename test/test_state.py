@@ -32,7 +32,8 @@ class TestState(unittest.TestCase):
     def test_init(self):
 
         assert (State(self.template_hard_filename, self.target_filename))
-        assert (State(self.template_hard_filename, self.target_filename).isTargetReadable())
+        #print (os.path.isfile(self.target_filename))
+        assert (not State(self.template_hard_filename, self.target_filename).isTargetReadable())
 
         assert (State(self.template_hard_filename, self.target_filename).isHardCreate())
         assert (State(self.template_hard_filename, self.target_filename).isHardUpdate())

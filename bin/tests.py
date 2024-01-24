@@ -22,6 +22,7 @@ def main():
     able.string_reader.main()
     able.string_template.main()
     able.string_updater.main()
+    able.string_writer.main()
     able.taskable.main()
 
     print('good enough')
