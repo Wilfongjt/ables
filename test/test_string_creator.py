@@ -3,7 +3,7 @@ import unittest
 import shutil
 
 from able import CreatorString
-from able import ReaderString
+from able import StringReader
 
 class TestCreatorString(unittest.TestCase):
 

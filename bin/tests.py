@@ -14,6 +14,7 @@ def main():
     able.projectable.main()
     able.recordable.main()
     able.resultable.main()
+    able.state.main()
     able.string_creator.main()
     able.string_deleter.main()
     able.string_env.main()

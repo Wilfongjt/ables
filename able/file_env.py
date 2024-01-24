@@ -3,7 +3,7 @@ import os.path
 import shutil
 import re
 from able.folderfileable import FolderFileable
-from able.string_reader import ReaderString
+from able.string_reader import StringReader
 
 class FileEnv(list, FolderFileable):
     ##* create with defaults when file doesnt exist
@@ -34,7 +34,7 @@ class FileEnv(list, FolderFileable):
         # if file exists, read it, load vars into memory
         if not os.path.isfile(self.getFolderFile()):
             raise Exception('.env must be manually created.')
-        contents = ReaderString(self.getFolderFile())
+        contents = StringReader(self.getFolderFile())
         for ln in contents.split('\n'):
 
             # Define the regular expression pattern

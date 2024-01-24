@@ -3,7 +3,7 @@ import unittest
 import shutil
 
 from able import CreatorString
-from able import ReaderString
+from able import StringReader
 
 class TestReaderString(unittest.TestCase):
 
@@ -21,7 +21,7 @@ class TestReaderString(unittest.TestCase):
             shutil.rmtree(self.folder)
 
     def test_init(self):
-        self.assertTrue(ReaderString(self.folder_filename)==self.contents)
+        self.assertTrue(StringReader(self.folder_filename) == self.contents)
 
 
 if __name__ == '__main__':

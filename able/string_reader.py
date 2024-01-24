@@ -1,10 +1,9 @@
 import os
 import shutil
 
-class ReaderString(str):
-    ##__FileReadable__
-    ##* enable standalone version for testing and ad hoc cases
-
+class StringReader(str):
+    ##__StringReader__
+    ## Read the contents of a file into a string
     def __new__(cls, folder_filename):
         ##* Fail when file doesnt exist
         fileExists = os.path.isfile(folder_filename)
@@ -31,7 +30,7 @@ def main():
 
     # test
 
-    assert (ReaderString(folder_filename)==contents)
+    assert (StringReader(folder_filename) == contents)
 
     # cleanup
     fileExists = os.path.isfile(folder_filename)
