@@ -1,4 +1,4 @@
-__version__ = '1.4.0'
+__version__ = '1.4.2'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
