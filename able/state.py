@@ -50,19 +50,19 @@ class State():
 
     def isTargetDeleteable(self):
         rc = False
-        print('isTargetDeleteable 1')
+        #print('isTargetDeleteable 1')
         if self.isSoftDelete():
             rc = True
 
         elif self.isHardDelete():
-            print('isTargetDeleteable 3')
+            #print('isTargetDeleteable 3')
             rc = True
 
         if not os.path.isfile(self.target_filename):
-            print('isTargetDeleteable 4')
+            #print('isTargetDeleteable 4')
             rc = False
 
-        print('isTargetDeleteable out ', rc)
+        #print('isTargetDeleteable out ', rc)
 
         return rc
 
