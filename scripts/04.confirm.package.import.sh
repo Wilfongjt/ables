@@ -19,6 +19,7 @@ python3 -c "from able.string_deleter import DeleterString"
 python3 -c "from able.string_env import EnvString"
 python3 -c "from able.string_merger import MergerString"
 python3 -c "from able.string_template import TemplateString"
+python3 -c "from able.string_template_validator import TemplateStringValidator"
 python3 -c "from able.string_updater import UpdaterString"
 python3 -c "from able.taskable import Taskable"
 

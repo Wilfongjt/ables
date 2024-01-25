@@ -1,4 +1,4 @@
-__version__ = '1.4.4'
+__version__ = '1.5.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
@@ -17,6 +17,7 @@ from .string_deleter import DeleterString
 from .string_merger import MergerString
 from .string_reader import StringReader
 from .string_template import TemplateString
+from .string_template_validator import TemplateStringValidator
 from .string_updater import UpdaterString # update entire string
 from .string_writer import StringWriter
 from .recordable import Recordable
