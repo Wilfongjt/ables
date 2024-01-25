@@ -2,23 +2,36 @@ import os
 import shutil
 import re
 
-class State():
+class State(str):
     def __init__(self, template_filename, target_filename):
         self.template_filename = template_filename
         self.target_filename = target_filename
+    def __new__(cls, template_filename, target_filename):
+        pattern = r'\.[Cc-][Rr-][Uu-][Dd-]\.[t][m][p][l]'
+        contents = '----'
+        matches = re.findall(pattern, template_filename)
+
+        if matches != []:
+            contents = template_filename.split('.')[-2]
+
+        instance = super().__new__(cls, contents)
+        return instance
 
     def isHardCreate(self):
         ##* createable when template file exist and the target file doesnt
         rc = False
-        pattern = r'\.[C][Rr-][Uu-][Dd-]\.[t][m][p][l]'
-        if re.findall(pattern, self.template_filename) != []:
+        #pattern = r'\.[C][Rr-][Uu-][Dd-]\.[t][m][p][l]'
+        pattern = r'[C][Rr-][Uu-][Dd-]'
+        if re.findall(pattern, self) != []:
             rc = True
         return rc
 
     def isSoftCreate(self):
         rc = False
-        pattern = r'\.[c][Rr-][Uu-][Dd-]\.[t][m][p][l]'
-        if re.findall(pattern, self.template_filename):
+        pattern = r'[c][Rr-][Uu-][Dd-]'
+        #pattern = r'\.[c][Rr-][Uu-][Dd-]\.[t][m][p][l]'
+
+        if re.findall(pattern, self):
             rc = True
         return rc
 
@@ -36,48 +49,51 @@ class State():
 
     def isHardDelete(self):
         rc = False
-        pattern = r'\.[Cc-][Rr-][Uu-][D]\.[t][m][p][l]'
-        if re.findall(pattern, self.template_filename):
+        pattern = r'[Cc-][Rr-][Uu-][D]'
+        #pattern = r'\.[Cc-][Rr-][Uu-][D]\.[t][m][p][l]'
+
+        if re.findall(pattern, self):
             rc = True
         return rc
 
     def isSoftDelete(self):
         rc = False
-        pattern = r'\.[Cc-][Rr-][Uu-][d]\.[t][m][p][l]'
-        if re.findall(pattern, self.template_filename):
+        pattern = r'[Cc-][Rr-][Uu-][d]'
+        #pattern = r'\.[Cc-][Rr-][Uu-][d]\.[t][m][p][l]'
+
+        if re.findall(pattern, self):
             rc = True
         return rc
 
     def isTargetDeleteable(self):
         rc = False
-        #print('isTargetDeleteable 1')
         if self.isSoftDelete():
             rc = True
 
         elif self.isHardDelete():
-            #print('isTargetDeleteable 3')
             rc = True
 
         if not os.path.isfile(self.target_filename):
-            #print('isTargetDeleteable 4')
             rc = False
-
-        #print('isTargetDeleteable out ', rc)
 
         return rc
 
     def isHardUpdate(self):
         rc = False
-        pattern = r'\.[Cc-][Rr-][U][Dd-]\.[t][m][p][l]'
-        if re.findall(pattern, self.template_filename):
+        pattern = r'[Cc-][Rr-][U][Dd-]'
+        #pattern = r'\.[Cc-][Rr-][U][Dd-]\.[t][m][p][l]'
+
+        if re.findall(pattern, self):
             rc = True
 
         return rc
 
     def isSoftUpdate(self):
         rc = False
-        pattern = r'\.[Cc-][Rr-][u][Dd-]\.[t][m][p][l]'
-        if re.findall(pattern, self.template_filename):
+        pattern = r'[Cc-][Rr-][u][Dd-]'
+        #pattern = r'\.[Cc-][Rr-][u][Dd-]\.[t][m][p][l]'
+
+        if re.findall(pattern, self):
             rc = True
 
         return rc
@@ -99,11 +115,36 @@ class State():
             rc = False
 
         return rc
+    def isSoftRead(self):
+        rc = False
+        pattern = r'[Cc-][r][Uu-][Dd-]'
+        #pattern = r'\.[Cc-][r][Uu-][Dd-]\.[t][m][p][l]'
+        if re.findall(pattern, self):
+            rc = True
+        return rc
+    def isHardRead(self):
+        rc = False
+        pattern = r'[Cc-][R][U][Dd-]'
+        #pattern = r'\.[Cc-][R][U][Dd-]\.[t][m][p][l]'
+
+        if re.findall(pattern, self):
+            rc = True
+
+        return rc
 
     def isTargetReadable(self):
-        rc = True
+
+        rc = False
+
+        if self.isSoftRead():
+            rc = True
+
+        elif self.isHardRead():
+            rc = True
+
         if not os.path.isfile(self.target_filename):
             rc = False
+
         return rc
 
 def main():
@@ -127,8 +168,8 @@ def main():
     #    f.write(contents)
 
     # test
-    #print('template_hard_filename',template_hard_filename)
-    assert (State(template_hard_filename, target_filename))
+    #print('state', State(template_hard_filename, target_filename))
+    assert (State(template_hard_filename, target_filename)=='CRUD')
     assert (not State(template_hard_filename, target_filename).isTargetReadable())
 
     # CRUD
@@ -141,6 +182,9 @@ def main():
     assert (not State(template_hard_filename, target_filename).isSoftDelete())
 
     # crud
+    #print('state', State(template_soft_filename, target_filename))
+
+    assert (State(template_soft_filename, target_filename)=='crud')
     assert (not State(template_soft_filename, target_filename).isHardCreate())
     assert (not State(template_soft_filename, target_filename).isHardUpdate())
     assert (not State(template_soft_filename, target_filename).isHardDelete())
@@ -149,6 +193,9 @@ def main():
     assert (State(template_soft_filename, target_filename).isSoftUpdate())
     assert (State(template_soft_filename, target_filename).isSoftDelete())
     # ----
+    #print('state', State(template_dash_filename, target_filename))
+
+    assert (State(template_dash_filename, target_filename)=='----')
     assert (not State(template_dash_filename, target_filename).isHardCreate())
     assert (not State(template_dash_filename, target_filename).isHardUpdate())
     assert (not State(template_dash_filename, target_filename).isHardDelete())
@@ -184,8 +231,7 @@ def main():
     assert (State(template_hard_filename, target_filename).isTargetUpdateable())
     assert (State(template_hard_filename, target_filename).isTargetReadable())
 
-
-        # crud, target file
+    # crud, target file
     assert (State(template_soft_filename, target_filename).isTargetDeleteable())
     assert (not State(template_soft_filename, target_filename).isTargetCreateable())
     assert (State(template_soft_filename, target_filename).isTargetUpdateable())
