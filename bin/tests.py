@@ -21,6 +21,7 @@ def main():
     able.string_merger.main()
     able.string_reader.main()
     able.string_template.main()
+    able.string_template_validator.main()
     able.string_updater.main()
     able.string_writer.main()
     able.taskable.main()
