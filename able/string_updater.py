@@ -1,81 +1,64 @@
+import re
 
 class UpdaterString(str):
     ##
     ##__UpdaterString__
     ##
 
-    ## Update with another string
+    ## Update a string with another string
     ##
-    #def __init__(self):
-    #    self.updated_value = ''
-
-    #def create_instance(self):
-    #    return UpdaterString(self.updated_value)
 
     def updateAll(self, string_value):
         ##* Update entire string with a new string
         return UpdaterString(string_value)
 
+    def getKey(self, startswith_value):
+        ## Create a key from a string
+        key = startswith_value
+        pattern = re.compile(r'^\s*[A-Z_0-9]+=(.*)$')
+
+        if pattern.match(startswith_value):
+            # break up and use [0] as key
+            key = '{}='.format(key.split('=')[0])
+        return key
+
     def update(self, startswith_value, new_line_value):
         ## replace a line that starts with a specific value
-        key = str(startswith_value).strip()
 
+        key = self.getKey(startswith_value)
         temp_content = []
         found = False
         for ln in self.split('\n'):
             ##* find key and replace with a new line
             if ln.strip().startswith(key):
                 found = True
-                # temp_content.append('{}={}'.format(key, value))
                 temp_content.append(new_line_value)
             else:
                 temp_content.append(ln)
         if not found:
             ##* append when key is not found
-            # insert at end
-            # temp_content.append('{}={}'.format(key, value))
             temp_content.append(new_line_value)
 
         contents = '\n'.join(temp_content)
 
         return UpdaterString(contents)
-    '''
-    def update(self, key, value):
-        ## Update a single line with a name-value pair
-        key = str(key).strip()
 
-        temp_content = []
-        found = False
-        for ln in self.split('\n'):
-            ##* find key and replace with name=value pair
-            if ln.strip().startswith(key):
-                found = True
-                temp_content.append('{}={}'.format(key, value))
-            else:
-                temp_content.append(ln)
-        if not found:
-            ##* append when key is not found
-            # insert at end
-            temp_content.append('{}={}'.format(key, value))
-
-        contents = '\n'.join(temp_content)
-
-        return UpdaterString(contents)
-    '''
-    def updates(self, nv_list):
+    def updates(self, contents_new):
         ## Update multiple name-value pairs
 
         contents = UpdaterString(self)
+        for ln in contents_new.split('\n'):
+            contents = contents.update(ln, ln)
 
-        for chg in nv_list:
-            startswith_value = '{}='.format(chg['name'])
-            new_line_value = '{}={}'.format(chg['name'], chg['value'])
-            contents = contents.update(startswith_value, new_line_value)
-            # contents = contents.update(chg['name'],chg['value'])
-
-        #contents = '\n'.join(contents)
         return UpdaterString(contents)
+
+
 '''
+Use Cases
+Initialize from a file
+Update with a new line
+Update with an existing line
+
 ## Updater Use Cases
 ##|        | state                            | op | find startswith | replace line | to | outcome          |
 ##| ------ | -------------------------------- | -- | --------------- | ------------ | -- | ---------------- |
@@ -118,10 +101,13 @@ def main():
     nv_list = [{'name':'A', 'value': 'a'},
                {'name':'B', 'value': 'b'},
                {'name':'C', 'value': 'c'}]
-    #print('updates', UpdaterString('# sample').updates(nv_list))
-    assert(UpdaterString('# sample').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
-    assert(UpdaterString('# sample\nA=A').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
-    assert(UpdaterString('# sample\nA=A\nB=B').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
+    list1 = '# sample\nA=a\nB=b\nC=c'
+    list2 = '# sample\nD=d\nE=e\nF=f'
+    list3 = '# sample\nA=A\nB=B\nC=C'
+
+    assert(UpdaterString(list1).updates(list2)=='# sample\nA=a\nB=b\nC=c\nD=d\nE=e\nF=f')
+    assert(UpdaterString(list1).updates(list1)=='# sample\nA=a\nB=b\nC=c')
+    assert(UpdaterString(list1).updates(list2).updates(list3)=='# sample\nA=A\nB=B\nC=C\nD=d\nE=e\nF=f')
 
 
 if __name__ == "__main__":
