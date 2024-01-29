@@ -53,15 +53,18 @@ class TestUpdaterString(unittest.TestCase):
         assert (UpdaterString(str_value).update('C=', 'C=C') == expected3)
 
     def test_updates(self):
-        # updates
-        nv_list = [{'name': 'A', 'value': 'a'},
-                   {'name': 'B', 'value': 'b'},
-                   {'name': 'C', 'value': 'c'}]
-        # print('updates', UpdaterString('# sample').updates(nv_list))
-        assert (UpdaterString('# sample').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
-        assert (UpdaterString('# sample\nA=A').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
-        assert (UpdaterString('# sample\nA=A\nB=B').updates(nv_list) == '# sample\nA=a\nB=b\nC=c')
 
+        # updates
+        nv_list = [{'name':'A', 'value': 'a'},
+                   {'name':'B', 'value': 'b'},
+                   {'name':'C', 'value': 'c'}]
+        list1 = '# sample\nA=a\nB=b\nC=c'
+        list2 = '\n# xsample\nD=d\nE=e\nF=f'
+        list3 = '# sample\nA=A\nB=B\nC=C'
+
+        assert(UpdaterString(list1).updates(list2)=='# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f')
+        assert(UpdaterString(list1).updates(list1)=='# sample\nA=a\nB=b\nC=c')
+        assert(UpdaterString(list1).updates(list2).updates(list3)=='# sample\nA=A\nB=B\nC=C\n# xsample\nD=d\nE=e\nF=f')
 
 if __name__ == '__main__':
     unittest.main()
