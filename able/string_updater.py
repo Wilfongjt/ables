@@ -30,7 +30,9 @@ class UpdaterString(str):
         found = False
         for ln in self.split('\n'):
             ##* find key and replace with a new line
-            if ln.strip().startswith(key):
+            if not ln:
+                temp_content.append(ln)
+            elif ln.strip().startswith(key):
                 found = True
                 temp_content.append(new_line_value)
             else:
@@ -47,8 +49,12 @@ class UpdaterString(str):
         ## Update multiple name-value pairs
 
         contents = UpdaterString(self)
+        #print('---')
+        #print('split', contents_new.split('\n'))
         for ln in contents_new.split('\n'):
-            contents = contents.update(ln, ln)
+            #print('ln',ln)
+            if ln:
+                contents = contents.update(ln, ln)
 
         return UpdaterString(contents)
 
@@ -84,6 +90,7 @@ def main():
         # File system
 
         '''.replace('  ', '')  # remove leading spaces
+
     expected_2=new_value
     assert(UpdaterString(str_value) == expected_1)
     assert(UpdaterString(str_value).updateAll(new_value) == expected_2)
@@ -102,12 +109,15 @@ def main():
                {'name':'B', 'value': 'b'},
                {'name':'C', 'value': 'c'}]
     list1 = '# sample\nA=a\nB=b\nC=c'
-    list2 = '# sample\nD=d\nE=e\nF=f'
+    list2 = '\n# xsample\nD=d\nE=e\nF=f'
     list3 = '# sample\nA=A\nB=B\nC=C'
-
-    assert(UpdaterString(list1).updates(list2)=='# sample\nA=a\nB=b\nC=c\nD=d\nE=e\nF=f')
+    #print ('xx', UpdaterString(list1).updates(list2))
+    #problem whern second file starts with '\n' '# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f'
+    #print('AA','# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f'.replace('\n','.'))
+    #print('BB',UpdaterString(list1).updates(list2).replace('\n','.'))
+    assert(UpdaterString(list1).updates(list2)=='# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f')
     assert(UpdaterString(list1).updates(list1)=='# sample\nA=a\nB=b\nC=c')
-    assert(UpdaterString(list1).updates(list2).updates(list3)=='# sample\nA=A\nB=B\nC=C\nD=d\nE=e\nF=f')
+    assert(UpdaterString(list1).updates(list2).updates(list3)=='# sample\nA=A\nB=B\nC=C\n# xsample\nD=d\nE=e\nF=f')
 
 
 if __name__ == "__main__":
