@@ -1,5 +1,8 @@
 import re
 
+
+# from able import UpdaterString
+
 class UpdaterString(str):
     ##
     ##__UpdaterString__
@@ -7,6 +10,13 @@ class UpdaterString(str):
 
     ## Update a string with another string
     ##
+    # def __init__(self, str_value):
+
+    def __new__(cls, str_value):
+        contents = str_value
+
+        instance = super().__new__(cls, contents)
+        return instance
 
     def updateAll(self, string_value):
         ##* Update entire string with a new string
@@ -22,102 +32,78 @@ class UpdaterString(str):
             key = '{}='.format(key.split('=')[0])
         return key
 
-    def update(self, startswith_value, new_line_value):
-        ## replace a line that starts with a specific value
-
-        key = self.getKey(startswith_value)
-        temp_content = []
-        found = False
-        for ln in self.split('\n'):
-            ##* find key and replace with a new line
-            if not ln:
-                temp_content.append(ln)
-            elif ln.strip().startswith(key):
-                found = True
-                temp_content.append(new_line_value)
-            else:
-                temp_content.append(ln)
-        if not found:
-            ##* append when key is not found
-            temp_content.append(new_line_value)
-
-        contents = '\n'.join(temp_content)
-
-        return UpdaterString(contents)
-
     def updates(self, contents_new):
         ## Update multiple name-value pairs
+        contents = self.split('\n')
+        contents_new = contents_new.split('\n')
 
-        contents = UpdaterString(self)
-        #print('---')
-        #print('split', contents_new.split('\n'))
-        for ln in contents_new.split('\n'):
-            #print('ln',ln)
-            if ln:
-                contents = contents.update(ln, ln)
+        for ln in contents_new:
+            if ln == '':
+                contents.append(ln)
+            elif len(ln) > 0 and len(ln.strip()) == 0:
+                contents.append(ln)
+            else:
+                found = False
+                key = self.getKey(ln)
+                i = 0
+                for r in self.split('\n'):
+                    if r.startswith(key):
+                        found = True
+                        contents[i] = ln
+                    i += 1
+                if not found:
+                    contents.append(ln)
 
+        contents = '\n'.join(contents)
         return UpdaterString(contents)
 
 
-'''
-Use Cases
-Initialize from a file
-Update with a new line
-Update with an existing line
-
-## Updater Use Cases
-##|        | state                            | op | find startswith | replace line | to | outcome          |
-##| ------ | -------------------------------- | -- | --------------- | ------------ | -- | ---------------- |
-##| append | []                               | +  | 'abc 123'       | 'abc 123'    | -> | ['abc 123']  |
-##| ignore | ['abc 123']                      | +  | 'abc 123'       | 'abc 123'    | -> | ['abc 123']  |
-##| update | ['abc 123']                      | +  | 'abc'           | 'abc=123'    | -> | ['abc=123']  |
-##| update | ['abc=123']                      | +  | 'abc'           | 'ABC=123'    | -> | ['ABC=123']  |
-##| append | ['ABC=123']                      | +  | 'de'            | 'de=xxx'     | -> | ['ABC=123', 'de=xxx']  |
-
-'''
-
 def main():
+    d1 = '# 1sample\nA=a'
+    d2 = '\n# 2sample\nD=d\n \nE=e'
+    d3 = '\n# 3sample\nF=f\n \nF=g'
+    assert (UpdaterString(d1) == d1)
+    assert (UpdaterString(d2) == d2)
+    assert (UpdaterString(d3) == d3)
 
-    # updateAll
-    str_value = '''
-    #
-    # Environment
+    # d1 = '# 1sample\nA=a'
+    # d2 = '\n\n# 2sample\nD=d\n \nE=e'
+    # print('d2', d2.replace('\n','|'))
+    # print('d2', d2.split('\n'))
+    # d3 = '\n# 3sample\nF=f\n \nF=g'
 
-    '''.replace('  ', '')  # remove leading spaces
-    expected_1 = str_value
-    new_value = '''
-        #
-        # File system
+    # print('1',UpdaterString(d1).replace('\n','|'))
+    # print('2',UpdaterString(d1).updates(d2).replace('\n','|'))
+    m1 = '# m1'
+    A = 'A=a'
+    B = 'B=b'
+    s1 = '\n{}\n{}\n{}'.format(m1, A, B)
+    s2 = '\n# d2\nC=c'
+    s3 = '\n# d3\n# another\nD=d'
+    s4 = 'A=A\nB=B'
+    e1 = s1
+    e2 = '\n'.join(s1.split('\n') + s2.split('\n'))
+    e3 = '\n'.join(e2.split('\n') + s3.split('\n'))
+    e4 = e3.replace(A, 'A=A').replace(B, 'B=B')
 
-        '''.replace('  ', '')  # remove leading spaces
+    print('s1', s1.split('\n'))
+    print('s2', s2.split('\n'))
+    print('s3', s3.split('\n'))
+    print('s4', s4.split('\n'))
 
-    expected_2=new_value
-    assert(UpdaterString(str_value) == expected_1)
-    assert(UpdaterString(str_value).updateAll(new_value) == expected_2)
+    print('e1    ', e1.split('\n'))
+    print('e2    ', e2.split('\n'))
+    print('e3    ', e3.split('\n'))
+    print('e4    ', e4.split('\n'))
 
-    # update
-    str_value = "A=A\nB=B"
-    expected1 = "A=a\nB=B"
-    expected2 = "A=A\nB=b"
-    expected3 = "A=A\nB=B\nC=C"
-    assert(UpdaterString(str_value).update('A=', 'A=a') == expected1)
-    assert(UpdaterString(str_value).update('B=', 'B=b') == expected2)
-    assert(UpdaterString(str_value).update('C=', 'C=C') == expected3)
+    # e4 = '\n'.join(e4)
+    assert (UpdaterString(s1) == e1)
+    assert (UpdaterString(s1).updates(s2) == e2)
+    assert (UpdaterString(s1).updates(s2).updates(s3) == e3)
 
-    # updates
-    nv_list = [{'name':'A', 'value': 'a'},
-               {'name':'B', 'value': 'b'},
-               {'name':'C', 'value': 'c'}]
-    list1 = '# sample\nA=a\nB=b\nC=c'
-    list2 = '\n# xsample\nD=d\nE=e\nF=f'
-    list3 = '# sample\nA=A\nB=B\nC=C'
-    #print ('xx', UpdaterString(list1).updates(list2))
-    #problem whern second file starts with '\n' '# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f'
-    #print('AA','# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f'.replace('\n','.'))
-    #print('BB',UpdaterString(list1).updates(list2).replace('\n','.'))
-    assert(UpdaterString(list1).updates(list2)=='# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f')
-    assert(UpdaterString(list1).updates(list1)=='# sample\nA=a\nB=b\nC=c')
-    assert(UpdaterString(list1).updates(list2).updates(list3)=='# sample\nA=A\nB=B\nC=C\n# xsample\nD=d\nE=e\nF=f')
+    print('e4    ', e4.replace('\n', '|'))
+    print('actual', UpdaterString(s1).updates(s2).updates(s3).replace('\n', '|'))
+    assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4) == e4)
 
 
 if __name__ == "__main__":
