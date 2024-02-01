@@ -42,29 +42,46 @@ class TestUpdaterString(unittest.TestCase):
         assert (UpdaterString(str_value) == expected_1)
         assert (UpdaterString(self.str_value).updateAll(self.new_value) == self.expected_2)
 
-    def test_update(self):
-        # update
-        str_value = "A=A\nB=B"
-        expected1 = "A=a\nB=B"
-        expected2 = "A=A\nB=b"
-        expected3 = "A=A\nB=B\nC=C"
-        assert (UpdaterString(str_value).update('A=', 'A=a') == expected1)
-        assert (UpdaterString(str_value).update('B=', 'B=b') == expected2)
-        assert (UpdaterString(str_value).update('C=', 'C=C') == expected3)
-
     def test_updates(self):
+        d1 = '# 1sample\nA=a'
+        d2 = '\n# 2sample\nD=d\n \nE=e'
+        d3 = '\n# 3sample\nF=f\n \nF=g'
+        assert (UpdaterString(d1) == d1)
+        assert (UpdaterString(d2) == d2)
+        assert (UpdaterString(d3) == d3)
 
-        # updates
-        nv_list = [{'name':'A', 'value': 'a'},
-                   {'name':'B', 'value': 'b'},
-                   {'name':'C', 'value': 'c'}]
-        list1 = '# sample\nA=a\nB=b\nC=c'
-        list2 = '\n# xsample\nD=d\nE=e\nF=f'
-        list3 = '# sample\nA=A\nB=B\nC=C'
 
-        assert(UpdaterString(list1).updates(list2)=='# sample\nA=a\nB=b\nC=c\n# xsample\nD=d\nE=e\nF=f')
-        assert(UpdaterString(list1).updates(list1)=='# sample\nA=a\nB=b\nC=c')
-        assert(UpdaterString(list1).updates(list2).updates(list3)=='# sample\nA=A\nB=B\nC=C\n# xsample\nD=d\nE=e\nF=f')
+        m1 = '# m1'
+        A = 'A=a'
+        B = 'B=b'
+        s1 = '{}\n{}\n{}'.format(m1, A, B)
+        s2 = '\n# d2\nC=c'
+        s3 = '\n# d3\n# another\nD=d'
+        s4 = 'A=A\nB=B'
+        e1 = s1
+        e2 = '\n'.join(s1.split('\n') + s2.split('\n'))
+        e3 = '\n'.join(e2.split('\n') + s3.split('\n'))
+        e4 = e3.replace(A, 'A=A').replace(B, 'B=B')
+
+        #print('s1', s1.split('\n'))
+        #print('s2', s2.split('\n'))
+        #print('s3', s3.split('\n'))
+        #print('s4', s4.split('\n'))
+
+        #print('e1    ', e1.split('\n'))
+        #print('e2    ', e2.split('\n'))
+        #print('e3    ', e3.split('\n'))
+        #print('e4    ', e4.split('\n'))
+
+        # e4 = '\n'.join(e4)
+        assert (UpdaterString(s1) == e1)
+        assert (UpdaterString(s1).updates(s2) == e2)
+        assert (UpdaterString(s1).updates(s2).updates(s3) == e3)
+
+        #print('e4    ', e4.replace('\n', '|'))
+        #print('actual', UpdaterString(s1).updates(s2).updates(s3).replace('\n', '|'))
+        assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4) == e4)
+
 
 if __name__ == '__main__':
     unittest.main()
