@@ -54,6 +54,7 @@ class TestUpdaterString(unittest.TestCase):
         m1 = '# m1'
         A = 'A=a'
         B = 'B=b'
+        B1 = 'B=<<bb>>'
         s1 = '{}\n{}\n{}'.format(m1, A, B)
         s2 = '\n# d2\nC=c'
         s3 = '\n# d3\n# another\nD=d'
@@ -81,6 +82,7 @@ class TestUpdaterString(unittest.TestCase):
         #print('e4    ', e4.replace('\n', '|'))
         #print('actual', UpdaterString(s1).updates(s2).updates(s3).replace('\n', '|'))
         assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4) == e4)
+        assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4).updates(B1) == e4)
 
 
 if __name__ == '__main__':
