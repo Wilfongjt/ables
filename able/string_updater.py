@@ -48,8 +48,12 @@ class UpdaterString(str):
                 i = 0
                 for r in self.split('\n'):
                     if r.startswith(key):
+                        ##* update with new value
                         found = True
-                        contents[i] = ln
+                        if '<<' not in ln:
+                            ## do not update when value contain a template
+                            contents[i] = ln
+
                     i += 1
                 if not found:
                     contents.append(ln)
@@ -77,10 +81,12 @@ def main():
     m1 = '# m1'
     A = 'A=a'
     B = 'B=b'
+    B1 = 'B=<<bb>>'
     s1 = '\n{}\n{}\n{}'.format(m1, A, B)
     s2 = '\n# d2\nC=c'
     s3 = '\n# d3\n# another\nD=d'
     s4 = 'A=A\nB=B'
+
     e1 = s1
     e2 = '\n'.join(s1.split('\n') + s2.split('\n'))
     e3 = '\n'.join(e2.split('\n') + s3.split('\n'))
@@ -104,6 +110,7 @@ def main():
     print('e4    ', e4.replace('\n', '|'))
     print('actual', UpdaterString(s1).updates(s2).updates(s3).replace('\n', '|'))
     assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4) == e4)
+    assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4).updates(B1) == e4)
 
 
 if __name__ == "__main__":
