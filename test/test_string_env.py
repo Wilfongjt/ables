@@ -2,7 +2,7 @@ import os
 import unittest
 import shutil
 
-from able import EnvString
+from able import EnvString, StringReader
 
 class TestEnvString(unittest.TestCase):
 
@@ -20,7 +20,7 @@ class TestEnvString(unittest.TestCase):
             shutil.rmtree(self.folder)
 
     def test_init(self):
-        assert (EnvString(self.folder_filename) == self.contents)
+        assert (EnvString(StringReader(self.folder_filename)) == self.contents)
         assert (os.environ['AAAAA'] == 'a')
         assert (os.environ['BBBBB'] == 'b')
 
