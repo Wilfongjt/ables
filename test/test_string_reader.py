@@ -10,6 +10,8 @@ class TestReaderString(unittest.TestCase):
     def setUp(self):
         self.folder = '{}/Development/Temp/reader_string'.format(os.environ['HOME'])
         self.folder_filename = '{}/reader.txt'.format(self.folder)
+        self.nfolder_filename = '{}/notafile.txt'.format(self.folder)
+
         self.contents = 'A=a\nB=b'
         os.makedirs(self.folder, exist_ok=True)
         with open(self.folder_filename, 'w') as f:
@@ -21,8 +23,11 @@ class TestReaderString(unittest.TestCase):
             shutil.rmtree(self.folder)
 
     def test_init(self):
-        self.assertTrue(StringReader(self.folder_filename) == self.contents)
 
+        self.assertTrue(StringReader(self.nfolder_filename) == '')
+        self.assertTrue(not StringReader(self.nfolder_filename))
+        self.assertTrue(StringReader(self.folder_filename) == self.contents)
+        self.assertTrue(StringReader(self.nfolder_filename) or StringReader(self.folder_filename) == self.contents)
 
 if __name__ == '__main__':
     unittest.main()
