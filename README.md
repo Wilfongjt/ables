@@ -28,7 +28,8 @@ if __name__ == '__main__':
 
 from setuptools import setup, find_packages
 
-from able.__init__ import __version__
+# from able.__init__ import __version__
+__version__='1.5.7'
 setup(
     name='able',
     version=__version__,
