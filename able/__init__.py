@@ -1,4 +1,4 @@
-__version__ = '1.5.8'
+__version__ = '1.6.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
@@ -15,6 +15,8 @@ from .string_creator import CreatorString
 from .string_env import EnvString
 from .string_deleter import DeleterString
 from .string_merger import MergerString
+from .string_json import JSONString
+from .string_normal import NormalString
 from .string_reader import StringReader
 from .string_template import TemplateString
 from .string_template_validator import TemplateStringValidator
