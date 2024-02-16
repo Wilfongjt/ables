@@ -40,7 +40,7 @@ def main():
                         == '{ name : james , type : [ { name : w , type : 2 } ] , kind : [ 1 , -1 , 2.0 , -2.00 , abc , { name : 1 } ] }')
 
     print('normalize', NormalString('{name: hi, type: k!s}'))
-
+    print(NormalString('parameter: [token_id=TOKEN,owner_id:OWNERID,primary_key:PRIMARYKEY]'))
 
 if __name__ == "__main__":
     # execute as docker
