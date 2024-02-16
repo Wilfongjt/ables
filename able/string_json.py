@@ -11,12 +11,19 @@ class JSONString(str):
         i = 0
         for item in contents:
 
-            if bool_pattern.match(item):
+            is_val = i > 0 and contents[i - 1] == ':'
+
+            if is_val and bool_pattern.match(item):
+                ##* convert boolean string value to boolean actual
                 contents[i] = "{}".format(item)
             elif re.match(key_pattern, item):
+                ##* collect key
                 contents[i] = "'{}'".format(item)
-            elif re.match(num_pattern, item):
+            elif is_val and re.match(num_pattern, item):
+                ##* convert string number value to number actual
                 contents[i] = "{}".format(item)
+            elif is_val and item not in ['[','{']:
+                contents[i] = "'{}'".format(item)
 
             i += 1
         contents = ' '.join(contents)
@@ -31,8 +38,9 @@ def main():
     #print(JSONString(NormalString('{ name: james, type: [{name:w,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}')))
     #print(JSONString(NormalString('{ name: james, type: [{name:w,type:2},{name:x,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}')))
     #print(JSONString(NormalString('{ name: james, is:True, isnt: False}')))
-
-    assert(JSONString(NormalString('{ name: james, type: [{name:w,type:x}]}'))=="{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 'x' } ] }")
+    print (JSONString(NormalString('{ name: james, type: [{name:w,type:x}]}')))
+    print("{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 'x' } ] }")
+    assert(JSONString(NormalString('{ name: james, type: [{name:w,type:x}]}')) == "{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 'x' } ] }")
     assert(JSONString(NormalString('{ name: james, type: [{name:w,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}'))=="{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 2 } ] , 'kind' : [ 1 , -1 , 2.0 , -2.00 , 'abc' , { 'name' : 1 } ] }")
     assert(JSONString(NormalString('{ name: james, type: [{name:w,type:2},{name:x,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}'))
            == "{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 2 } , { 'name' : 'x' , 'type' : 2 } ] , 'kind' : [ 1 , -1 , 2.0 , -2.00 , 'abc' , { 'name' : 1 } ] }")
