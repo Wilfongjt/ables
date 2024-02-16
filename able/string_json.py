@@ -19,12 +19,16 @@ class JSONString(str):
             elif re.match(key_pattern, item):
                 ##* collect key
                 contents[i] = "'{}'".format(item)
-            elif is_val and re.match(num_pattern, item):
+            elif re.match(num_pattern, item):
                 ##* convert string number value to number actual
                 contents[i] = "{}".format(item)
             elif is_val and item not in ['[','{']:
                 contents[i] = "'{}'".format(item)
-
+            else:
+                if len(item)>1:
+                    contents[i]="'{}'".format(item)
+                #else:
+                #    print('else ok',item )
             i += 1
         contents = ' '.join(contents)
 
@@ -38,13 +42,15 @@ def main():
     #print(JSONString(NormalString('{ name: james, type: [{name:w,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}')))
     #print(JSONString(NormalString('{ name: james, type: [{name:w,type:2},{name:x,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}')))
     #print(JSONString(NormalString('{ name: james, is:True, isnt: False}')))
-    print (JSONString(NormalString('{ name: james, type: [{name:w,type:x}]}')))
-    print("{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 'x' } ] }")
+    #print (JSONString(NormalString('{ name: james, type: [{name:w,type:x}]}')))
+    #print("{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 'x' } ] }")
     assert(JSONString(NormalString('{ name: james, type: [{name:w,type:x}]}')) == "{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 'x' } ] }")
     assert(JSONString(NormalString('{ name: james, type: [{name:w,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}'))=="{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 2 } ] , 'kind' : [ 1 , -1 , 2.0 , -2.00 , 'abc' , { 'name' : 1 } ] }")
     assert(JSONString(NormalString('{ name: james, type: [{name:w,type:2},{name:x,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}'))
            == "{ 'name' : 'james' , 'type' : [ { 'name' : 'w' , 'type' : 2 } , { 'name' : 'x' , 'type' : 2 } ] , 'kind' : [ 1 , -1 , 2.0 , -2.00 , 'abc' , { 'name' : 1 } ] }")
     assert(JSONString(NormalString('{ name: james, is:True, isnt: False}'))=="{ 'name' : 'james' , 'is' : True , 'isnt' : False }")
+    assert( JSONString(NormalString('parameter: [token_id=TOKEN,owner_id=OWNERID,primary_key=PRIMARYKEY]')) == "'parameter' : [ 'token_id=TOKEN' , 'owner_id=OWNERID' , 'primary_key=PRIMARYKEY' ]")
+    assert( JSONString(NormalString('parameter: [{token_id:TOKEN},{owner_id:OWNERID,primary_key:{name:PRIMARYKEY}}]'))=="'parameter' : [ { 'token_id' : 'TOKEN' } , { 'owner_id' : 'OWNERID' , 'primary_key' : { 'name' : 'PRIMARYKEY' } } ]")
 
 if __name__ == "__main__":
     # execute as docker
