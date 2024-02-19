@@ -1,4 +1,4 @@
-__version__ = '1.6.2'
+__version__ = '1.7.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
@@ -10,6 +10,7 @@ from .lb_util import LbUtil
 from .mergeable import Mergeable
 from .projectable import Projectable
 from .resultable import Resultable
+from .stack import Stack
 from .state import State
 from .string_creator import CreatorString
 from .string_env import EnvString
