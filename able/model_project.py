@@ -65,8 +65,9 @@ def main():
     from  string_reader import StringReader
     md_project = str(os.getcwd()).replace('able','source/data')
     md_project = '{}/model.project.md'.format(md_project)
-    print('md_project', md_project)
+    #print('md_project', md_project)
     md_string = StringReader(md_project)
+    assert (ProjectModel('') == {})
     assert(ProjectModel(md_string))
     assert(type(ProjectModel(md_string) is dict))
     assert ('project' in ProjectModel(md_string))
@@ -79,7 +80,7 @@ def main():
     assert ('subject' in ProjectModel(md_string)['project'])
 
     #print('ProjectModel',ProjectModel(md_string))
-    pprint(ProjectModel(md_string))
+    #pprint(ProjectModel(md_string))
 
 if __name__ == "__main__":
     # execute as docker
