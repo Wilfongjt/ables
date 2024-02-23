@@ -1,4 +1,4 @@
-__version__ = '1.7.0'
+__version__ = '1.8.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
@@ -6,8 +6,12 @@ from .failable import Failable
 from .file_env import FileEnv
 from .folderfileable import FolderFileable
 from .inputable import Inputable
+from .is_array import IsArray
+from .is_object import IsObject
 from .lb_util import LbUtil
+from .level import Level
 from .mergeable import Mergeable
+from .model_project import ProjectModel
 from .projectable import Projectable
 from .resultable import Resultable
 from .stack import Stack

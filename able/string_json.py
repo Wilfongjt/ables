@@ -36,7 +36,8 @@ class JSONString(str):
         return instance
 
 def main():
-    from able.string_normal import NormalString
+    #from string_normal import NormalString
+    from able import NormalString
 
     #print(JSONString(NormalString('{ name: james, type: [{name:w,type:x}]}')))
     #print(JSONString(NormalString('{ name: james, type: [{name:w,type:2}], kind:[1, -1, 2.0, -2.00, abc, {name:1}]}')))
