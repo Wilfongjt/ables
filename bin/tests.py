@@ -9,8 +9,12 @@ def main():
     able.failable.main()
     able.folderfileable.main()
     able.inputable.main()
+    able.is_array.main()
+    able.is_object.main()
+    able.level.main()
     # lb_util
     able.mergeable.main()
+    #able.model_project.main()
     able.projectable.main()
     able.recordable.main()
     able.resultable.main()
