@@ -63,7 +63,7 @@
 1. owner: abc@xyz.abc
 
 #### methods:
-##### account_delete:[package.json](..%2F..%2F..%2F..%2F..%2Ftest-org%2F00_test%2Fpy_test%2Fpackage.json)
+##### account_delete:
 1. active: 1
 1. name: account_delete
 1. scope: [api_user, api_admin, api_guest]
