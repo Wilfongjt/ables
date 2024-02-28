@@ -7,6 +7,6 @@ setup(
     url='https://github.com/Wilfongjt/abilities',
     author='James Wilfong',
     author_email='wilfongjt@gmail.com',
-    data_files=[('source/template/api/model/latest',['source/template/api/model/latest/*.tmpl'])],
+    data_files=[('data',['*.tmpl'])],
     packages=find_packages()
 )
