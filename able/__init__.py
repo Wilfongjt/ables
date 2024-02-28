@@ -29,4 +29,3 @@ from .string_updater import UpdaterString # update entire string
 from .string_writer import StringWriter
 from .recordable import Recordable
 from .taskable import Taskable
-from .template.api.model.latest import *
