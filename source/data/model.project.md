@@ -57,8 +57,13 @@
 1. type: account
 1. version:000
 
+#### model:
+1. id: abc#abc
+1. type: ACCOUNT
+1. owner: abc@xyz.abc
+
 #### methods:
-##### account_delete:
+##### account_delete:[package.json](..%2F..%2F..%2F..%2F..%2Ftest-org%2F00_test%2Fpy_test%2Fpackage.json)
 1. active: 1
 1. name: account_delete
 1. scope: [api_user, api_admin, api_guest]
@@ -82,17 +87,3 @@
 1. scope: [api_user, api_admin, api_guest]
 1. parameter: [token_id=TOKEN,owner_id=OWNERID,primary_key=PRIMARYKEY,trip=TRIPLE]
 
-#### test_data:
-1. id: replace_id
-1. type: replace_type_id
-1. owner: replace_owner_id
-
-#### data:
-##### model:
-1. id: abc#abc
-1. type: ACCOUNT
-1. owner: abc@xyz.abc
-##### test:
-1. id: replace_id
-1. type: replace_type_id
-1. owner: replace_owner_id

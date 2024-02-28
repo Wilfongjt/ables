@@ -35,10 +35,10 @@ def main():
         f.write(contents)
 
     # test
-
     assert (EnvString(StringReader(folder_filename))==contents)
     assert (os.environ['AAAAA']=='a')
     assert (os.environ['BBBBB']=='b')
+    print('EnvString', EnvString(StringReader(folder_filename)))
 
 
     # cleanup
