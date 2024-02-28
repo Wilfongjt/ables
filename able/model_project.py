@@ -63,6 +63,16 @@ class ProjectModel(dict):
 def main():
     from pprint import pprint
     from  string_reader import StringReader
+    from string_template import TemplateString
+    # handle default with a template
+    md_project_tmpl_string = str(os.getcwd()).replace('able','able/template/api/model/latest')
+    md_project_tmpl_string = '{}/model.project.md.C---.tmpl'.format(md_project_tmpl_string)
+    md_project_tmpl_string = StringReader(md_project_tmpl_string)
+    nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'test-org'},
+               {'name':'<<GH_PROJECT>>', 'value':'able'}]
+    md_project_tmpl_string = TemplateString(md_project_tmpl_string, nv_list)
+    print('md_project_tmpl_string',md_project_tmpl_string)
+    # handle template values
     md_project = str(os.getcwd()).replace('able','source/data')
     md_project = '{}/model.project.md'.format(md_project)
     #print('md_project', md_project)
