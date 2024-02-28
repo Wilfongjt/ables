@@ -80,7 +80,7 @@ def main():
     assert ('subject' in ProjectModel(md_string)['project'])
 
     #print('ProjectModel',ProjectModel(md_string))
-    #pprint(ProjectModel(md_string))
+    pprint(ProjectModel(md_string))
 
 if __name__ == "__main__":
     # execute as docker
