@@ -9,6 +9,6 @@ setup(
     author='James Wilfong',
     author_email='wilfongjt@gmail.com',
     include_package_data=True,
-    package_data={'': ['template/model.project.md.C---.tmpl']},
+    package_data={'': ['template/api/model.project.md.C---.tmpl']},
     packages=['able']
 )
