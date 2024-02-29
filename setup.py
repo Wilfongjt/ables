@@ -9,7 +9,7 @@ setup(
     author='James Wilfong',
     author_email='wilfongjt@gmail.com',
     include_package_data=True,
-    package_data={'able.template.api': ['*','*/*','*/*/*']},
+    package_data={'able': ['template/*/*','*/*']},
     packages=['able']
 )
 '''
