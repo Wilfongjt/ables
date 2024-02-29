@@ -7,6 +7,6 @@ setup(
     url='https://github.com/Wilfongjt/abilities',
     author='James Wilfong',
     author_email='wilfongjt@gmail.com',
-    data_files=[('modeld',['data/*.tmpl'])],
+    data_files=[('modeld',['*.tmpl'])],
     packages=find_packages()
 )
