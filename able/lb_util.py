@@ -9,12 +9,14 @@ class LbUtil():
     ##
     ## Some handy functions
     def create_folders(self, folder):
-        ##* create folders on request
+        ##
+        ##Create folders on request
         os.makedirs(folder, exist_ok=True)
         return self
 
     def delete_file(self, folder, file_name):
-        ##* Delete file on request
+        ##
+        ##Delete file on request
         if self.file_exists(folder, file_name):
             ##* delete file when project_folder and file are found ... [x] has test
             os.remove("{}/{}".format(folder, file_name))
@@ -25,7 +27,8 @@ class LbUtil():
         return self
 
     def delete_folder(self, folder):
-        ##* Delete project_folder on request
+        ##
+        ##Delete project_folder on request
 
         ##* remove all files and subfolders in a folder
         exists = os.path.isdir('{}'.format(folder))
@@ -35,8 +38,8 @@ class LbUtil():
         return self
 
     def delete_folderfilename(self, folder_filename):
-
-        ##* delete a single file
+        ##
+        ##delete a single file
         folder = folder_filename.split('/')
         file_name = folder[-1]
         folder = '/'.join(folder[0:-1])
@@ -47,7 +50,8 @@ class LbUtil():
         return self
 
     def file_exists(self, folder, filename):
-        ##* Test if a given project_folder and file exist on request
+        ##
+        ##Test if a given project_folder and file exist on request
 
         ##* file exists when project_folder exists and file exists
         exists = os.path.isfile('{}/{}'.format(folder, filename))
@@ -55,7 +59,8 @@ class LbUtil():
         return exists
 
     def formulate(self, form, title=None):
-        ##* Convert JSON Object to String
+        ##
+        ##Convert JSON Object to String
         ##* eg {a:1, b:2} to (a, b)
         keys = []
         for key in form:
@@ -66,21 +71,24 @@ class LbUtil():
         return '({})'.format(','.join(keys))
 
     def folder_exists(self, folder):
-        ##* Test if a given project_folder exists on request
+        ##
+        ##Test if a given project_folder exists on request
         ##* project_folder exists when found on drive ... [x] has test
         exists = os.path.isdir('{}'.format(folder))
         ##* returns bool ... [x] has test
         return exists
 
     def folderfile_exists(self, folder_filename):
-        ##* Test if a given folder and file exist on request
+        ##
+        ##Test if a given folder and file exist on request
 
         ##* file exists when folder exists and file exists
         exists = os.path.isfile(folder_filename)
 
         return exists
     def get_file_list(self, path, ext=None, withpath=False):
-        #### Get List of File Names on request
+        ##
+        ## Get List of File Names on request
         onlyfiles = []
 
         ##* return [] when project_folder is None ... [x] has test
@@ -111,7 +119,8 @@ class LbUtil():
         return onlyfiles
 
     def get_folder_list(self, path):
-        #### Get List of Folder Names on request
+        ##
+        ##Get List of Folder Names on request
 
         onlyfolders = []
         ##* return [] when project_folder is None ... [x] has test

@@ -8,7 +8,7 @@ from able.string_reader import StringReader
 class FileEnv(list, FolderFileable):
     ##
     ##__FileEnv__
-    ##* create with defaults when file doesnt exist
+    ##Create environment file with defaults when file doesnt exist
     ##* read when file exists
     ##* by default, expect .env in the folder where script is running
     def __init__(self, folder_filename=None):

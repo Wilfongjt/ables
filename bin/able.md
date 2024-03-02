@@ -41,7 +41,7 @@ __ClassNameable__
 
 __CreatorString__
 
- create an unmerged template file in the target folder
+ Create an unmerged template file in the target folder
 * enable standalone version for testing and ad hoc cases
 * default_contents eg 'A' or 'A=a\nB=b'
 * Create target file when overwrite is True
@@ -133,7 +133,7 @@ __ProjectModel__
 
 * load dictionary from a markdown document
 
-__MergerString__
+__MergerString__ Deprecated, use TempalteString instead
 
 
 
@@ -188,7 +188,7 @@ __Level__
 
 __EnvString__
 
- String that represents environment variables and values
+ Environment Variables and Values
 * loads env variables into memory
 
 __Stack__
@@ -206,6 +206,7 @@ __Update__
 __TemplateString__
 
  String with a merge function
+
 * merge nv_list into string on instantiation
 
 __FileEnv__
@@ -216,36 +217,46 @@ __FileEnv__
 
 __JSONString__
 
+ Dequoted JSON object
 * convert boolean string value to boolean actual
 * collect key
 * convert string number value to number actual
 
 __NormalString__
 
- Normalize a JSON string
+ Normalize a JSON string for predictable spaces and symbols
 
 __LbUtil__
 
  Some handy functions
-* create folders on request
-* Delete file on request
+
+Create folders on request
+
+Delete file on request
 * delete file when project_folder and file are found ... [x] has test
 * skip file delete when project_folder and file are NOT found ... [x] has test
 * return LbUtil ... [x] has test
-* Delete project_folder on request
+
+Delete project_folder on request
 * remove all files and subfolders in a folder
-* delete a single file
+
+delete a single file
 * delete file when project_folder and file are found ... [x] has test
-* Test if a given project_folder and file exist on request
+
+Test if a given project_folder and file exist on request
 * file exists when project_folder exists and file exists
-* Convert JSON Object to String
+
+Convert JSON Object to String
 * eg {a:1, b:2} to (a, b)
-* Test if a given project_folder exists on request
+
+Test if a given project_folder exists on request
 * project_folder exists when found on drive ... [x] has test
 * returns bool ... [x] has test
-* Test if a given folder and file exist on request
+
+Test if a given folder and file exist on request
 * file exists when folder exists and file exists
-## Get List of File Names on request
+
+ Get List of File Names on request
 * return [] when project_folder is None ... [x] has test
 * returns [] when project_folder NOT found ... [x] has test
 * returns [] when no files found ... [ ] has test
@@ -253,7 +264,8 @@ __LbUtil__
 * return files when file has specified extention ... [x] has test
 * prefix with a project_folder name
 * return list of filenames when files found [x] has test
-## Get List of Folder Names on request
+
+Get List of Folder Names on request
 * return [] when project_folder is None ... [x] has test
 * returns [] when project_folder NOT found ... [x] has test
 * returns [] when no folders found ... [x] has test
