@@ -72,13 +72,20 @@ __DeleteString__
 __FolderFileable__
 
  Enable file references
+
  Provide a folder_name variable
+
  Enable refererence to the filename
+
  Enable reference to folder_name
+
  Enable reference to folder name
+
  Enable reference to folder file
-* set project_folder and filename from single string
-* Test if a given folder_file exists on request
+
+set project_folder and filename from single string
+
+ Test if a given folder_file exists on request
 
 __Recordable__
 
@@ -86,10 +93,12 @@ __Recordable__
 * Record a message on request
 * Retrieve recorded steps
 
-__Inputability__
+__Inputable__
+
  Enable input from user
 
-* Prompt user for input
+
+Prompt user for input
 * Show current value or default
 * Provide a default input value when user presses return
 * Cause a hard stop when user types 'n','N','x','X','q' or 'Q'
@@ -210,7 +219,7 @@ __TemplateString__
 * merge nv_list into string on instantiation
 
 __FileEnv__
-* create with defaults when file doesnt exist
+Create environment file with defaults when file doesnt exist
 * read when file exists
 * by default, expect .env in the folder where script is running
 * by default, put .env file in parent folder

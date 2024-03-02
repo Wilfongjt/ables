@@ -7,33 +7,40 @@ class FolderFileable():
     ##
     ## Enable file references
     def __init__(self):
+        ##
         ## Provide a folder_name variable
         self.folder_filename=None
 
     def getFilename(self):
+        ##
         ## Enable refererence to the filename
         return self.folder_filename.split('/')[-1]
 
     def setFolderFilename(self, folder_filename):
+        ##
         ## Enable reference to folder_name
         self.folder_filename=folder_filename
         return self
 
     def getFolder(self):
+        ##
         ## Enable reference to folder name
         return '/'.join(self.folder_filename.split('/')[0:-1])
 
     def getFolderFile(self):
+        ##
         ## Enable reference to folder file
         return self.folder_filename
 
     def setFolderFile(self, folder_filename):
-        ##* set project_folder and filename from single string
+        ##
+        ##set project_folder and filename from single string
         self.folder_filename=folder_filename
         return self
 
     def folderfile_exists(self, folder_filename=None):
-        ##* Test if a given folder_file exists on request
+        ##
+        ## Test if a given folder_file exists on request
 
         if folder_filename:
             exists = os.path.isfile(folder_filename)

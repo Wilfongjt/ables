@@ -2,11 +2,13 @@ import sys
 
 class Inputable():
     ##
-    ##__Inputability__
+    ##__Inputable__
+    ##
     ## Enable input from user
     ##
     def get_input(self, msg, default, hardstop=True):
-        ##* Prompt user for input
+        ##
+        ##Prompt user for input
         ##* Show current value or default
         rc = '{} [{}] : '.format(msg, default)
         rc = input(rc)
