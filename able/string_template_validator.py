@@ -1,6 +1,10 @@
 import re
 
 class TemplateStringValidator(str):
+    ##
+    ##__TemplateStringValidator__
+    ##
+    ## Test if all \<\<keys>> have been replaced
     def __init__(self, template_string):
         # Define the regular expression pattern
         pattern = r'<<[A-Z_0-9]+>>'

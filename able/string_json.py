@@ -2,6 +2,10 @@ import re
 import json
 
 class JSONString(str):
+    ##
+    ##__JSONString__
+    ##
+    ## Dequoted JSON object
     def __new__(cls, normal_string):
         key_pattern = r'^[a-zA-Z_][a-zA-Z0-9_]*$'
         num_pattern = r'^[-0-9][0-9\.]*$'

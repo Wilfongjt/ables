@@ -1,6 +1,11 @@
 class Recordable():
+    ##
+    ##__Recordable__
+    ##
+    ##
     def __init__(self):
         self.recording = {}
+
     def addRecord(self, msg, arrow='->'):
         ##* Record a message on request
 
@@ -22,7 +27,7 @@ class Recordable():
     def getRecording(self):
         return self.recording
     def getDiagram(self):
-        ##* Retrieve recorded step
+        ##* Retrieve recorded steps
         rc = ''
         if 'step_list' not in self.recording:
             self.recording['step_list'] = []

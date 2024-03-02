@@ -1,5 +1,6 @@
 
 class Appendable():
+    ##
     ##__Appendable__
     ##
     ## Provide the abilty to append new lines to a document

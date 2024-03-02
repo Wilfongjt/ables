@@ -2,7 +2,9 @@ import os
 import shutil
 
 class StringReader(str):
+    ##
     ##__StringReader__
+    ##
     ## Read the contents of a file into a string
     def __new__(cls, folder_filename):
         ##* Fail when file doesnt exist

@@ -4,7 +4,10 @@ from os import listdir
 from os.path import isfile, join
 
 class LbUtil():
-
+    ##
+    ##__LbUtil__
+    ##
+    ## Some handy functions
     def create_folders(self, folder):
         ##* create folders on request
         os.makedirs(folder, exist_ok=True)
@@ -32,7 +35,7 @@ class LbUtil():
         return self
 
     def delete_folderfilename(self, folder_filename):
-        ##__delete_folderfilename__
+
         ##* delete a single file
         folder = folder_filename.split('/')
         file_name = folder[-1]
@@ -133,11 +136,14 @@ class LbUtil():
 
 
 def main():
-    folder= os.getcwd().replace('/able','')
-    print('folder', folder)
+    folder= os.getcwd() #.replace('/able','')
+    # print('folder', folder)
     assert(LbUtil())
     assert(LbUtil().formulate({'A': 'a', 'B': 'b'})=='(A,B)')
     assert(LbUtil().get_folder_list(folder) != [])
+
+    # print (LbUtil().get_folder_list(folder))
+    assert(LbUtil().get_folder_list(folder) == ['{}/template'.format(folder)])
     assert(LbUtil().get_file_list(folder, withpath=True)!=[])
 
 if __name__ == "__main__":

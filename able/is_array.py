@@ -2,8 +2,12 @@ import re
 
 
 class IsArray(int):
+    ##
+    ##__IsArray__
+    ##Is string an array string
     def __new__(cls, str_value):
         is_array=False
+        ##* regular expression pattern is r'\[.*\]'
         pattern = r'\[.*\]'
         match = re.search(pattern, str_value)
         if match:

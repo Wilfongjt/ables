@@ -12,9 +12,9 @@ def main():
     able.is_array.main()
     able.is_object.main()
     able.level.main()
-    # lb_util
+    able.lb_util.main()
     able.mergeable.main()
-    #able.model_project.main()
+    able.model_project.main()
     able.projectable.main()
     able.recordable.main()
     able.resultable.main()

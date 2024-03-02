@@ -33,6 +33,13 @@ import able
 ## "-" is a placeholder for a space
 
 class ProjectModel(dict):
+    ##
+    ##__ProjectModel__
+    ##
+    ## Dictionary that models a project
+    ##
+    ##* load dictionary from a markdown document
+
 
     def __init__(self, md_string):
         #contents = {}
@@ -65,32 +72,36 @@ def main():
     from  string_reader import StringReader
     from string_template import TemplateString
     # handle default with a template
-    md_project_tmpl_string = str(os.getcwd()).replace('able','able/template/api/model/latest')
-    md_project_tmpl_string = '{}/model.project.md.C---.tmpl'.format(md_project_tmpl_string)
-    md_project_tmpl_string = StringReader(md_project_tmpl_string)
+    md_project_string = str(os.getcwd()).replace('able','able/template/api/model/latest')
+    md_project_string = '{}/model.project.md.C---.tmpl'.format(md_project_string)
+    md_project_string = StringReader(md_project_string)
+    #print('md_project_string',md_project_string)
     nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'test-org'},
                {'name':'<<GH_PROJECT>>', 'value':'able'}]
-    md_project_tmpl_string = TemplateString(md_project_tmpl_string, nv_list)
-    print('md_project_tmpl_string',md_project_tmpl_string)
+    md_project_string = TemplateString(md_project_string, nv_list)
+    print('md_project_string',md_project_string)
     # handle template values
-    md_project = str(os.getcwd()).replace('able','source/data')
-    md_project = '{}/model.project.md'.format(md_project)
+    #md_project = str(os.getcwd()).replace('able','source/data')
+    #md_project = '{}/model.project.md'.format(md_project)
     #print('md_project', md_project)
-    md_string = StringReader(md_project)
+    #md_string = StringReader(md_project)
     assert (ProjectModel('') == {})
-    assert(ProjectModel(md_string))
-    assert(type(ProjectModel(md_string) is dict))
-    assert ('project' in ProjectModel(md_string))
-    assert ('audience' in ProjectModel(md_string)['project'])
-    assert ('claim' in ProjectModel(md_string)['project'])
-    assert ('issuer' in ProjectModel(md_string)['project'])
-    assert ('name' in ProjectModel(md_string)['project'])
-    assert ('owner' in ProjectModel(md_string)['project'])
-    assert ('resource' in ProjectModel(md_string)['project'])
-    assert ('subject' in ProjectModel(md_string)['project'])
 
-    #print('ProjectModel',ProjectModel(md_string))
-    pprint(ProjectModel(md_string))
+    print(ProjectModel(md_project_string))
+
+    assert(ProjectModel(md_project_string))
+    assert(type(ProjectModel(md_project_string) is dict))
+    assert ('project' in ProjectModel(md_project_string))
+    assert ('audience' in ProjectModel(md_project_string)['project'])
+    assert ('claim' in ProjectModel(md_project_string)['project'])
+    assert ('issuer' in ProjectModel(md_project_string)['project'])
+    assert ('name' in ProjectModel(md_project_string)['project'])
+    assert ('owner' in ProjectModel(md_project_string)['project'])
+    assert ('resource' in ProjectModel(md_project_string)['project'])
+    assert ('subject' in ProjectModel(md_project_string)['project'])
+
+    #print('ProjectModel',ProjectModel(md_project_string))
+    pprint(ProjectModel(md_project_string))
 
 if __name__ == "__main__":
     # execute as docker

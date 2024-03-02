@@ -1,6 +1,14 @@
 
 
 class Level(int):
+    ##
+    ##__Level__
+    ##
+    ## Calculate the level represented by a string
+    ##* eg 'something' is level 0
+    ##* eg '# something' is level 1
+    ##* eg '## something' is level 2
+
     def __new__(cls, md_line):
         lvl = 0
         counting = False

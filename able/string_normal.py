@@ -1,5 +1,9 @@
 
 class NormalString(str):
+    ##
+    ##__NormalString__
+    ##
+    ## Normalize a JSON string for predictable spaces and symbols
     def __new__(cls, json_string):
         # .replace(';', ' ; ') \
         #                               .replace('!', ' ! ') \
