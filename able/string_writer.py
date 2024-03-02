@@ -1,6 +1,10 @@
 import os
 
 class StringWriter():
+    ##
+    ##__StringWriter__
+    ##
+    ## Write a string value to a given filename
     def __init__(self, folder_filename, content_string):
         with open(folder_filename, 'w') as f:
             f.write(content_string)

@@ -3,6 +3,10 @@ import shutil
 import re
 
 class State(str):
+    ##
+    ##__State__
+    ##
+    ## Determine a template's conversion state
     def __init__(self, template_filename, target_filename):
         self.template_filename = template_filename
         self.target_filename = target_filename

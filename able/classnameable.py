@@ -1,5 +1,6 @@
 
 class ClassNameable():
+    ##
     ##__ClassNameable__
     ##
     ## Enable the use of classname for reference

@@ -1,6 +1,10 @@
 from able import Mergeable
-
+# Deprecated
 class MergerString(str, Mergeable):
+    ##
+    ##__MergerString__ Deprecated, use TempalteString instead
+    ##
+    ##
     def __init__(self, string_value, nv_list=None):
         Mergeable.__init__(self)
 

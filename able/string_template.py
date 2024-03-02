@@ -2,11 +2,16 @@
 from able import Mergeable
 
 class TemplateString(str, Mergeable):
-
+    ##
+    ##__TemplateString__
+    ##
+    ## String with a merge function
+    ##
     def __init__(self, template, nv_list=[]):
         Mergeable.__init__(self)
 
     def __new__(cls, template, nv_list=[]):
+        ##* merge nv_list into string on instantiation
         contents=[]
         for ln in str(template).split('\n'):
             for nv in nv_list:

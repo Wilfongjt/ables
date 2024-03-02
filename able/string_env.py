@@ -4,18 +4,23 @@ import shutil
 import re
 
 class EnvString(str):
+    ##
+    ##__EnvString__
+    ##
+    ## Environment Variables and Values
     def __new__(cls, env_var_string):
 
         contents = env_var_string
         for ln in contents.split('\n'):
 
-            # Define the regular expression pattern
+            # Define the regular expression pattern  r'^([A-Z][A-Z0-9_]+)=(.+)'
             pattern = r'^([A-Z][A-Z0-9_]+)=(.+)'
 
             # Use re.match() to match the entire input string
             match = re.match(pattern, ln)
             if match:
                 ln = ln.split('=')
+                ##* loads env variables into memory
                 os.environ[ln[0]] = ln[1]
 
         instance = super().__new__(cls, contents)

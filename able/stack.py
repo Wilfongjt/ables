@@ -1,13 +1,19 @@
 class Stack(list):
+    ##
+    ##__Stack__
+    ##
+
     def __init__(self, talk=False):
         self.talk = talk
 
     def push(self, value):
+        ##* Push a value into stack
         if self.talk: print('    * push', value)
         self.append(value)
         return self
 
     def pop(self, count=1,msg=None):
+        ##* Pop a value out of stack
         p = None
         if not msg: msg='' # hide the msg when not requested
         if count < 1:
@@ -22,14 +28,17 @@ class Stack(list):
         return p
 
     def get(self, idx):
+        ##* Get a stack item at a give index
         if self.size() > 0:
             return self[idx]
         return None
 
     def size(self):
+        ##* Get number of items in the stack
         return len(self)
 
     def peek(self):
+        ##* Look at the item at the top of the stack
         if len(self) == 0:
             if self.talk: print('    * peek', None)
             return None
@@ -40,7 +49,11 @@ class Stack(list):
 
 
     def update(self, dictionary, value):
-        # put value into dictionary at the end of stack's path
+        ##
+        ##__Update__
+        ##
+
+        ## Put value into dictionary at the end of stack's path
         # pass value as array to add
         target = dictionary
 

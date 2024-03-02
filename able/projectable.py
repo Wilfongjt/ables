@@ -2,6 +2,7 @@ import os
 import shutil
 
 class Projectable():
+    ##
     ##__Projectable__
     ##
     ##* project folder eg Development/client/workspace/project
@@ -21,31 +22,30 @@ class Projectable():
         return self.project_folder.split('/')[-1]
 
     def getDevelopmentFolder(self):
-        ##__Enable reference to the development folder__
-        ##* get "Development" folder on request
+        ##* Enable reference to the development folder
+
         if not self.project_folder:
             return None
         ws = '/'.join(self.project_folder.split('/')[0:-3])
         return ws
 
     def getClientFolder(self):
-        ##__Enable reference to the client folder__
-        ##* get client folder on request
+        ##* Enable reference to the client folder
+
         if not self.project_folder:
             return None
         ws = '/'.join(self.project_folder.split('/')[0:-2])
         return ws
 
     def getWorkspaceFolder(self):
-        ## __Enable reference to the workspace folder__
-        ##* get workspace folder on request
+        ##* Enable reference to the workspace folder
         if not self.project_folder:
             return None
         return '/'.join(self.project_folder.split('/')[0:-1])
 
     def getProjectFolder(self):
-        ##__Enable setting and reference to project folder__
-        ##* get project folder on request
+        ##* Enable setting and reference to project folder
+
         if not self.project_folder:
             return None
         ws = '/'.join(self.project_folder.split('/'))

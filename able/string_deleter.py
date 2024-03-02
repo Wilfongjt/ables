@@ -2,7 +2,9 @@ import os
 import shutil
 
 class DeleterString(str):
+    ##
     ##__DeleteString__
+    ##
     ##* Remove a file and return its contents
 
     def __new__(cls, folder_filename):

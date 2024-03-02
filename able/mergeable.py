@@ -1,7 +1,7 @@
 
 class Mergeable():
     ##
-    ##__Mergable__
+    ##__Mergeable__
     ##
     ## Render a template with user provided values
     def __init__(self):

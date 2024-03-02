@@ -9,8 +9,10 @@ import shutil
 # if State(template_hard_filename, target_filename).isUpdateable(): # update a line when line starts with a given string "--U-"
 
 class CreatorString(str):
+    ##
     ##__CreatorString__
-    ## create an unmerged template file in the target folder
+    ##
+    ## Create an unmerged template file in the target folder
     ##* enable standalone version for testing and ad hoc cases
     def __init__(self, folder_filename, default_contents, overwrite=False,hardfail=True):
         ##* default_contents eg 'A' or 'A=a\nB=b'

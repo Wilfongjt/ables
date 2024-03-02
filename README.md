@@ -7,7 +7,7 @@ Useful Python Mixins
 # main.py 
 # This is a sample Python script.
 
-__version__ = '1.8.1'
+__version__ = '1.8.2'
 from able.mergeable import Mergeable
 
 def main():
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 from setuptools import setup, find_packages
 
 # from able.__init__ import __version__
-__version__='1.8.1'
+__version__='1.8.2'
 setup(
     name='able',
     version=__version__,
