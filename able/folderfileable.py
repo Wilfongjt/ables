@@ -14,34 +14,39 @@ class FolderFileable():
     def getFilename(self):
         ##
         ## Enable refererence to the filename
+        ##* eg folderfileable.py
         return self.folder_filename.split('/')[-1]
 
     def setFolderFilename(self, folder_filename):
         ##
-        ## Enable reference to folder_name
+        ## Set folder filename
+        ##* folder_filename is full path and filename
         self.folder_filename=folder_filename
         return self
 
     def getFolder(self):
         ##
         ## Enable reference to folder name
+        ##* Get path to filename
         return '/'.join(self.folder_filename.split('/')[0:-1])
 
     def getFolderFile(self):
         ##
         ## Enable reference to folder file
+        ##*
         return self.folder_filename
 
     def setFolderFile(self, folder_filename):
         ##
-        ##set project_folder and filename from single string
+        ##Set project_folder and filename from single string
+        ##*
         self.folder_filename=folder_filename
         return self
 
     def folderfile_exists(self, folder_filename=None):
         ##
         ## Test if a given folder_file exists on request
-
+        ##* returns True or False
         if folder_filename:
             exists = os.path.isfile(folder_filename)
         else:
