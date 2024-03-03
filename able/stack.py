@@ -5,6 +5,7 @@ class Stack(list):
 
     def __init__(self,branch=None, talk=False):
         self.talk = talk
+        ##* initialize using a branch string eg project/resource
         if branch:
             branch = branch.replace(' ','_')
             branch=branch.split('/')
