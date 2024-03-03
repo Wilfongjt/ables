@@ -4,6 +4,7 @@ import re
 class IsObject(int):
     ##
     ##__IsObject__
+    ##
     ## Is string an object
     ##* regular expression r'\{.*\}'
     def __new__(cls, str_value):

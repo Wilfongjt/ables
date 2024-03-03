@@ -3,8 +3,14 @@ class Stack(list):
     ##__Stack__
     ##
 
-    def __init__(self, talk=False):
+    def __init__(self,branch=None, talk=False):
         self.talk = talk
+        ##* initialize using a branch string eg project/resource
+        if branch:
+            branch = branch.replace(' ','_')
+            branch=branch.split('/')
+            for item in branch:
+                self.push(item)
 
     def push(self, value):
         ##* Push a value into stack
@@ -238,6 +244,14 @@ def main():
 
     dictionary = {}
     stack = Stack(talk=show)
+
+    assert(Stack(branch='') == [])
+    assert(Stack(branch='A') == ['A'])
+    assert(Stack(branch='A/B') == ['A', 'B'])
+    assert(Stack(branch='A/B/C') == ['A', 'B', 'C'])
+
+    # print (Stack(branch='A/B/C'))
+
     print('Stack tests are incomplete!')
 if __name__ == "__main__":
     # execute only if run as a script

@@ -29,6 +29,7 @@ __Failable__
 * Provide a hard failure when failed
 
 __IsObject__
+
  Is string an object
 * regular expression r'\{.*\}'
 
@@ -76,16 +77,22 @@ __FolderFileable__
  Provide a folder_name variable
 
  Enable refererence to the filename
+* eg folderfileable.py
 
- Enable reference to folder_name
+ Set folder filename
+* folder_filename is full path and filename
 
  Enable reference to folder name
+* Get path to filename
 
  Enable reference to folder file
+*
 
-set project_folder and filename from single string
+Set project_folder and filename from single string
+*
 
  Test if a given folder_file exists on request
+* returns True or False
 
 __Recordable__
 
