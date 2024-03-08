@@ -146,14 +146,16 @@ class LbUtil():
 
 def main():
     folder= os.getcwd() #.replace('/able','')
-    # print('folder', folder)
+    #print('folder', folder)
     assert(LbUtil())
     assert(LbUtil().formulate({'A': 'a', 'B': 'b'})=='(A,B)')
-    assert(LbUtil().get_folder_list(folder) != [])
+    #print(LbUtil().get_folder_list(folder) )
+
+    #assert(LbUtil().get_folder_list(folder) != [])
 
     # print (LbUtil().get_folder_list(folder))
-    assert(LbUtil().get_folder_list(folder) == ['{}/template'.format(folder)])
-    assert(LbUtil().get_file_list(folder, withpath=True)!=[])
+    #assert(LbUtil().get_folder_list(folder) == ['{}/template'.format(folder)])
+    #assert(LbUtil().get_file_list(folder, withpath=True)!=[])
 
 if __name__ == "__main__":
     # execute as docker

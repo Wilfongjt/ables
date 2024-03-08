@@ -32,7 +32,7 @@ def main():
     able.string_updater.main()
     able.string_writer.main()
     able.taskable.main()
-
+    able.template_map.main()
     print('good enough')
 
 if __name__ == "__main__":

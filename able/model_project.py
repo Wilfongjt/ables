@@ -68,20 +68,28 @@ class ProjectModel(dict):
 
 def main():
     from pprint import pprint
-    from  string_reader import StringReader
-    from string_template import TemplateString
+    from able import StringReader
+    from able import TemplateString
 
     # handle default with a template
-    md_project_string = str(os.getcwd()).replace('able','able/template/api/model/latest')
+    print('cwd                ', os.getcwd())
+    md_project_string = str(os.getcwd()).replace('able','able/template/api/model/latest').replace('bin','able/template/api/model/latest')
+    print('A md_project_string',md_project_string)
+
     md_project_string = '{}/model.project.md.C---.tmpl'.format(md_project_string)
+    print('B md_project_string',md_project_string)
+
     md_project_string = StringReader(md_project_string)
+    print('C md_project_string',md_project_string)
+
     md_project_string += StringReader('{}/model.resource.*.md.C---.tmpl'.format(str(os.getcwd()).replace('able','able/template/api/model/latest')))
+    print('D md_project_string',md_project_string)
 
     #print('md_project_string',md_project_string)
     nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'test-org'},
                {'name':'<<GH_PROJECT>>', 'value':'able'}]
     md_project_string = TemplateString(md_project_string, nv_list)
-    print('md_project_string',md_project_string)
+    print('E md_project_string',md_project_string)
     # handle template values
     #md_project = str(os.getcwd()).replace('able','source/data')
     #md_project = '{}/model.project.md'.format(md_project)
