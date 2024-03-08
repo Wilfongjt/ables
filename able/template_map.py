@@ -1,10 +1,11 @@
 import os
-from string_reader import StringReader
-from string_updater import UpdaterString
-from string_merger import MergerString
-from string_template import TemplateString
-from folderfileable import FolderFileable
-from datable import Datable
+#from able import StringReader, UpdaterString, MergerString, TemplateString,FolderFileable, Datable
+from able.string_reader import StringReader
+from able.string_updater import UpdaterString
+from able.string_merger import MergerString
+from able.string_template import TemplateString
+from able.folderfileable import FolderFileable
+from able.datable import Datable
 
 class TemplateMap(dict, FolderFileable, Datable):
     ## Map Template files to Target files
@@ -18,8 +19,8 @@ class TemplateMap(dict, FolderFileable, Datable):
 
     def get_every_other(self, lst):
         ##* get every other list element
-        print('get_every_other',lst)
-        print('get_every_other', lst[1::2])
+        #print('get_every_other',lst)
+        #print('get_every_other', lst[1::2])
         return lst[1::2]
 
     def toOutputName(self,  item_path):
@@ -59,12 +60,12 @@ class TemplateMap(dict, FolderFileable, Datable):
             item_path = os.path.join(folder_path, item)
 
             if os.path.isdir(item_path):
-                print('2 traverse_folder')
+                #print('2 traverse_folder')
 
                 # If the item is a directory, recursively call the function
                 self.traverse_folder(item_path)
             else:
-                print('3 traverse_folder item', item)
+                #print('3 traverse_folder item', item)
 
                 # interleave destination folder name in the template folder structure
                 # keep every other subfolder name starting with "api"
@@ -73,13 +74,13 @@ class TemplateMap(dict, FolderFileable, Datable):
 
                 ##* list the latest version of a template
                 if 'latest' in item_path:
-                    print('3.1 traverse_folder')
+                    #print('3.1 traverse_folder')
 
                     # print('item:', item)
                     from_ = item_path.split('/')
                     methods=''
                     if not str(from_[-1]).lower().endswith('.dep'):
-                        print('3.1.1 traverse_folder')
+                        #print('3.1.1 traverse_folder')
 
                         methods = str(from_[-1]).split('.')[-2]
 
@@ -94,18 +95,18 @@ class TemplateMap(dict, FolderFileable, Datable):
                     #    print('to_  ', to_)
 
                     if 'root/' in to_:
-                        print('3.2 traverse_folder')
+                        #print('3.2 traverse_folder')
 
                         ##* 'root' designates that the target-file is put in the app's root folder
                         to_ = to_.replace('root/', '')
 
                     if 'api/' in to_:
-                        print('3.3 traverse_folder')
+                        #print('3.3 traverse_folder')
 
                         to_ = to_.replace('api/','')
 
                     if not from_.endswith('.dep'):
-                        print('3.4 traverse_folder')
+                        #print('3.4 traverse_folder')
                         to_ = MergerString(
                             '{}/Development/<<WS_ORGANIZATION>>/<<WS_WORKSPACE>>/<<GH_PROJECT>>/{}'.format(os.environ['HOME'],to_),
                             self.getData()
@@ -127,13 +128,13 @@ class TemplateMap(dict, FolderFileable, Datable):
                                               'methods': methods,
                                               'contents': TemplateString(StringReader(from_), self.getData())}
                         else:
-                            print('3.4.2 traverse_folder')
+                            #print('3.4.2 traverse_folder')
 
                             # handle compound templates
                             self[target_file_key]['count'] += 1
                             #print('target_file_key', self[target_file_key]['target'])
                             if not os.path.isfile(self[target_file_key]['target']):
-                                print('3.4.2.1 traverse_folder')
+                                #print('3.4.2.1 traverse_folder')
 
                                 ##* May have multiple templates with the same name
                                 ##* merge multiple templates on initialization of target
@@ -145,14 +146,14 @@ class TemplateMap(dict, FolderFileable, Datable):
 
 def main():
     from pprint import pprint
-    from state import State
+    from able import State
     nv_list = [
         {'name': '<<WS_ORGANIZATION>>', 'value': 'test-org'},
         {'name': '<<WS_WORKSPACE>>', 'value': '00_template_map'},
         {'name':'<<GH_PROJECT>>', 'value': 'abilities'}]
     actual = TemplateMap(os.getcwd(),nv_list)
-    print('actual', actual)
-    pprint(actual)
+    #print('actual', actual)
+    #pprint(actual)
     template_folder = os.getcwd()
     #assert (TemplateMap(os.getcwd(),nv_list))
     actual = TemplateMap(template_folder, nv_list)
