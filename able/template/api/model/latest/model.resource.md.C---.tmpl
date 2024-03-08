@@ -1,0 +1,36 @@
+
+### <<WS_RESOURCE>>:
+1. resource: <<WS_RESOURCE>>
+1. type: <<WS_RESOURCE>>
+1. version:000
+
+#### model:
+1. id: abc#abc
+1. type: <<WS_RESOURCE>>
+1. owner: abc@xyz.abc
+
+#### methods:
+##### <<WS_RESOURCE>>_delete:
+1. active: 1
+1. name: <<WS_RESOURCE>>_delete
+1. scope: [api_user, api_admin, api_guest]
+1. parameter: [token_id=TOKEN, owner_id=OWNERID, primary_key=PRIMARYKEY]
+
+##### <<WS_RESOURCE>>_get:
+1. active: 1
+1. name: <<WS_RESOURCE>>_get
+1. scope: [api_user, api_admin, api_guest]
+1. parameter: [token_id=TOKEN,owner_id=OWNERID,primary_key=PRIMARYKEY]
+
+##### <<WS_RESOURCE>>_post:
+1. active: 1
+1. name: <<WS_RESOURCE>>_post
+1. scope: [api_user, api_admin, api_guest]
+1. parameter: [token_id=TOKEN,owner_id=OWNERID,trip=TRIPLE]
+
+##### <<WS_RESOURCE>>_put:
+1. active: 1
+1. name: <<WS_RESOURCE>>_put
+1. scope: [api_user, api_admin, api_guest]
+1. parameter: [token_id=TOKEN,owner_id=OWNERID,primary_key=PRIMARYKEY,trip=TRIPLE]
+

@@ -66,15 +66,17 @@ class ProjectModel(dict):
                 stack.update(self, s[1])
                 stack.pop()
 
-
 def main():
     from pprint import pprint
     from  string_reader import StringReader
     from string_template import TemplateString
+
     # handle default with a template
     md_project_string = str(os.getcwd()).replace('able','able/template/api/model/latest')
     md_project_string = '{}/model.project.md.C---.tmpl'.format(md_project_string)
     md_project_string = StringReader(md_project_string)
+    md_project_string += StringReader('{}/model.resource.*.md.C---.tmpl'.format(str(os.getcwd()).replace('able','able/template/api/model/latest')))
+
     #print('md_project_string',md_project_string)
     nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'test-org'},
                {'name':'<<GH_PROJECT>>', 'value':'able'}]
