@@ -16,7 +16,7 @@ class Inputable():
         if not rc:
             rc = default
         ##* Cause a hard stop when user types 'n','N','x','X','q' or 'Q'
-        if rc in ['n','N','x','X','q','Q','TBD']:
+        if rc in ['n','N','x','X','q','Q','TBD','?']:
             if hardstop:
                 print('stopping...Stopped')
                 exit(0)
