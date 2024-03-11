@@ -18,17 +18,17 @@ class LbUtil():
         ##
         ##Delete file on request
         if self.file_exists(folder, file_name):
-            ##* delete file when project_folder and file are found ... [x] has test
+            ##* delete file when repo_folder_gh and file are found ... [x] has test
             os.remove("{}/{}".format(folder, file_name))
 
-        ##* skip file delete when project_folder and file are NOT found ... [x] has test
+        ##* skip file delete when repo_folder_gh and file are NOT found ... [x] has test
 
         ##* return LbUtil ... [x] has test
         return self
 
     def delete_folder(self, folder):
         ##
-        ##Delete project_folder on request
+        ##Delete repo_folder_gh on request
 
         ##* remove all files and subfolders in a folder
         exists = os.path.isdir('{}'.format(folder))
@@ -45,15 +45,15 @@ class LbUtil():
         folder = '/'.join(folder[0:-1])
 
         if self.file_exists(folder, file_name):
-            ##* delete file when project_folder and file are found ... [x] has test
+            ##* delete file when repo_folder_gh and file are found ... [x] has test
             os.remove("{}/{}".format(folder, file_name))
         return self
 
     def file_exists(self, folder, filename):
         ##
-        ##Test if a given project_folder and file exist on request
+        ##Test if a given repo_folder_gh and file exist on request
 
-        ##* file exists when project_folder exists and file exists
+        ##* file exists when repo_folder_gh exists and file exists
         exists = os.path.isfile('{}/{}'.format(folder, filename))
 
         return exists
@@ -72,8 +72,8 @@ class LbUtil():
 
     def folder_exists(self, folder):
         ##
-        ##Test if a given project_folder exists on request
-        ##* project_folder exists when found on drive ... [x] has test
+        ##Test if a given repo_folder_gh exists on request
+        ##* repo_folder_gh exists when found on drive ... [x] has test
         exists = os.path.isdir('{}'.format(folder))
         ##* returns bool ... [x] has test
         return exists
@@ -91,11 +91,11 @@ class LbUtil():
         ## Get List of File Names on request
         onlyfiles = []
 
-        ##* return [] when project_folder is None ... [x] has test
+        ##* return [] when repo_folder_gh is None ... [x] has test
         if not path:
             return []
 
-        ##* returns [] when project_folder NOT found ... [x] has test
+        ##* returns [] when repo_folder_gh NOT found ... [x] has test
         if not self.folder_exists(path):
             return []
         # get list of files
@@ -111,7 +111,7 @@ class LbUtil():
         if ext != None and ext != '*':
             onlyfiles = [f for f in onlyfiles if f.startswith(ext) or f.endswith(ext)]
         onlyfiles =  [fn for fn in onlyfiles if '.DS_Store' not in fn]
-        ##* prefix with a project_folder name
+        ##* prefix with a repo_folder_gh name
         if withpath:
             onlyfiles = ['{}/{}'.format(path, fn) for fn in onlyfiles]
 
@@ -123,11 +123,11 @@ class LbUtil():
         ##Get List of Folder Names on request
 
         onlyfolders = []
-        ##* return [] when project_folder is None ... [x] has test
+        ##* return [] when repo_folder_gh is None ... [x] has test
         if not path:
             return []
 
-        ##* returns [] when project_folder NOT found ... [x] has test
+        ##* returns [] when repo_folder_gh NOT found ... [x] has test
         if not self.folder_exists(path):
             return []
 

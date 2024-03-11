@@ -1,7 +1,8 @@
-__version__ = '1.9.0'
+__version__ = '1.10.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
+from able.exceptions.exception_cloning import ExceptionCloning
 from .failable import Failable
 from .file_env import FileEnv
 from .folderfileable import FolderFileable
@@ -30,3 +31,5 @@ from .string_writer import StringWriter
 from .recordable import Recordable
 from .taskable import Taskable
 from .template_map import TemplateMap
+from .userable_gh import Userable_GH
+from .urlable_gh import Urlable_GH

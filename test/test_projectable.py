@@ -16,19 +16,19 @@ class TestProjectable(unittest.TestCase):
             def __init__(self):
                 Projectable.__init__(self)
 
-        assert (Example().setProjectFolder(self.folder)
-                .getProjectFolder() == self.folder)
-        assert (Example().setProjectFolder(self.folder)
+        assert (Example().setRepoFolder(self.folder)
+                .getRepoFolder() == self.folder)
+        assert (Example().setRepoFolder(self.folder)
                 .getWorkspaceFolder() == '{}/Development/client/workspace'.format(
             os.environ['HOME']))
-        assert (Example().setProjectFolder(self.folder)
+        assert (Example().setRepoFolder(self.folder)
                 .getClientFolder() == '{}/Development/client'.format(
             os.environ['HOME']))
-        assert (Example().setProjectFolder(self.folder)
+        assert (Example().setRepoFolder(self.folder)
                 .getDevelopmentFolder() == '{}/Development'.format(
             os.environ['HOME']))
 
-        assert (Example().setProjectFolder(self.folder).getProjectName()==self.project_name)
+        assert (Example().setRepoFolder(self.folder).getRepoName() == self.project_name)
 
     def tearDown(self) -> None:
         # tearDown

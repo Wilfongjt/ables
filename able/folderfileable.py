@@ -38,7 +38,7 @@ class FolderFileable():
 
     def setFolderFile(self, folder_filename):
         ##
-        ##Set project_folder and filename from single string
+        ##Set repo_folder_gh and filename from single string
         ##*
         self.folder_filename=folder_filename
         return self

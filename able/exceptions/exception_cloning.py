@@ -1,0 +1,2 @@
+class ExceptionCloning(Exception):
+    pass
