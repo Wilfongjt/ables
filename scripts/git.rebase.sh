@@ -22,7 +22,7 @@ source .env set
 set +o allexport
 # show env
 #env
-# goto bin project_folder
+# goto bin repo_folder_gh
 #cd ..
 
 ls

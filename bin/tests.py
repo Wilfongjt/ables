@@ -33,6 +33,7 @@ def main():
     able.string_writer.main()
     able.taskable.main()
     able.template_map.main()
+    able.userable_gh.main()
     print('good enough')
 
 if __name__ == "__main__":
