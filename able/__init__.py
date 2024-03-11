@@ -2,7 +2,7 @@ __version__ = '1.10.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .datable import Datable
-from able.exceptions.exception_cloning import ExceptionCloning
+from .exceptions.exception_cloning import ExceptionCloning
 from .failable import Failable
 from .file_env import FileEnv
 from .folderfileable import FolderFileable
