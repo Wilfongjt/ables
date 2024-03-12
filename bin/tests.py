@@ -17,6 +17,7 @@ def main():
     able.lb_util.main()
     able.mergeable.main()
     able.model_project.main()
+    able.permissions.main()
     able.projectable.main()
     able.recordable.main()
     able.resultable.main()
