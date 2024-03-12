@@ -1,4 +1,4 @@
-__version__ = '1.10.2'
+__version__ = '1.11.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
@@ -15,6 +15,7 @@ from .lb_util import LbUtil
 from .level import Level
 from .mergeable import Mergeable
 from .model_project import ProjectModel
+from .permissions import Permissions
 from .projectable import Projectable
 from .resultable import Resultable
 from .stack import Stack
