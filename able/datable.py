@@ -38,8 +38,8 @@ def main():
 
 
     # tearDown
-    #if os.path.isdir('{}'.format(folder)):
-    #    shutil.rmtree(folder)
+    #if os.path.isdir('{}'.format(repo_folder)):
+    #    shutil.rmtree(repo_folder)
 
 
 

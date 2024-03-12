@@ -23,9 +23,9 @@ class TestState(unittest.TestCase):
 
     #def tearDown(self) -> None:
     #    # cleanup
-    #    fileExists = os.path.isdir(self.folder)
+    #    fileExists = os.path.isdir(self.repo_folder)
     #    if fileExists:
-    #        shutil.rmtree(self.folder)
+    #        shutil.rmtree(self.repo_folder)
 
 
 if __name__ == '__main__':

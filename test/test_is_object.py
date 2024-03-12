@@ -21,7 +21,7 @@ class TestIsObject(unittest.TestCase):
     #def tearDown(self):
     #    fileExists = os.path.isfile(self.folder_filename)
     #    if fileExists:
-    #        shutil.rmtree(self.folder)
+    #        shutil.rmtree(self.repo_folder)
 
 if __name__ == '__main__':
     unittest.main()

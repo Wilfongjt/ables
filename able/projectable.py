@@ -5,15 +5,15 @@ class Projectable():
     ##
     ##__Projectable__
     ##
-    ##* project folder eg Development/client/workspace/project
-    ##* branch folder  eg Development/client/workspace/project/branch
-    ##* repo folder    eg Development/client/workspace/project/branch/repo
+    ##* project repo_folder eg Development/client/workspace/project
+    ##* branch repo_folder  eg Development/client/workspace/project/branch
+    ##* repo repo_folder    eg Development/client/workspace/project/branch/repo
 
     def __init__(self, repo_folder=None):
         self.repo_folder=repo_folder
 
     def setRepoFolder(self, repo_folder):
-        ##* set repo folder on request eg Development/client/workspace/project/branch/repo
+        ##* set repo repo_folder on request eg Development/client/workspace/project/branch/repo
         self.repo_folder = repo_folder
         return self
 
@@ -48,7 +48,7 @@ class Projectable():
         return self.repo_folder.split('/')[-5]
 
     def getDevelopmentFolder(self):
-        ##* Enable reference to the development folder
+        ##* Enable reference to the development repo_folder
 
         if not self.repo_folder:
             return None
@@ -56,7 +56,7 @@ class Projectable():
         return ws
 
     def getClientFolder(self):
-        ##* Enable reference to the client folder
+        ##* Enable reference to the client repo_folder
 
         if not self.repo_folder:
             return None
@@ -64,25 +64,25 @@ class Projectable():
         return ws
 
     def getWorkspaceFolder(self):
-        ##* Enable reference to the workspace folder
+        ##* Enable reference to the workspace repo_folder
         if not self.repo_folder:
             return None
         return '/'.join(self.repo_folder.split('/')[0:-3])
 
     def getProjectFolder(self):
-        ##* Enable reference to the project folder
+        ##* Enable reference to the project repo_folder
         if not self.repo_folder:
             return None
         return '/'.join(self.repo_folder.split('/')[0:-2])
 
     def getBranchFolder(self):
-        ##* Enable reference to the project folder
+        ##* Enable reference to the project repo_folder
         if not self.repo_folder:
             return None
         return '/'.join(self.repo_folder.split('/')[0:-1])
 
     def getRepoFolder(self):
-        ##* Enable setting a reference to repo folder
+        ##* Enable setting a reference to repo repo_folder
 
         if not self.repo_folder:
             return None
