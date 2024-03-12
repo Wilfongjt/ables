@@ -1,9 +1,9 @@
 import unittest
 import os
 import shutil
-from able import Cloneable_GH
+from able import CloneRepo
 
-class TestCloneable(unittest.TestCase):
+class TestCloneRepo(unittest.TestCase):
 
     def setUp(self):
         self.organization = 'test-org'
@@ -35,10 +35,8 @@ class TestCloneable(unittest.TestCase):
 
 
     def test_init(self):
-        class Example(Cloneable_GH):
-            def __init__(self):
-                Cloneable_GH.__init__(self)
-        assert(Example().clone(self.repo_folder,self.username))
+
+        assert(CloneRepo(self.repo_folder,self.username))
         assert(os.path.isdir(self.repo_folder))
 
     def tearDown(self):

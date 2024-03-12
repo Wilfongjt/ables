@@ -3,6 +3,8 @@ cd ..
 #python3 -c "from pylyttlebit.lb_branch import LbBranch; LbBranch().hello_world()"
 python3 -c "from able.appendable import Appendable"
 python3 -c "from able.classnameable import ClassNameable"
+python3 -c "from able.cloneable_gh import Cloneable_GH"
+python3 -c "from able.clone_repo import CloneRepo"
 python3 -c "from able.datable import Datable"
 python3 -c "from able.failable import Failable"
 python3 -c "from able.file_env import FileEnv"

@@ -1,8 +1,10 @@
-__version__ = '1.10.0'
+__version__ = '1.10.2'
 from .appendable import Appendable
 from .classnameable import ClassNameable
+from .cloneable_gh import Cloneable_GH
+from .clone_repo import CloneRepo
 from .datable import Datable
-from .exceptions.exception_cloning import ExceptionCloning
+from .exception_cloning import ExceptionCloning
 from .failable import Failable
 from .file_env import FileEnv
 from .folderfileable import FolderFileable

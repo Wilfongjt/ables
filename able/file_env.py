@@ -10,18 +10,18 @@ class FileEnv(list, FolderFileable):
     ##__FileEnv__
     ##Create environment file with defaults when file doesnt exist
     ##* read when file exists
-    ##* by default, expect .env in the folder where script is running
+    ##* by default, expect .env in the repo_folder where script is running
     def __init__(self, folder_filename=None):
         FolderFileable.__init__(self)
-        # load from current folder
+        # load from current repo_folder
         # fail if .env not found
         #self.setFolderFilename(folder_filename)
         if folder_filename:
             self.setFolderFilename(folder_filename)
         elif os.getcwd().endswith('able'):
             ffn = '{}/.env'.format(os.getcwd())
-            # In testing folder
-            ##* by default, put .env file in parent folder
+            # In testing repo_folder
+            ##* by default, put .env file in parent repo_folder
             parent_folder = '/'.join(os.getcwd().split('/')[0:-1])
             parent_folderfile = '{}/.env'.format(parent_folder)
             ffn = parent_folderfile

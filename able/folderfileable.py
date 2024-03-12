@@ -19,20 +19,20 @@ class FolderFileable():
 
     def setFolderFilename(self, folder_filename):
         ##
-        ## Set folder filename
+        ## Set repo_folder filename
         ##* folder_filename is full path and filename
         self.folder_filename=folder_filename
         return self
 
     def getFolder(self):
         ##
-        ## Enable reference to folder name
+        ## Enable reference to repo_folder name
         ##* Get path to filename
         return '/'.join(self.folder_filename.split('/')[0:-1])
 
     def getFolderFile(self):
         ##
-        ## Enable reference to folder file
+        ## Enable reference to repo_folder file
         ##*
         return self.folder_filename
 

@@ -4,6 +4,8 @@ def main():
 
     able.appendable.main()
     able.classnameable.main()
+    able.cloneable_gh.main()
+    able.clone_repo.main()
     able.datable.main()
     able.file_env.main()
     able.failable.main()

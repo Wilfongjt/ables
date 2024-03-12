@@ -1,8 +1,8 @@
 import os
 import shutil
-# create an unmerged template file in the target folder
-# create target file from a template in target folder when target file doesnt exist
-# create target file from a template in target folder when overwrite is True
+# create an unmerged template file in the target repo_folder
+# create target file from a template in target repo_folder when target file doesnt exist
+# create target file from a template in target repo_folder when overwrite is True
 
 # if State(template_hard_filename, target_filename).isDeleteable(): # delete file when it exists "---D"
 # if State(template_hard_filename, target_filename).isCreateable(): # create a file when it doesnt exist "C---"
@@ -12,7 +12,7 @@ class CreatorString(str):
     ##
     ##__CreatorString__
     ##
-    ## Create an unmerged template file in the target folder
+    ## Create an unmerged template file in the target repo_folder
     ##* enable standalone version for testing and ad hoc cases
     def __init__(self, folder_filename, default_contents, overwrite=False,hardfail=True):
         ##* default_contents eg 'A' or 'A=a\nB=b'
@@ -36,7 +36,7 @@ class CreatorString(str):
 
                     raise Exception('Create file failed, file exists and no overwrite: {}'.format(folder_filename))
         else:
-            ##* Create target file in target folder when target file doesnt exist
+            ##* Create target file in target repo_folder when target file doesnt exist
             with open(folder_filename, 'w') as f:
                 f.write(default_contents)
         instance = super().__new__(cls, default_contents)

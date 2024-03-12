@@ -67,9 +67,9 @@ class TemplateMap(dict, FolderFileable, Datable):
             else:
                 #print('3 traverse_folder item', item)
 
-                # interleave destination folder name in the template folder structure
+                # interleave destination repo_folder name in the template repo_folder structure
                 # keep every other subfolder name starting with "api"
-                # api is a standin for the destination project folder
+                # api is a standin for the destination project repo_folder
                 # remove "latest" from the destination path#
 
                 ##* list the latest version of a template
@@ -97,7 +97,7 @@ class TemplateMap(dict, FolderFileable, Datable):
                     if 'root/' in to_:
                         #print('3.2 traverse_folder')
 
-                        ##* 'root' designates that the target-file is put in the app's root folder
+                        ##* 'root' designates that the target-file is put in the app's root repo_folder
                         to_ = to_.replace('root/', '')
 
                     if 'api/' in to_:

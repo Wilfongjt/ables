@@ -30,7 +30,7 @@ class LbUtil():
         ##
         ##Delete repo_folder_gh on request
 
-        ##* remove all files and subfolders in a folder
+        ##* remove all files and subfolders in a repo_folder
         exists = os.path.isdir('{}'.format(folder))
         if exists:
             shutil.rmtree(folder)
@@ -80,9 +80,9 @@ class LbUtil():
 
     def folderfile_exists(self, folder_filename):
         ##
-        ##Test if a given folder and file exist on request
+        ##Test if a given repo_folder and file exist on request
 
-        ##* file exists when folder exists and file exists
+        ##* file exists when repo_folder exists and file exists
         exists = os.path.isfile(folder_filename)
 
         return exists
@@ -146,16 +146,16 @@ class LbUtil():
 
 def main():
     folder= os.getcwd() #.replace('/able','')
-    #print('folder', folder)
+    #print('repo_folder', repo_folder)
     assert(LbUtil())
     assert(LbUtil().formulate({'A': 'a', 'B': 'b'})=='(A,B)')
-    #print(LbUtil().get_folder_list(folder) )
+    #print(LbUtil().get_folder_list(repo_folder) )
 
-    #assert(LbUtil().get_folder_list(folder) != [])
+    #assert(LbUtil().get_folder_list(repo_folder) != [])
 
-    # print (LbUtil().get_folder_list(folder))
-    #assert(LbUtil().get_folder_list(folder) == ['{}/template'.format(folder)])
-    #assert(LbUtil().get_file_list(folder, withpath=True)!=[])
+    # print (LbUtil().get_folder_list(repo_folder))
+    #assert(LbUtil().get_folder_list(repo_folder) == ['{}/template'.format(repo_folder)])
+    #assert(LbUtil().get_file_list(repo_folder, withpath=True)!=[])
 
 if __name__ == "__main__":
     # execute as docker
