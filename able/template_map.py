@@ -105,12 +105,17 @@ class TemplateMap(dict, FolderFileable, Datable):
 
                         to_ = to_.replace('api/','')
 
+                    #print('3.3 traverse_folder to_', to_)
+
                     if not from_.endswith('.dep'):
                         #print('3.4 traverse_folder')
+                        #print('3.4 data', self.getData())
                         to_ = MergerString(
-                            '{}/Development/<<WS_ORGANIZATION>>/<<WS_WORKSPACE>>/<<GH_PROJECT>>/{}'.format(os.environ['HOME'],to_),
+                            '{}/Development/<<WS_ORGANIZATION>>/<<WS_WORKSPACE>>/<<GH_PROJECT>>/<<GH_BRANCH>>/<<GH_PROJECT>>/{}'.format(os.environ['HOME'],to_),
                             self.getData()
                         )
+                        #print('3.4 traverse_folder to_', to_)
+
                         target_file_key = to_.split('/')[-1]
 
                         ##* Make list of unique target files
@@ -119,7 +124,7 @@ class TemplateMap(dict, FolderFileable, Datable):
                             target_file_key = '.'.join(item.split('.')[0:-2])
                         if target_file_key not in self:
                             #print('3.4.1 traverse_folder target_file_key',target_file_key)
-
+                            #print('3.4.2 to_', to_)
                             # add a unique target file
                             self[target_file_key] = {
                                               'count': 1,
@@ -150,7 +155,9 @@ def main():
     nv_list = [
         {'name': '<<WS_ORGANIZATION>>', 'value': 'test-org'},
         {'name': '<<WS_WORKSPACE>>', 'value': '00_template_map'},
-        {'name':'<<GH_PROJECT>>', 'value': 'abilities'}]
+        {'name':'<<GH_PROJECT>>', 'value': 'abilities'},
+        {'name': '<<GH_BRANCH>>', 'value': 'test_branch'}
+       ]
     actual = TemplateMap(os.getcwd(),nv_list)
     #print('actual', actual)
     #pprint(actual)
@@ -163,8 +170,9 @@ def main():
               'exists', os.path.isfile(actual[f]['target']),
               State(actual[f]['template'], actual[f]['target']),
               '', str(len(actual[f]['contents'])).rjust(5),
-              'target', str(actual[f]['target']).replace('/Users/jameswilfong/Development/','')
+              'target', str(actual[f]['target']).replace('{}/Development/'.format(os.environ['HOME']), '')
               )
+        # 'target', str(actual[f]['target']).replace('/Users/jameswilfong/Development/', '')
 
         folder_file= actual[f]['target'].split('/')
 
