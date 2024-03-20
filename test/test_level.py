@@ -9,7 +9,7 @@ class TestLevel(unittest.TestCase):
     # def setUp(self):
 
     def test_init(self):
-        # test
+        # testapi
         assert (Level('')==0)
         assert (Level('abc')==0)
         assert (Level('# abc') == 1)

@@ -44,7 +44,7 @@ class Taskable():
 def main():
     # setup
 
-    # test
+    # testapi
     class Example(list, Taskable):
         def __init__(self):
             Taskable.__init__(self)

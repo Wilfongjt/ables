@@ -12,7 +12,7 @@ class TemplateStringValidator(str):
         # Use re.findall() to find all occurrences of the pattern in the input string
         matches = re.findall(pattern, template_string)
 
-        # Create a unique list of matching patterns using set()
+        # Create github unique list of matching patterns using set()
         unique_matches = list(set(matches))
         # print('unique_matches', unique_matches)
         if matches != []:

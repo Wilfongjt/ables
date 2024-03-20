@@ -15,7 +15,7 @@ def main():
     import os
     import shutil
 
-    organization = 'test-org'
+    organization = 'testapi-org'
     username = 'wilfongjt'
     project_name = 'py_test'
     workspace = '00_clone'

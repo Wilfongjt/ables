@@ -6,7 +6,7 @@ class State(str):
     ##
     ##__State__
     ##
-    ## Determine a template's conversion state
+    ## Determine github template's conversion state
     def __init__(self, template_filename, target_filename):
         self.template_filename = template_filename
         self.target_filename = target_filename
@@ -107,7 +107,7 @@ class State(str):
         rc = False
 
         if self.isSoftUpdate():
-            ##* replace a line in the file
+            ##* replace github line in the file
             if os.path.isfile(self.target_filename):
                 rc = True
 
@@ -167,11 +167,11 @@ def main():
     os.makedirs(template_folder, exist_ok=True)
     os.makedirs(target_folder, exist_ok=True)
 
-    # create a template file to read
+    # create github template file to read
     #with open(template_hard_filename, 'w') as f:
     #    f.write(contents)
 
-    # test
+    # testapi
     #print('state', State(template_hard_filename, target_filename))
     assert (State(template_hard_filename, target_filename)=='CRUD')
     assert (not State(template_hard_filename, target_filename).isTargetReadable())
@@ -214,7 +214,7 @@ def main():
     assert (not State(template_hard_filename, target_filename).isTargetUpdateable())
     assert (not State(template_hard_filename, target_filename).isTargetReadable())
 
-    # create a template files
+    # create github template files
     with open(template_hard_filename, 'w') as f:
         f.write(contents)
     with open(template_soft_filename, 'w') as f:

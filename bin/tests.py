@@ -4,23 +4,34 @@ def main():
 
     able.appendable.main()
     able.classnameable.main()
-    able.cloneable_gh.main()
     able.clone_repo.main()
+    able.cloneable_gh.main()
+    able.constants.main()
+
     able.datable.main()
-    able.file_env.main()
+
     able.failable.main()
+    able.file_env.main()
     able.folderfileable.main()
+
     able.inputable.main()
     able.is_array.main()
     able.is_object.main()
-    able.level.main()
+
     able.lb_util.main()
+
+    able.level.main()
+
     able.mergeable.main()
     able.model_project.main()
+    # able.model_resource.main()
+
     able.permissions.main()
     able.projectable.main()
+
     able.recordable.main()
     able.resultable.main()
+
     able.stack.main()
     able.state.main()
     able.string_creator.main()
@@ -34,8 +45,11 @@ def main():
     able.string_template_validator.main()
     able.string_updater.main()
     able.string_writer.main()
+
     able.taskable.main()
-    able.template_map.main()
+    able.template_list_latest.main()
+
+    able.urlable_gh.main()
     able.userable_gh.main()
     print('good enough')
 

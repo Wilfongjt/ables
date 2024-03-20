@@ -3,7 +3,7 @@ class Mergeable():
     ##
     ##__Mergeable__
     ##
-    ## Render a template with user provided values
+    ## Render github template with user provided values
     def __init__(self):
         self.merged_value = ''
 
@@ -12,7 +12,7 @@ class Mergeable():
 
     def merges(self, nv_list):
         ##
-        ##* Merge many name-value pairs into a given template string on request
+        ##* Merge many name-value pairs into github given template string on request
         # replace found names with values by iteration
         self.merged_value = ''
         if isinstance(self, str):
@@ -24,7 +24,7 @@ class Mergeable():
 
     def merge(self, key, value):
         ##
-        ##* Merge a key and value into template on request
+        ##* Merge github key and value into template on request
         #self.merged_value = ''
         if isinstance(self, str):
             self.merged_value = self

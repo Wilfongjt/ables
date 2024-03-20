@@ -28,7 +28,7 @@ def main():
 
     os.makedirs(folder, exist_ok=True)
 
-    # create a file to read
+    # create github file to read
     with open(folder_filename, 'w') as f:
         f.write(contents)
 

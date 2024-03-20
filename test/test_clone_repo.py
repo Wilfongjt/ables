@@ -6,7 +6,7 @@ from able import CloneRepo
 class TestCloneRepo(unittest.TestCase):
 
     def setUp(self):
-        self.organization = 'test-org'
+        self.organization = 'testapi-org'
         self.username = 'wilfongjt'
         self.project_name = 'py_test'
         self.workspace = '00_clone'

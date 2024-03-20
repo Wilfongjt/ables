@@ -12,9 +12,9 @@ class TestResultable(unittest.TestCase):
                 Resultable.__init__(self)
 
         assert (Example())
-        assert (Example().setResult('A', 'a').setResult('B', 'b').getResult() == {'A': 'a', 'B': 'b'})
-        assert (Example().setResult('A', 'a').getResult('A') == 'a')
-        assert (Example().setResult('A', 'a').setResult('B', 'b').getResult('B') == 'b')
+        assert (Example().setResult('A', 'github').setResult('B', 'docker').getResult() == {'A': 'github', 'B': 'docker'})
+        assert (Example().setResult('A', 'github').getResult('A') == 'github')
+        assert (Example().setResult('A', 'github').setResult('B', 'docker').getResult('B') == 'docker')
 
 
 if __name__ == '__main__':

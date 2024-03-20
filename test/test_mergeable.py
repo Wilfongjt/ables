@@ -9,7 +9,7 @@ class TestMergeable(unittest.TestCase):
     def setUp(self) -> None:
         # setup
         self.template = 'Hi from <<A>>, looking at <<B>>.'
-        self.nv_list = [{'name': '<<A>>', 'value': 'a'}, {'name': '<<B>>', 'value': 'b'}]
+        self.nv_list = [{'name': '<<A>>', 'value': 'github'}, {'name': '<<B>>', 'value': 'docker'}]
 
     def test_init(self):
         class Example(str, Mergeable):
@@ -27,12 +27,12 @@ class TestMergeable(unittest.TestCase):
             def create_instance(self):
                 return Example(self.merged_value)
 
-        assert (Example(self.template).merge('<<A>>', 'a')=='Hi from a, looking at <<B>>.')
-        assert (Example(self.template).merge('<<B>>', 'b')=='Hi from <<A>>, looking at b.')
-        assert (Example(self.template).merge('<<A>>', 'a')
-                                      .merge('<<B>>', 'b')=='Hi from a, looking at b.')
+        assert (Example(self.template).merge('<<A>>', 'github')=='Hi from github, looking at <<B>>.')
+        assert (Example(self.template).merge('<<B>>', 'docker')=='Hi from <<A>>, looking at docker.')
+        assert (Example(self.template).merge('<<A>>', 'github')
+                                      .merge('<<B>>', 'docker')=='Hi from github, looking at docker.')
 
-        assert (Example(self.template).merges(self.nv_list)=='Hi from a, looking at b.')
+        assert (Example(self.template).merges(self.nv_list)=='Hi from github, looking at docker.')
 
 
 if __name__ == '__main__':

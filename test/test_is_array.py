@@ -10,7 +10,7 @@ class TestIsArray(unittest.TestCase):
 
 
     def test_init(self):
-        # test
+        # testapi
         assert (not IsArray('abc'))
         assert (not IsArray('{abc}'))
 

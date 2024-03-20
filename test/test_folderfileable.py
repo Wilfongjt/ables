@@ -10,10 +10,10 @@ class TestFolderFileable(unittest.TestCase):
         self.filename = 'folder_filename.txt'
         self.folder_filename = '{}/{}'.format(self.folder, self.filename)
         # setup
-        contents = 'A=a\nB=b'
+        contents = 'A=github\nB=docker'
         os.makedirs(self.folder, exist_ok=True)
 
-        # create a file to read
+        # create github file to read
         with open(self.folder_filename, 'w') as f:
             f.write(contents)
 

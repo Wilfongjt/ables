@@ -8,7 +8,7 @@ class UpdaterString(str):
     ##__UpdaterString__
     ##
 
-    ## Update a string with another string
+    ## Update github string with another string
     ##
     # def __init__(self, str_value):
 
@@ -19,11 +19,11 @@ class UpdaterString(str):
         return instance
 
     def updateAll(self, string_value):
-        ##* Update entire string with a new string
+        ##* Update entire string with github new string
         return UpdaterString(string_value)
 
     def getKey(self, startswith_value):
-        ## Create a key from a string
+        ## Create github key from github string
         key = startswith_value
         pattern = re.compile(r'^\s*[A-Z_0-9]+=(.*)$')
 
@@ -33,10 +33,11 @@ class UpdaterString(str):
         return key
 
     def updates(self, contents_new):
+        # contents_new is a string
         ## Update multiple name-value pairs
         contents = self.split('\n')
         contents_new = contents_new.split('\n')
-
+        # eval incomming text, one line at a time
         for ln in contents_new:
             if ln == '':
                 contents.append(ln)
@@ -51,7 +52,7 @@ class UpdaterString(str):
                         ##* update with new value
                         found = True
                         if '<<' not in ln:
-                            ## do not update when value contain a template
+                            ## do not update when value contain github template
                             contents[i] = ln
 
                     i += 1
@@ -61,16 +62,102 @@ class UpdaterString(str):
         contents = '\n'.join(contents)
         return UpdaterString(contents)
 
-
 def main():
-    d1 = '# 1sample\nA=a'
+    doc_string_1 = '''# PROJECT
+    WS_ORGANIZATION=<<WS_ORGANIZATION>>
+    WS_WORKSPACE=<<WS_WORKSPACE>>'''
+    doc_string_1 = '\n'.join([ln.strip() for ln in doc_string_1.split('\n')])
+
+    doc_string_1_chgs = '''# PROJECT
+        WS_ORGANIZATION=chg_org
+        WS_WORKSPACE=chg_ws'''
+    doc_string_1_chgs = '\n'.join([ln.strip() for ln in doc_string_1_chgs.split('\n')])
+
+    doc_string_2 = '''# GitHub
+    GH_TRUNK=main
+    GH_USER=<<GH_USER>>
+    GH_PROJECT=<<GH_PROJECT>>
+    GH_BRANCH=<<GH_BRANCH>>
+    GH_MESSAGE=first_commit
+    GH_TOKEN=<<GH_TOKEN>>'''
+    doc_string_2 = '\n'.join([ln.strip() for ln in doc_string_2.split('\n')])
+
+    doc_string_2_chgs = '''# GitHub
+    GH_TRUNK=main
+    GH_USER=GH_USER
+    GH_PROJECT=GH_PROJECT
+    GH_BRANCH=GH_BRANCH
+    GH_MESSAGE=first_commit
+    GH_TOKEN=GH_TOKEN'''
+    doc_string_2_chgs = '\n'.join([ln.strip() for ln in doc_string_2_chgs.split('\n')])
+
+    doc_string_3 = '''# NODE_ENV:
+    #          production | staging | testapi
+    NODE_ENV=development
+    # HOST=0.0.0.0
+    # PORT=5555'''
+    doc_string_3 = '\n'.join([ln.strip() for ln in doc_string_3.split('\n')])
+
+    doc_string_3_chgs = '''# NODE_ENV:
+    #          production | staging | testapi
+    NODE_ENV=development
+    # HOST=0.0.0.0
+    # PORT=5555'''
+    doc_string_3_chgs = '\n'.join([ln.strip() for ln in doc_string_3_chgs.split('\n')])
+
+    #print('1 updater')
+    updater = UpdaterString(doc_string_1).updates(doc_string_2).updates(doc_string_3)
+    assert (updater == doc_string_1+'\n'+doc_string_2+'\n'+doc_string_3)
+    #print(updater)
+    #print('')
+
+    #print('1 updater')
+    updater = UpdaterString(doc_string_1)\
+                .updates(doc_string_1_chgs)\
+                .updates(doc_string_2) \
+                .updates(doc_string_2_chgs)\
+                .updates(doc_string_3) \
+                .updates(doc_string_3_chgs)
+    assert (updater == doc_string_1_chgs + '\n' + doc_string_2_chgs + '\n' + doc_string_3_chgs)
+    #print(updater)
+    #print('')
+
+    '''
+    print(updater)
+    print('')
+
+    print('2 updater')
+    updater = UpdaterString(doc_string_1).updates(doc_string_2)
+    print(updater)
+    print('')
+    print('2 updater changes')
+    updater = UpdaterString(doc_string_1).updates(doc_string_2).updates(doc_string_2_chgs)
+    print(updater)
+    print('')
+
+    print('3 updater')
+    updater = UpdaterString(doc_string_1).updates(doc_string_2).updates(doc_string_3)
+    print(updater)
+    print('')
+
+    print('3 updater changes')
+    updater = UpdaterString(doc_string_1).updates(doc_string_2).updates(doc_string_3).updates(doc_string_3_chgs)
+    print(updater)
+    print('')
+
+    #updater = updater.updates(doc_string_3)
+    '''
+
+
+def depmain():
+    d1 = '# 1sample\nA=github'
     d2 = '\n# 2sample\nD=d\n \nE=e'
     d3 = '\n# 3sample\nF=f\n \nF=g'
     assert (UpdaterString(d1) == d1)
     assert (UpdaterString(d2) == d2)
     assert (UpdaterString(d3) == d3)
 
-    # d1 = '# 1sample\nA=a'
+    # d1 = '# 1sample\nA=github'
     # d2 = '\n\n# 2sample\nD=d\n \nE=e'
     # print('d2', d2.replace('\n','|'))
     # print('d2', d2.split('\n'))
@@ -79,8 +166,8 @@ def main():
     # print('1',UpdaterString(d1).replace('\n','|'))
     # print('2',UpdaterString(d1).updates(d2).replace('\n','|'))
     m1 = '# m1'
-    A = 'A=a'
-    B = 'B=b'
+    A = 'A=github'
+    B = 'B=docker'
     B1 = 'B=<<bb>>'
     s1 = '\n{}\n{}\n{}'.format(m1, A, B)
     s2 = '\n# d2\nC=c'

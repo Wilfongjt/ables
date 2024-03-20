@@ -1,3 +1,4 @@
+# deprecated
 import os
 import json
 import able
@@ -6,9 +7,9 @@ class ResourceModel(dict):
     ##
     ##__ResourceModel__
     ##
-    ## Dictionary that models a resource
+    ## Dictionary that models github resource
     ##
-    ##* load dictionary from a markdown document
+    ##* load dictionary from github markdown document
 
 
     def __init__(self, md_string):
@@ -41,15 +42,15 @@ def main():
     from pprint import pprint
     from  string_reader import StringReader
     from string_template import TemplateString
-    # handle default with a template
-    md_project_string = str(os.getcwd()).replace('able','able/template/api/model/latest')
+    # handle default with github template
+    md_project_string = str(os.getcwd()).replace('able','able/template/hapi/model/latest')
     print('A md_project_string',md_project_string)
     md_project_string = '{}/model.resource.md.C---.tmpl'.format(md_project_string)
     print('B md_project_string',md_project_string)
     md_project_string = StringReader(md_project_string)
     print('C md_project_string',md_project_string)
 
-    nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'test-org'},
+    nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'testapi-org'},
                {'name':'<<GH_PROJECT>>', 'value':'able'},
                {'name':'<<WS_RESOURCE>>', 'value':'CRAZY'}]
 
@@ -62,14 +63,16 @@ def main():
     #md_string = StringReader(md_project)
     assert (ResourceModel('') == {})
 
-    print(ResourceModel(md_project_string))
+    pprint(ResourceModel(md_project_string))
 
     assert(ResourceModel(md_project_string))
     assert(type(ResourceModel(md_project_string) is dict))
-    assert ('resource' in ResourceModel(md_project_string))
-    assert ('CRAZY' in ResourceModel(md_project_string)['resource'])
 
-    pprint(ResourceModel(md_project_string))
+    # assert ('resource' in ResourceModel(md_project_string))
+    pprint (ResourceModel(md_project_string)['CRAZY']['model'])
+    #assert ('CRAZY' in ResourceModel(md_project_string)['CRAZY']['resource'])
+
+    #pprint(ResourceModel(md_project_string))
 
 if __name__ == "__main__":
     # execute as docker

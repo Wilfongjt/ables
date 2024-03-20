@@ -12,10 +12,10 @@ class TestTemplateStringValidator(unittest.TestCase):
         self.tmpl_str2 = 'abc <<A>> <<B>>'
 
     def test_init(self):
-        ##*__TemplateStringValidator__ happy test
+        ##*__TemplateStringValidator__ happy testapi
         self.assertTrue (TemplateStringValidator(self.tmpl_str) == self.tmpl_str)
 
-        ##*__TemplateStringValidator__  unsub keys test
+        ##*__TemplateStringValidator__  unsub keys testapi
         with self.assertRaises(Exception):
             TemplateStringValidator(self.tmpl_str2)
 

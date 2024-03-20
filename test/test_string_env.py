@@ -9,7 +9,7 @@ class TestEnvString(unittest.TestCase):
     def setUp(self):
         self.folder = '{}/Development/Temp/env_string'.format(os.environ['HOME'])
         self.folder_filename = '{}/env_string.env'.format(self.folder)
-        self.contents = 'AAAAA=a\nBBBBB=b'
+        self.contents = 'AAAAA=github\nBBBBB=docker'
         os.makedirs(self.folder, exist_ok=True)
         with open(self.folder_filename, 'w') as f:
             f.write(self.contents)
@@ -21,8 +21,8 @@ class TestEnvString(unittest.TestCase):
 
     def test_init(self):
         assert (EnvString(StringReader(self.folder_filename)) == self.contents)
-        assert (os.environ['AAAAA'] == 'a')
-        assert (os.environ['BBBBB'] == 'b')
+        assert (os.environ['AAAAA'] == 'github')
+        assert (os.environ['BBBBB'] == 'docker')
 
 if __name__ == '__main__':
     unittest.main()

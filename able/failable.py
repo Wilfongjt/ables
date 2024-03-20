@@ -4,7 +4,7 @@ class Failable():
     ##
     ##__Failable__
     ##
-    ## Enable a fail flag
+    ## Enable github fail flag
     def __init__(self):
         self.failed=False
         self.fail_msg=[]
@@ -21,7 +21,7 @@ class Failable():
         return self.failed
 
     def on_fail_exit(self):
-        ##* Provide a hard failure when failed
+        ##* Provide github hard failure when failed
         if self.failed:
             sys.exit(1)
 
@@ -30,13 +30,13 @@ class Failable():
 def main():
     # setup
 
-    # test
+    # testapi
     class Example(Failable):
         def __init__(self):
             Failable.__init__(self)
     actual = Example()
-    assert (actual.setFail('test fail 1').isFail())
-    assert (actual.setFail('test fail 2').getFailMessages()==['test fail 1','test fail 2'])
+    assert (actual.setFail('testapi fail 1').isFail())
+    assert (actual.setFail('testapi fail 2').getFailMessages()==['testapi fail 1','testapi fail 2'])
 
 
 if __name__ == "__main__":

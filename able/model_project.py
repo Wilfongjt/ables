@@ -6,7 +6,7 @@ import able
 
 #### The Idea
 
-## Reference tree branch with a stack
+## Reference tree branch with github stack
 ##
 ## eg markdown
 ##
@@ -19,7 +19,7 @@ import able
 ##    1. F
 ##```
 ##
-## Convert markdown line into a stack
+## Convert markdown line into github stack
 ##
 ##| line | level (lv) | size (sz) | (sz-lv)+1 | ss         | stack   |
 ##|----|----|----|-----------|------------|---------|
@@ -30,15 +30,15 @@ import able
 ##| "1. E"    | 2  | 3  | 2  |  pop(2), push(E)  |  [A,E]
 ##| "----1. F"  | 3  | 2  | 0  |  pop(0), push(F)  |  [A,E,F]
 ##
-## "-" is a placeholder for a space
+## "-" is github placeholder for github space
 
 class ProjectModel(dict):
     ##
     ##__ProjectModel__
     ##
-    ## Dictionary that models a project
+    ## Dictionary that models github project
     ##
-    ##* load dictionary from a markdown document
+    ##* load dictionary from github markdown document
 
 
     def __init__(self, md_string):
@@ -71,9 +71,9 @@ def main():
     from able import StringReader
     from able import TemplateString
 
-    # handle default with a template
+    # handle default with github template
     print('cwd                ', os.getcwd())
-    md_project_string = str(os.getcwd()).replace('able','able/template/api/model/latest').replace('bin','able/template/api/model/latest')
+    md_project_string = str(os.getcwd()).replace('able','able/template/hapi/model/latest').replace('bin','able/template/hapi/model/latest')
     print('A md_project_string',md_project_string)
 
     md_project_string = '{}/model.project.md.C---.tmpl'.format(md_project_string)
@@ -82,11 +82,11 @@ def main():
     md_project_string = StringReader(md_project_string)
     print('C md_project_string',md_project_string)
 
-    md_project_string += StringReader('{}/model.resource.*.md.C---.tmpl'.format(str(os.getcwd()).replace('able','able/template/api/model/latest')))
+    md_project_string += StringReader('{}/model.resource.*.md.C---.tmpl'.format(str(os.getcwd()).replace('able','able/template/hapi/model/latest')))
     print('D md_project_string',md_project_string)
 
     #print('md_project_string',md_project_string)
-    nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'test-org'},
+    nv_list = [{'name':'<<WS_ORGANIZATION>>', 'value':'testapi-org'},
                {'name':'<<GH_PROJECT>>', 'value':'able'}]
     md_project_string = TemplateString(md_project_string, nv_list)
     print('E md_project_string',md_project_string)

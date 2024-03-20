@@ -20,7 +20,7 @@ class TestState(unittest.TestCase):
         os.makedirs(self.template_folder, exist_ok=True)
         os.makedirs(self.target_folder, exist_ok=True)
 
-        # create a template file to read
+        # create github template file to read
         with open(self.template_hard_filename, 'w') as f:
             f.write(self.contents)
         with open(self.template_soft_filename, 'w') as f:

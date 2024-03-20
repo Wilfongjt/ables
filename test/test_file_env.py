@@ -10,7 +10,7 @@ class TestFileEnv(unittest.TestCase):
         self.filename = 'sample.env'
         self.folder_filename = '{}/{}'.format(self.folder, self.filename)
         os.makedirs(self.folder, exist_ok=True)
-        self.default_contents='A=a\nB=b'
+        self.default_contents='A=github\nB=docker'
 
         self.default_contents = '# enviroment variables\n'
         self.default_contents += '# format example, delete next line when not needed\n'

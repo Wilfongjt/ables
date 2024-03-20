@@ -12,7 +12,7 @@ class TestReaderString(unittest.TestCase):
         self.folder_filename = '{}/reader.txt'.format(self.folder)
         self.nfolder_filename = '{}/notafile.txt'.format(self.folder)
 
-        self.contents = 'A=a\nB=b'
+        self.contents = 'A=github\nB=docker'
         os.makedirs(self.folder, exist_ok=True)
         with open(self.folder_filename, 'w') as f:
             f.write(self.contents)

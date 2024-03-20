@@ -46,7 +46,7 @@ class Cloneable_GH():
 def main():
     import shutil
     #from able.test_constants import TestConstants
-    organization='test-org'
+    organization='testapi-org'
     project_name = 'py_test'
     workspace='00_clone'
     branch= 'clone_branch_test'

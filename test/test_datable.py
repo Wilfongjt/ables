@@ -7,7 +7,7 @@ from able import Datable
 class TestDatable(unittest.TestCase):
     def setUp(self) -> None:
         # setup
-        self.data = [{'name': 'A', 'value': 'a'}, {'name': 'B', 'value': 'b'}]
+        self.data = [{'name': 'A', 'value': 'github'}, {'name': 'B', 'value': 'docker'}]
 
     def test_init(self):
         class Example(Datable):
@@ -15,8 +15,8 @@ class TestDatable(unittest.TestCase):
                 Datable.__init__(self)
 
         assert (Example().setData(self.data).getData() == self.data)
-        assert (Example().setData(self.data).getData('B') == 'b')
-        assert (Example().setData(self.data).getData('A') == 'a')
+        assert (Example().setData(self.data).getData('B') == 'docker')
+        assert (Example().setData(self.data).getData('A') == 'github')
 
     #def tearDown(self) -> None:
     #    # tearDown

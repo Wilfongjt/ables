@@ -80,7 +80,7 @@ if [ ${PUSH} = "N" ]; then
 fi
 echo "-- pushing"
 git push origin "${GH_BRANCH}"
-# open a browser for convenience
+# open github browser for convenience
 open -a "Google Chrome" "https://github.com/${GH_USER}/${GH_PROJECT}"
 # giv user some feedback
 git status
