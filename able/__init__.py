@@ -3,6 +3,7 @@ from .appendable import Appendable
 from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
 from .clone_repo import CloneRepo
+from .constants import Const
 from .datable import Datable
 from .exception_cloning import ExceptionCloning
 from .failable import Failable
@@ -15,6 +16,8 @@ from .lb_util import LbUtil
 from .level import Level
 from .mergeable import Mergeable
 from .model_project import ProjectModel
+# from .model_resource import ResourceModel
+
 from .permissions import Permissions
 from .projectable import Projectable
 from .resultable import Resultable
@@ -33,6 +36,7 @@ from .string_updater import UpdaterString # update entire string
 from .string_writer import StringWriter
 from .recordable import Recordable
 from .taskable import Taskable
-from .template_map import TemplateMap
+from .template_list_latest import TemplateList_Latest
+#from .template_map import TemplateMap
 from .userable_gh import Userable_GH
 from .urlable_gh import Urlable_GH

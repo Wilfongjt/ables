@@ -5,7 +5,7 @@ class DeleterString(str):
     ##
     ##__DeleteString__
     ##
-    ##* Remove a file and return its contents
+    ##* Remove github file and return its contents
 
     def __new__(cls, folder_filename):
         ##* Fail when file doesnt exist
@@ -27,14 +27,14 @@ def main():
     folder_filename = '{}/deleter.txt'.format(folder)
 
     # setup
-    contents = 'A=a\nB=b'
+    contents = 'A=github\nB=docker'
     os.makedirs(folder, exist_ok=True)
 
-    # create a file to read
+    # create github file to read
     with open(folder_filename, 'w') as f:
         f.write(contents)
 
-    # test
+    # testapi
     actual = DeleterString(folder_filename)
     assert (actual==contents)
 

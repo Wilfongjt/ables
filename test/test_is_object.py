@@ -9,7 +9,7 @@ class TestIsObject(unittest.TestCase):
     # def setUp(self):
 
     def test_init(self):
-        # test
+        # testapi
         assert (not IsObject('abc'))
         assert (IsObject('{abc}'))
         assert (IsObject('{abc: abc, bbb: ccc}'))

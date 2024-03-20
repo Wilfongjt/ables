@@ -32,7 +32,7 @@ class Urlable_GH():
         return project_url
 
 def main():
-    organization = 'test-org'
+    organization = 'testapi-org'
     workspace='00_clone'
     branch_name='urlable_gh'
     project_name='py_test'

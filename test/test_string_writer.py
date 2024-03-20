@@ -12,12 +12,12 @@ class TestStringWriter(unittest.TestCase):
         self.folder_filename = '{}/string_writer.txt'.format(self.folder)
 
         # setup
-        self.content_string = 'A=a\nB=b'
+        self.content_string = 'A=github\nB=docker'
         os.makedirs(self.folder, exist_ok=True)
 
 
     def test_init(self):
-        # test
+        # testapi
         assert (StringWriter(self.folder_filename, self.content_string))
         assert (os.path.isfile(self.folder_filename))
 

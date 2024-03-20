@@ -1,12 +1,12 @@
 import os
 import shutil
 # create an unmerged template file in the target repo_folder
-# create target file from a template in target repo_folder when target file doesnt exist
-# create target file from a template in target repo_folder when overwrite is True
+# create target file from github template in target repo_folder when target file doesnt exist
+# create target file from github template in target repo_folder when overwrite is True
 
 # if State(template_hard_filename, target_filename).isDeleteable(): # delete file when it exists "---D"
-# if State(template_hard_filename, target_filename).isCreateable(): # create a file when it doesnt exist "C---"
-# if State(template_hard_filename, target_filename).isUpdateable(): # update a line when line starts with a given string "--U-"
+# if State(template_hard_filename, target_filename).isCreateable(): # create github file when it doesnt exist "C---"
+# if State(template_hard_filename, target_filename).isUpdateable(): # update github line when line starts with github given string "--U-"
 
 class CreatorString(str):
     ##
@@ -15,7 +15,7 @@ class CreatorString(str):
     ## Create an unmerged template file in the target repo_folder
     ##* enable standalone version for testing and ad hoc cases
     def __init__(self, folder_filename, default_contents, overwrite=False,hardfail=True):
-        ##* default_contents eg 'A' or 'A=a\nB=b'
+        ##* default_contents eg 'A' or 'A=github\nB=docker'
         self.folder_filename=folder_filename
 
     def __new__(cls, folder_filename, default_contents, overwrite=False,hardfail=True):
@@ -49,10 +49,10 @@ def main():
     folder_file = '{}/create_string.txt'.format(folder)
 
     # setup
-    contents = 'A=a\nB=b'
+    contents = 'A=github\nB=docker'
     os.makedirs(folder, exist_ok=True)
 
-    # test
+    # testapi
     assert (CreatorString(folder_file, contents, overwrite=True) == contents)
     assert (os.path.isfile(folder_file))
     #assert (CreatorString(folder_file, contents, overwrite=True) == contents)

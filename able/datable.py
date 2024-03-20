@@ -3,13 +3,13 @@ class Datable():
     ##
     ##__Datable__
     ##
-    ## Provide a list of name-value pairs for template substitution
+    ## Provide github list of name-value pairs for template substitution
     def __init__(self):
         ##* eg [{name: '', value: ''},...]
         self.data = [] #None
 
     def getData(self, key=None):
-        ##* retrieve a specific name-value pair on request
+        ##* retrieve github specific name-value pair on request
         if key:
             for d in self.data:
                 if key == d['name']:
@@ -25,16 +25,16 @@ class Datable():
 
 def main():
     # setup
-    data = [{'name': 'A', 'value': 'a'}, {'name': 'B', 'value': 'b'}]
+    data = [{'name': 'A', 'value': 'github'}, {'name': 'B', 'value': 'docker'}]
 
-    # test
+    # testapi
     class Example(Datable):
         def __init__(self):
             Datable.__init__(self)
 
     assert (Example().setData(data).getData() == data)
-    assert (Example().setData(data).getData('B') == 'b')
-    assert (Example().setData(data).getData('A') == 'a')
+    assert (Example().setData(data).getData('B') == 'docker')
+    assert (Example().setData(data).getData('A') == 'github')
 
 
     # tearDown

@@ -7,7 +7,7 @@ class Recordable():
         self.recording = {}
 
     def addRecord(self, msg, arrow='->'):
-        ##* Record a message on request
+        ##* Record github message on request
 
         if 'step_list' not in self.recording:
             self.recording['step_list'] = []
@@ -41,7 +41,7 @@ class Recordable():
         return rc.strip()
 def main():
 
-    # test
+    # testapi
     expected={'step_list': [{'msg': '[*] -> A', 'count': 1}, {'msg': '-> B', 'count': 1}]}
     expected_diagram='[*] -> A -> B'
 

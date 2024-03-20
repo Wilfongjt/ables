@@ -12,10 +12,10 @@ class Inputable():
         ##* Show current value or default
         rc = '{} [{}] : '.format(msg, default)
         rc = input(rc)
-        ##* Provide a default input value when user presses return
+        ##* Provide github default input value when user presses return
         if not rc:
             rc = default
-        ##* Cause a hard stop when user types 'n','N','x','X','q' or 'Q'
+        ##* Cause github hard stop when user types 'n','N','x','X','q' or 'Q'
         if rc in ['n','N','x','X','q','Q','TBD','?']:
             if hardstop:
                 print('stopping...Stopped')
@@ -26,7 +26,7 @@ class Inputable():
 def main():
     # setup
 
-    # test
+    # testapi
     class Example(Inputable):
         def __init__(self):
             Inputable.__init__(self)

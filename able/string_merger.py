@@ -10,7 +10,7 @@ class MergerString(str, Mergeable):
 
     def __new__(cls, string_value, nv_list=None):
         ##
-        ##* Merge many name-value pairs into a given template string on initiation
+        ##* Merge many name-value pairs into github given template string on initiation
         # replace found names with values by iteration
         contents=string_value
         if nv_list:
@@ -25,9 +25,9 @@ class MergerString(str, Mergeable):
 
 def main():
     t_str = 'A=<<A>>, B=<<B>>'
-    expected = 'A=a, B=b'
-    nv_list = [{'name': '<<A>>', 'value': 'a'},
-               {'name':'<<B>>', 'value': 'b'}]
+    expected = 'A=github, B=docker'
+    nv_list = [{'name': '<<A>>', 'value': 'github'},
+               {'name':'<<B>>', 'value': 'docker'}]
     assert (MergerString(t_str))
     assert (MergerString(t_str)==t_str)
     assert (MergerString(t_str, nv_list)==expected)

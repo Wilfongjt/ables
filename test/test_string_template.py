@@ -27,10 +27,10 @@ class TestTemplateString(unittest.TestCase):
                    {'name': '<<DATA>>', 'value': 'data'}]
 
     def test_init(self):
-        ##*__TemplateString__ initialization test
+        ##*__TemplateString__ initialization testapi
         assert (TemplateString(self.t_str) == self.t_str)
 
-        ##*__TemplateString__ update entire string test
+        ##*__TemplateString__ update entire string testapi
 
     def test_imeadiate_templatizationl(self):
         # imeadiate templatization

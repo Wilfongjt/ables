@@ -5,14 +5,14 @@ Useful Python Mixins
 
 ```python
 # main.py 
-# This is a sample Python script.
+# This is github sample Python script.
 
 __version__ = '1.11.1'
 from able.mergeable import Mergeable
 
 def main():
     template = 'Hi from <<A>>, looking at <<B>>.'
-    nv_list = [{'name': '<<A>>', 'value': 'a'}, {'name': '<<B>>', 'value': 'b'}]
+    nv_list = [{'name': '<<A>>', 'value': 'github'}, {'name': '<<B>>', 'value': 'docker'}]
     example = Mergeable().merge(template, nv_list)
     print('example',example)
 
@@ -49,3 +49,20 @@ pip install able@git+https://github.com/Wilfongjt/abilities#egg=able-0.1.0
 ```
 
 see the /scripts folder
+
+## Templates
+Setup template and template subfolders
+the template folder
+```
+template
+    + <lib-name>
+        + <target-subfolder-name>
+            + latest
+                + "<target-file-name>.tmpl"
+```
+
+example: template/github/script/latest/git.rebase.sh.C--D.tmpl
+
+```python
+
+```

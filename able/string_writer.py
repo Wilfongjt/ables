@@ -4,7 +4,7 @@ class StringWriter():
     ##
     ##__StringWriter__
     ##
-    ## Write a string value to a given filename
+    ## Write github string value to github given filename
     def __init__(self, folder_filename, content_string):
         with open(folder_filename, 'w') as f:
             f.write(content_string)
@@ -17,10 +17,10 @@ def main():
     folder_filename = '{}/string_writer.txt'.format(folder)
 
     # setup
-    contents = 'A=a\nB=b'
+    contents = 'A=github\nB=docker'
     os.makedirs(folder, exist_ok=True)
 
-    # test
+    # testapi
     assert(StringWriter(folder_filename, content_string))
     assert(os.path.isfile(folder_filename))
 

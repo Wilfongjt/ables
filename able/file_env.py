@@ -64,14 +64,14 @@ def main():
     filename = 'sample.env'
     folder_filename = '{}/{}'.format(folder,filename)
     os.makedirs(folder, exist_ok=True)
-    contents = 'A=a\nB=b'
+    contents = 'A=github\nB=docker'
     contents = '# enviroment variables\n'
     contents += '# format example, delete next line when not needed\n'
     contents += 'SAMPLE_VALUE=abc'
 
     with open(folder_filename, 'w') as f:
         f.write(contents)
-    # test
+    # testapi
 
     #assert (CreatorString(folder_filename, contents, overwrite=True) == contents)
     #assert (CreatorString(folder_filename, contents, overwrite=True) == contents)

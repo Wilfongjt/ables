@@ -12,8 +12,8 @@ class TestFailable(unittest.TestCase):
                 Failable.__init__(self)
 
         actual = Example()
-        assert (actual.setFail('test fail 1').isFail())
-        assert (actual.setFail('test fail 2').getFailMessages()==['test fail 1','test fail 2'])
+        assert (actual.setFail('testapi fail 1').isFail())
+        assert (actual.setFail('testapi fail 2').getFailMessages()==['testapi fail 1','testapi fail 2'])
 
 
 

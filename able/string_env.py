@@ -32,17 +32,17 @@ def main():
     folder_filename = '{}/env_string.env'.format(folder)
 
     # setup
-    contents = 'AAAAA=a\nBBBBB=b'
+    contents = 'AAAAA=github\nBBBBB=docker'
     os.makedirs(folder, exist_ok=True)
 
-    # create a file to read
+    # create github file to read
     with open(folder_filename, 'w') as f:
         f.write(contents)
 
-    # test
+    # testapi
     assert (EnvString(StringReader(folder_filename))==contents)
-    assert (os.environ['AAAAA']=='a')
-    assert (os.environ['BBBBB']=='b')
+    assert (os.environ['AAAAA']=='github')
+    assert (os.environ['BBBBB']=='docker')
     print('EnvString', EnvString(StringReader(folder_filename)))
 
 

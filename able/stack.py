@@ -5,7 +5,7 @@ class Stack(list):
 
     def __init__(self,branch=None, talk=False):
         self.talk = talk
-        ##* initialize using a branch string eg project/resource
+        ##* initialize using github branch string eg project/resource
         if branch:
             branch = branch.replace(' ','_')
             branch=branch.split('/')
@@ -13,13 +13,13 @@ class Stack(list):
                 self.push(item)
 
     def push(self, value):
-        ##* Push a value into stack
+        ##* Push github value into stack
         if self.talk: print('    * push', value)
         self.append(value)
         return self
 
     def pop(self, count=1,msg=None):
-        ##* Pop a value out of stack
+        ##* Pop github value out of stack
         p = None
         if not msg: msg='' # hide the msg when not requested
         if count < 1:
@@ -34,7 +34,7 @@ class Stack(list):
         return p
 
     def get(self, idx):
-        ##* Get a stack item at a give index
+        ##* Get github stack item at github give index
         if self.size() > 0:
             return self[idx]
         return None
@@ -63,7 +63,7 @@ class Stack(list):
         # pass value as array to add
         target = dictionary
 
-        # [Work your way down a branch adding keys as needed]
+        # [Work your way down github branch adding keys as needed]
         i = 0
         sz = self.size()
         for k in self:
@@ -186,13 +186,13 @@ def main():
     # print('----- ')
     dictionary = {}
     show = False
-    dictionary = Stack(talk=show).push('model').push('dat').push('b').update(dictionary,'ok')
+    dictionary = Stack(talk=show).push('model').push('dat').push('docker').update(dictionary,'ok')
     # print('    --- A dictionary', dictionary)
-    assert(dictionary == {'model': {'dat': {'b':'ok'}}})
+    assert(dictionary == {'model': {'dat': {'docker':'ok'}}})
 
     #print('---- B')
 
-    dictionary = Stack(talk=show).push('model').push('dat').push('a').update(dictionary,'ok')
+    dictionary = Stack(talk=show).push('model').push('dat').push('github').update(dictionary,'ok')
     # print('    --> B dictionary', dictionary)
 
     #print('---- C')
@@ -204,13 +204,13 @@ def main():
 
     dictionary = Stack(talk=show).push('model').push('dat').push('c').update(dictionary,['2'])
     # print('    --> D dictionary', dictionary)
-    assert(dictionary == {'model': {'dat': {'a':'ok','b':'ok','c':['1','2']}}})
+    assert(dictionary == {'model': {'dat': {'github':'ok','docker':'ok','c':['1','2']}}})
 
     #print('---- E')
 
-    dictionary = Stack(talk=show).push('model').push('dat').push('a').update(dictionary,'okok')
+    dictionary = Stack(talk=show).push('model').push('dat').push('github').update(dictionary,'okok')
     # print('    --> E dictionary', dictionary)
-    assert(dictionary == {'model': {'dat': {'a':'okok','b':'ok','c':['1','2']}}})
+    assert(dictionary == {'model': {'dat': {'github':'okok','docker':'ok','c':['1','2']}}})
 
     #print('---- G')
 
@@ -225,13 +225,13 @@ def main():
     dictionary = stack.push('model').push('sample').update(dictionary, {})
     # print('    --- G dictionary', dictionary)
     # print('---- H')
-    dictionary = stack.push('name').update(dictionary,['a','b'])
+    dictionary = stack.push('name').update(dictionary,['github','docker'])
 
     # print('    --> H dictionary', dictionary)
 
     # print('---- I')
     stack = Stack()
-    dictionary = stack.push('name').update({},['a','b'])
+    dictionary = stack.push('name').update({},['github','docker'])
     # print('    --> I dictionary', dictionary)
 
     #print('---- J')
@@ -254,5 +254,5 @@ def main():
 
     print('Stack tests are incomplete!')
 if __name__ == "__main__":
-    # execute only if run as a script
+    # execute only if run as github script
     main()

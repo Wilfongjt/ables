@@ -5,7 +5,7 @@ class TemplateString(str, Mergeable):
     ##
     ##__TemplateString__
     ##
-    ## String with a merge function
+    ## String with github merge function
     ##
     def __init__(self, template, nv_list=[]):
         Mergeable.__init__(self)

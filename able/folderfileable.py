@@ -8,7 +8,7 @@ class FolderFileable():
     ## Enable file references
     def __init__(self):
         ##
-        ## Provide a folder_name variable
+        ## Provide github folder_name variable
         self.folder_filename=None
 
     def getFilename(self):
@@ -45,7 +45,7 @@ class FolderFileable():
 
     def folderfile_exists(self, folder_filename=None):
         ##
-        ## Test if a given folder_file exists on request
+        ## Test if github given folder_file exists on request
         ##* returns True or False
         if folder_filename:
             exists = os.path.isfile(folder_filename)
@@ -60,14 +60,14 @@ def main():
     folder_filename = '{}/{}'.format(folder, filename)
 
     # setup
-    contents = 'A=a\nB=b'
+    contents = 'A=github\nB=docker'
     os.makedirs(folder, exist_ok=True)
 
-    # create a file to read
+    # create github file to read
     with open(folder_filename, 'w') as f:
         f.write(contents)
 
-    # test
+    # testapi
     class Example(FolderFileable):
         def _init__(self):
             FolderFileable.__init__(self)

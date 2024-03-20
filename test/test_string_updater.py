@@ -22,9 +22,9 @@ class TestUpdaterString(unittest.TestCase):
         self.expected_2=self.new_value
 
     def test_init(self):
-        ##*__UpdaterString__ initialization test
+        ##*__UpdaterString__ initialization testapi
         assert (UpdaterString(self.str_value) == self.expected_1)
-        ##*__UpdaterString__ update entire string test
+        ##*__UpdaterString__ update entire string testapi
     def test_updateAll(self):
         # updateAll
         str_value = '''
@@ -43,7 +43,7 @@ class TestUpdaterString(unittest.TestCase):
         assert (UpdaterString(self.str_value).updateAll(self.new_value) == self.expected_2)
 
     def test_updates(self):
-        d1 = '# 1sample\nA=a'
+        d1 = '# 1sample\nA=github'
         d2 = '\n# 2sample\nD=d\n \nE=e'
         d3 = '\n# 3sample\nF=f\n \nF=g'
         assert (UpdaterString(d1) == d1)
@@ -52,8 +52,8 @@ class TestUpdaterString(unittest.TestCase):
 
 
         m1 = '# m1'
-        A = 'A=a'
-        B = 'B=b'
+        A = 'A=github'
+        B = 'B=docker'
         B1 = 'B=<<bb>>'
         s1 = '{}\n{}\n{}'.format(m1, A, B)
         s2 = '\n# d2\nC=c'

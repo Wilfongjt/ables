@@ -10,7 +10,7 @@ class TestCreatorString(unittest.TestCase):
     def setUp(self):
         self.folder = '{}/Development/Temp/creator_string'.format(os.environ['HOME'])
         self.folder_filename = '{}/creator.txt'.format(self.folder)
-        self.contents = 'A=a\nB=b'
+        self.contents = 'A=github\nB=docker'
         os.makedirs(self.folder, exist_ok=True)
         #with open(self.folder_filename, 'w') as f:
         #    f.write(self.new_contents)

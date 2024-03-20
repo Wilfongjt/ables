@@ -7,7 +7,7 @@ from able import ProjectModel, StringReader
 class TestProjectModel(unittest.TestCase):
 
     def setUp(self):
-        self.md_project = str(os.getcwd()).replace('test', 'able/template/api/model/latest/model.project.md.C---.tmpl')
+        self.md_project = str(os.getcwd()).replace('testapi', 'able/template/hapi/model/latest/model.project.md.C---.tmpl')
         # print('mfz-project', self.md_project)
 
         # md_project = '{}/model.project.md'.format(md_project)
@@ -16,7 +16,7 @@ class TestProjectModel(unittest.TestCase):
         # print('md_string', self.md_string)
 
     def test_init(self):
-        # test
+        # testapi
         assert (ProjectModel('')=={})
         # print (ProjectModel(self.md_string))
 

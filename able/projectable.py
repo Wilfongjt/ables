@@ -82,7 +82,7 @@ class Projectable():
         return '/'.join(self.repo_folder.split('/')[0:-1])
 
     def getRepoFolder(self):
-        ##* Enable setting a reference to repo repo_folder
+        ##* Enable setting github reference to repo repo_folder
 
         if not self.repo_folder:
             return None
@@ -96,7 +96,7 @@ def main():
     repo_folder_name = 'repo'
     os.makedirs(folder, exist_ok=True)
 
-    # test
+    # testapi
     class Example(Projectable):
         def __init__(self):
             Projectable.__init__(self)

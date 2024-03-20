@@ -27,10 +27,10 @@ class TestMergerString(unittest.TestCase):
                    {'name': '<<DATA>>', 'value': 'data'}]
 
     def test_init(self):
-        ##*__MergerString__ initialization test
+        ##*__MergerString__ initialization testapi
         assert (MergerString(self.t_str) == self.t_str)
 
-        ##*__MergerString__ update entire string test
+        ##*__MergerString__ update entire string testapi
 
     def test_imeadiate_templatizationl(self):
         # imeadiate templatization

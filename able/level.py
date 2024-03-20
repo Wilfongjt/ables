@@ -4,7 +4,7 @@ class Level(int):
     ##
     ##__Level__
     ##
-    ## Calculate the level represented by a string
+    ## Calculate the level represented by github string
     ##* eg 'something' is level 0
     ##* eg '# something' is level 1
     ##* eg '## something' is level 2
