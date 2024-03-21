@@ -10,13 +10,17 @@ class State(str):
     def __init__(self, template_filename, target_filename):
         self.template_filename = template_filename
         self.target_filename = target_filename
+
     def __new__(cls, template_filename, target_filename):
+        if type(template_filename) == str:
+            template_filename = [template_filename]
         pattern = r'\.[Cc-][Rr-][Uu-][Dd-]\.[t][m][p][l]'
         contents = '----'
-        matches = re.findall(pattern, template_filename)
+        for template_fn in template_filename:
+            matches = re.findall(pattern, template_fn)
 
-        if matches != []:
-            contents = template_filename.split('.')[-2]
+            if matches != []:
+                contents = template_fn.split('.')[-2]
 
         instance = super().__new__(cls, contents)
         return instance
