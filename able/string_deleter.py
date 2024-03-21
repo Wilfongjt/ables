@@ -39,7 +39,12 @@ def main():
     assert (actual==contents)
 
     # cleanup
-    fileExists = os.path.isfile(folder_filename)
+    #fileExists = os.path.isfile(folder_filename)
+    #if fileExists:
+    #    shutil.rmtree(folder)
+
+    # cleanup
+    fileExists = os.path.isdir(folder)
     if fileExists:
         shutil.rmtree(folder)
 

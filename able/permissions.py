@@ -20,6 +20,8 @@ class Permissions():
                 rc = ret.stdout.decode('ascii').strip()
 
 def main():
+    import shutil
+
     folder = '{}/Development/Temp/permissions'.format(os.environ['HOME'])
     folder_filename = '{}/permissions.sh'.format(folder)
 
@@ -36,7 +38,10 @@ def main():
 
     if os.path.isfile(folder_filename):
         os.remove(folder_filename)
-
+ # cleanup
+    fileExists = os.path.isdir(folder)
+    if fileExists:
+        shutil.rmtree(folder)
 if __name__ == "__main__":
     # execute as docker
     main()

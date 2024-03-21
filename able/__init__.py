@@ -1,4 +1,4 @@
-__version__ = '1.11.2'
+__version__ = '1.11.3'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
