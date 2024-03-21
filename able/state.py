@@ -123,6 +123,7 @@ class State(str):
             rc = False
 
         return rc
+
     def isSoftRead(self):
         rc = False
         pattern = r'[Cc-][r][Uu-][Dd-]'
@@ -130,6 +131,7 @@ class State(str):
         if re.findall(pattern, self):
             rc = True
         return rc
+
     def isHardRead(self):
         rc = False
         pattern = r'[Cc-][R][U][Dd-]'
@@ -168,6 +170,7 @@ def main():
     target_filename = '{}/template.txt'.format(target_folder)
 
     contents = '# ab\nA=<<A>>\nB=<<B>>'
+
     os.makedirs(template_folder, exist_ok=True)
     os.makedirs(target_folder, exist_ok=True)
 
@@ -178,6 +181,8 @@ def main():
     # testapi
     #print('state', State(template_hard_filename, target_filename))
     assert (State(template_hard_filename, target_filename)=='CRUD')
+    #print (State(template_hard_filename, target_filename))
+    #print (State(template_hard_filename, target_filename).isTargetReadable())
     assert (not State(template_hard_filename, target_filename).isTargetReadable())
 
     # CRUD
@@ -244,6 +249,14 @@ def main():
     assert (not State(template_soft_filename, target_filename).isTargetCreateable())
     assert (State(template_soft_filename, target_filename).isTargetUpdateable())
     assert (State(template_soft_filename, target_filename).isTargetReadable())
+
+
+    template_filename=[template_hard_filename,
+                       template_hard_filename]
+    assert (State(template_filename, target_filename).isTargetDeleteable())
+    assert (State(template_filename, target_filename).isTargetCreateable())
+    assert (State(template_filename, target_filename).isTargetUpdateable())
+    assert (State(template_filename, target_filename).isTargetReadable())
 
     # cleanup
     fileExists = os.path.isdir(folder)
