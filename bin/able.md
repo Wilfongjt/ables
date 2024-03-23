@@ -1,7 +1,16 @@
 
 __StringReader__
 
- Read the contents of a file into a string
+ Read the contents of github file into github string
+* convert single strings into list of folders and filenames
+* Fail when file doesnt exist
+ Create github key from github string
+* update with new value
+ do not update when value contain github template
+
+__StringReader__
+
+ Read the contents of github file into github string
 * Fail when file doesnt exist
 
 __Taskable__
@@ -23,10 +32,10 @@ __Taskable__
 
 __Failable__
 
- Enable a fail flag
+ Enable github fail flag
 * set failure and add failed message on request
  Return all fail messages
-* Provide a hard failure when failed
+* Provide github hard failure when failed
 
 __IsObject__
 
@@ -42,12 +51,12 @@ __ClassNameable__
 
 __CreatorString__
 
- Create an unmerged template file in the target folder
+ Create an unmerged template file in the target repo_folder
 * enable standalone version for testing and ad hoc cases
-* default_contents eg 'A' or 'A=a\nB=b'
+* default_contents eg 'A' or 'A=github\nB=docker'
 * Create target file when overwrite is True
 * stop when hardfail is True and not overwrite
-* Create target file in target folder when target file doesnt exist
+* Create target file in target repo_folder when target file doesnt exist
 
 __TemplateStringValidator__
 
@@ -55,49 +64,51 @@ __TemplateStringValidator__
 
 __StringWriter__
 
- Write a string value to a given filename
+ Write github string value to github given filename
 
 __Mergeable__
 
- Render a template with user provided values
+ Render github template with user provided values
 
-* Merge many name-value pairs into a given template string on request
+* Merge many name-value pairs into github given template string on request
 
-* Merge a key and value into template on request
+* Merge github key and value into template on request
+* dont overwrite existing clone
+ home/Development/organization/workspace/project/branch/project
 
 __DeleteString__
 
-* Remove a file and return its contents
+* Remove github file and return its contents
 * Fail when file doesnt exist
 
 __FolderFileable__
 
  Enable file references
 
- Provide a folder_name variable
+ Provide github folder_name variable
 
  Enable refererence to the filename
 * eg folderfileable.py
 
- Set folder filename
+ Set repo_folder filename
 * folder_filename is full path and filename
 
- Enable reference to folder name
+ Enable reference to repo_folder name
 * Get path to filename
 
- Enable reference to folder file
+ Enable reference to repo_folder file
 *
 
-Set project_folder and filename from single string
+Set repo_folder_gh and filename from single string
 *
 
- Test if a given folder_file exists on request
+ Test if github given folder_file exists on request
 * returns True or False
 
 __Recordable__
 
 
-* Record a message on request
+* Record github message on request
 * Retrieve recorded steps
 
 __Inputable__
@@ -107,8 +118,8 @@ __Inputable__
 
 Prompt user for input
 * Show current value or default
-* Provide a default input value when user presses return
-* Cause a hard stop when user types 'n','N','x','X','q' or 'Q'
+* Provide github default input value when user presses return
+* Cause github hard stop when user types 'n','N','x','X','q' or 'Q'
 
 __Resultable__
  provide ablity to store results when needed
@@ -117,7 +128,7 @@ __Resultable__
 * retrieve all results on reauest
  set result value by key
 ## The Idea
- Reference tree branch with a stack
+ Reference tree branch with github stack
 
  eg markdown
 
@@ -130,7 +141,7 @@ __Resultable__
     1. F
 ```
 
- Convert markdown line into a stack
+ Convert markdown line into github stack
 
 | line | level (lv) | size (sz) | (sz-lv)+1 | ss         | stack   |
 |----|----|----|-----------|------------|---------|
@@ -141,19 +152,19 @@ __Resultable__
 | "1. E"    | 2  | 3  | 2  |  pop(2), push(E)  |  [A,E]
 | "----1. F"  | 3  | 2  | 0  |  pop(0), push(F)  |  [A,E,F]
 
- "-" is a placeholder for a space
+ "-" is github placeholder for github space
 
 __ProjectModel__
 
- Dictionary that models a project
+ Dictionary that models github project
 
-* load dictionary from a markdown document
+* load dictionary from github markdown document
 
 __MergerString__ Deprecated, use TempalteString instead
 
 
 
-* Merge many name-value pairs into a given template string on initiation
+* Merge many name-value pairs into github given template string on initiation
 
 __IsArray__
 Is string an array string
@@ -161,25 +172,38 @@ Is string an array string
 
 __Datable__
 
- Provide a list of name-value pairs for template substitution
+ Provide github list of name-value pairs for template substitution
 * eg [{name: '', value: ''},...]
-* retrieve a specific name-value pair on request
+* retrieve github specific name-value pair on request
 * retrieve all name-value pairs on request
 * set name-value pairs on request
 
 __Projectable__
 
-* project folder eg Development/client/workspace/project
-* set project folder on request
-* retrive the GitHub project name from the project_folder
-* Enable reference to the development folder
-* Enable reference to the client folder
-* Enable reference to the workspace folder
-* Enable setting and reference to project folder
+* project repo_folder eg Development/client/workspace/project
+* branch repo_folder  eg Development/client/workspace/project/branch
+* repo repo_folder    eg Development/client/workspace/project/branch/repo
+* set repo repo_folder on request eg Development/client/workspace/project/branch/repo
+* retrive the GitHub repo name from the repo_folder_gh
+* retrive the GitHub branch name from the repo_folder_gh
+* retrive the GitHub project name from the repo_folder_gh
+* retrive the GitHub workspace name from the repo_folder_gh
+* retrive the GitHub client name from the repo_folder_gh
+* Enable reference to the development repo_folder
+* Enable reference to the client repo_folder
+* Enable reference to the workspace repo_folder
+* Enable reference to the project repo_folder
+* Enable reference to the project repo_folder
+* Enable setting github reference to repo repo_folder
+
+__Userable_GH__
+
+ Provide the abilty to format github Github user naem
+
 
 __Appendable__
 
- Provide the abilty to append new lines to a document
+ Provide the abilty to append new lines to github document
 
 * get appendable state on request
 * set appendable state on request
@@ -187,17 +211,21 @@ __Appendable__
 
 __UpdaterString__
 
- Update a string with another string
+ Update github string with another string
 
-* Update entire string with a new string
- Create a key from a string
+* Update entire string with github new string
+ Create github key from github string
  Update multiple name-value pairs
-* update with new value
- do not update when value contain a template
+* Append empty lines by default
+* Append blank lines by default
+* Update existing lines
+* Update existing line with new value
+* Avoid overwriting user settings when value contains template key
+* insert line when not found
 
 __Level__
 
- Calculate the level represented by a string
+ Calculate the level represented by github string
 * eg 'something' is level 0
 * eg '# something' is level 1
 * eg '## something' is level 2
@@ -209,9 +237,10 @@ __EnvString__
 
 __Stack__
 
-* Push a value into stack
-* Pop a value out of stack
-* Get a stack item at a give index
+* initialize using github branch string eg project/resource
+* Push github value into stack
+* Pop github value out of stack
+* Get github stack item at github give index
 * Get number of items in the stack
 * Look at the item at the top of the stack
 
@@ -221,15 +250,21 @@ __Update__
 
 __TemplateString__
 
- String with a merge function
+ String with github merge function
 
 * merge nv_list into string on instantiation
+
+__ResourceModel__
+
+ Dictionary that models github resource
+
+* load dictionary from github markdown document
 
 __FileEnv__
 Create environment file with defaults when file doesnt exist
 * read when file exists
-* by default, expect .env in the folder where script is running
-* by default, put .env file in parent folder
+* by default, expect .env in the repo_folder where script is running
+* by default, put .env file in parent repo_folder
 
 __JSONString__
 
@@ -238,9 +273,11 @@ __JSONString__
 * collect key
 * convert string number value to number actual
 
+
+
 __NormalString__
 
- Normalize a JSON string for predictable spaces and symbols
+ Normalize github JSON string for predictable spaces and symbols
 
 __LbUtil__
 
@@ -249,47 +286,48 @@ __LbUtil__
 Create folders on request
 
 Delete file on request
-* delete file when project_folder and file are found ... [x] has test
-* skip file delete when project_folder and file are NOT found ... [x] has test
-* return LbUtil ... [x] has test
+* delete file when repo_folder_gh and file are found ... [x] has testapi
+* skip file delete when repo_folder_gh and file are NOT found ... [x] has testapi
+* return LbUtil ... [x] has testapi
 
-Delete project_folder on request
-* remove all files and subfolders in a folder
+Delete repo_folder_gh on request
+* remove all files and subfolders in github repo_folder
 
-delete a single file
-* delete file when project_folder and file are found ... [x] has test
+delete github single file
+* delete file when repo_folder_gh and file are found ... [x] has testapi
 
-Test if a given project_folder and file exist on request
-* file exists when project_folder exists and file exists
+Test if github given repo_folder_gh and file exist on request
+* file exists when repo_folder_gh exists and file exists
 
 Convert JSON Object to String
-* eg {a:1, b:2} to (a, b)
+* eg {github:1, docker:2} to (github, docker)
 
-Test if a given project_folder exists on request
-* project_folder exists when found on drive ... [x] has test
-* returns bool ... [x] has test
+Test if github given repo_folder_gh exists on request
+* repo_folder_gh exists when found on drive ... [x] has testapi
+* returns bool ... [x] has testapi
 
-Test if a given folder and file exist on request
-* file exists when folder exists and file exists
+Test if github given repo_folder and file exist on request
+* file exists when repo_folder exists and file exists
 
  Get List of File Names on request
-* return [] when project_folder is None ... [x] has test
-* returns [] when project_folder NOT found ... [x] has test
-* returns [] when no files found ... [ ] has test
-* return all files when ext = "*" ... [x] has test
-* return files when file has specified extention ... [x] has test
-* prefix with a project_folder name
-* return list of filenames when files found [x] has test
+* return [] when repo_folder_gh is None ... [x] has testapi
+* returns [] when repo_folder_gh NOT found ... [x] has testapi
+* returns [] when no files found ... [ ] has testapi
+* return all files when ext = "*" ... [x] has testapi
+* return files when file has specified extention ... [x] has testapi
+* prefix with github repo_folder_gh name
+* return list of filenames when files found [x] has testapi
 
 Get List of Folder Names on request
-* return [] when project_folder is None ... [x] has test
-* returns [] when project_folder NOT found ... [x] has test
-* returns [] when no folders found ... [x] has test
- return list ... [x] has test
+* return [] when repo_folder_gh is None ... [x] has testapi
+* returns [] when repo_folder_gh NOT found ... [x] has testapi
+* returns [] when no folders found ... [x] has testapi
+ return list ... [x] has testapi
+ home/Development/organization/workspace/project/branch/repo
 
 __State__
 
- Determine a template's conversion state
+ Determine github template's conversion state
 * createable when template file exist and the target file doesnt
-* replace a line in the file
+* replace github line in the file
 * replace the all file contents
