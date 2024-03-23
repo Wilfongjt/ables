@@ -40,23 +40,28 @@ class UpdaterString(str):
         # eval incomming text, one line at a time
         for ln in contents_new:
             if ln == '':
+                ##* Append empty lines by default
                 contents.append(ln)
             elif len(ln) > 0 and len(ln.strip()) == 0:
+                ##* Append blank lines by default
                 contents.append(ln)
             else:
+                ##* Update existing lines
                 found = False
                 key = self.getKey(ln)
                 i = 0
                 for r in self.split('\n'):
                     if r.startswith(key):
-                        ##* update with new value
+                        ##* Update existing line with new value
+
                         found = True
                         if '<<' not in ln:
-                            ## do not update when value contain github template
+                            ##* do not update when value contains template key
                             contents[i] = ln
 
                     i += 1
                 if not found:
+                    ##* insert line when not found
                     contents.append(ln)
 
         contents = '\n'.join(contents)
