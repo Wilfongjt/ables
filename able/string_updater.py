@@ -56,7 +56,7 @@ class UpdaterString(str):
 
                         found = True
                         if '<<' not in ln:
-                            ##* do not update when value contains template key
+                            ##* Avoid overwriting user settings when value contains template key
                             contents[i] = ln
 
                     i += 1
