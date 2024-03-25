@@ -7,7 +7,7 @@ Useful Python Mixins
 # main.py 
 # This is github sample Python script.
 
-__version__ = '1.11.3'
+__version__ = '1.12.0'
 from able.mergeable import Mergeable
 
 def main():
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 from setuptools import setup, find_packages
 
 # from able.__init__ import __version__
-__version__='1.11.3'
+__version__='1.12.0'
 setup(
     name='able',
     version=__version__,
@@ -66,3 +66,22 @@ example: template/github/script/latest/git.rebase.sh.C--D.tmpl
 ```python
 
 ```
+
+DataString(string, settings)
+    .insert(new_line)
+    .update(existing_line, new_line)
+    .upsert(new_or_existing_line, upsert_line)
+    .delete(existing_line)
+    .replace(existing_value, new_value)
+
+settings {'duplicates': True} 
+Insert means append new-line to the end
+Update means find and replace all found lines
+Upsert means find and replace all found lines otherwise append new-line
+Delete means find and remove all line found lines
+
+settings {'duplicates': False}
+Insert means append new-line to the end when new-line not found
+Update means find and replace first found line
+Upsert means find and replace first found line otherwise append new-line
+Delete means find and remove single found 

@@ -1,4 +1,4 @@
-__version__ = '1.11.3'
+__version__ = '1.12.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
@@ -24,6 +24,7 @@ from .resultable import Resultable
 from .stack import Stack
 from .state import State
 from .string_creator import CreatorString
+from .string_data import DataString
 from .string_env import EnvString
 from .string_deleter import DeleterString
 from .string_merger import MergerString
