@@ -35,6 +35,7 @@ def main():
     able.stack.main()
     able.state.main()
     able.string_creator.main()
+    able.string_data.main()
     able.string_deleter.main()
     able.string_env.main()
     able.string_json.main()
