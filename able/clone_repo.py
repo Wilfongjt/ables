@@ -21,7 +21,7 @@ def main():
     workspace = '00_clone'
     branch_name = 'clone_branch_test'
     # Create target repo_folder
-    ## home/Development/organization/workspace/project/branch/repo
+    ## home/Development/organization/workspace/lb_project/branch/repo
     repo_folder = '{}/Development/{}/{}/{}/{}/{}'.format(os.environ['HOME'],
                                                               organization,
                                                               workspace,

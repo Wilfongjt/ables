@@ -58,7 +58,7 @@ def main():
     print('D md_project_string',md_project_string)
     # handle template resource  values
     #md_project = str(os.getcwd()).replace('able','source/data')
-    #md_project = '{}/model.project.md'.format(md_project)
+    #md_project = '{}/model.lb_project.md'.format(md_project)
     #print('md_project', md_project)
     #md_string = StringReader(md_project)
     assert (ResourceModel('') == {})

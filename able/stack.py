@@ -5,7 +5,7 @@ class Stack(list):
 
     def __init__(self,branch=None, talk=False):
         self.talk = talk
-        ##* initialize using github branch string eg project/resource
+        ##* initialize using github branch string eg lb_project/resource
         if branch:
             branch = branch.replace(' ','_')
             branch=branch.split('/')

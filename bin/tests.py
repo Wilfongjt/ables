@@ -23,7 +23,7 @@ def main():
     able.level.main()
 
     able.mergeable.main()
-    able.model_project.main()
+    # able.model_project.main()
     # able.model_resource.main()
 
     able.permissions.main()
@@ -38,6 +38,8 @@ def main():
     able.string_data.main()
     able.string_deleter.main()
     able.string_env.main()
+    able.string_env_var.main()
+
     able.string_json.main()
     able.string_merger.main()
     able.string_normal.main()

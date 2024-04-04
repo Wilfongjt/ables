@@ -60,7 +60,7 @@ class FileEnv(list, FolderFileable):
 
 def main():
     # setUp
-    folder = '{}/Development/client/workspace/project'.format(os.environ['HOME'])
+    folder = '{}/Development/client/workspace/lb_project'.format(os.environ['HOME'])
     filename = 'sample.env'
     folder_filename = '{}/{}'.format(folder,filename)
     os.makedirs(folder, exist_ok=True)

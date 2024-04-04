@@ -53,7 +53,7 @@ def main():
     username= 'wilfongjt'
 
     # Create target repo_folder
-    ## home/Development/organization/workspace/project/branch/project
+    ## home/Development/organization/workspace/lb_project/branch/lb_project
     repo_folder = '{}/Development/{}/{}/{}/{}/{}'.format(os.environ['HOME'],
                                                          organization,
                                                          workspace,
