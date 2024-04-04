@@ -6,7 +6,7 @@ from able import FileEnv
 class TestFileEnv(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.folder = '{}/Development/client/workspace/project'.format(os.environ['HOME'])
+        self.folder = '{}/Development/client/workspace/lb_project'.format(os.environ['HOME'])
         self.filename = 'sample.env'
         self.folder_filename = '{}/{}'.format(self.folder, self.filename)
         os.makedirs(self.folder, exist_ok=True)

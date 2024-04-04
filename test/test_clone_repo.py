@@ -12,7 +12,7 @@ class TestCloneRepo(unittest.TestCase):
         self.workspace = '00_clone'
         self.branch_name = 'clone_branch_test'
         # Create target repo_folder
-        ## home/Development/organization/workspace/project/branch/repo
+        ## home/Development/organization/workspace/lb_project/branch/repo
         self.repo_folder = '{}/Development/{}/{}/{}/{}/{}'.format(os.environ['HOME'],
                                                                   self.organization,
                                                                   self.workspace,

@@ -15,7 +15,7 @@ from .is_object import IsObject
 from .lb_util import LbUtil
 from .level import Level
 from .mergeable import Mergeable
-from .model_project import ProjectModel
+# from .model_project import ProjectModel
 # from .model_resource import ResourceModel
 
 from .permissions import Permissions
@@ -26,6 +26,8 @@ from .state import State
 from .string_creator import CreatorString
 from .string_data import DataString
 from .string_env import EnvString
+from .string_env_var import EnvVarString
+
 from .string_deleter import DeleterString
 from .string_merger import MergerString
 from .string_json import JSONString

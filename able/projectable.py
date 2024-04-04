@@ -5,15 +5,15 @@ class Projectable():
     ##
     ##__Projectable__
     ##
-    ##* project repo_folder eg Development/client/workspace/project
-    ##* branch repo_folder  eg Development/client/workspace/project/branch
-    ##* repo repo_folder    eg Development/client/workspace/project/branch/repo
+    ##* lb_project repo_folder eg Development/client/workspace/lb_project
+    ##* branch repo_folder  eg Development/client/workspace/lb_project/branch
+    ##* repo repo_folder    eg Development/client/workspace/lb_project/branch/repo
 
     def __init__(self, repo_folder=None):
         self.repo_folder=repo_folder
 
     def setRepoFolder(self, repo_folder):
-        ##* set repo repo_folder on request eg Development/client/workspace/project/branch/repo
+        ##* set repo repo_folder on request eg Development/client/workspace/lb_project/branch/repo
         self.repo_folder = repo_folder
         return self
 
@@ -30,7 +30,7 @@ class Projectable():
         return self.repo_folder.split('/')[-2]
 
     def getProjectName(self):
-        ##* retrive the GitHub project name from the repo_folder_gh
+        ##* retrive the GitHub lb_project name from the repo_folder_gh
         if not self.repo_folder:
             return None
         return self.repo_folder.split('/')[-3]
@@ -70,13 +70,13 @@ class Projectable():
         return '/'.join(self.repo_folder.split('/')[0:-3])
 
     def getProjectFolder(self):
-        ##* Enable reference to the project repo_folder
+        ##* Enable reference to the lb_project repo_folder
         if not self.repo_folder:
             return None
         return '/'.join(self.repo_folder.split('/')[0:-2])
 
     def getBranchFolder(self):
-        ##* Enable reference to the project repo_folder
+        ##* Enable reference to the lb_project repo_folder
         if not self.repo_folder:
             return None
         return '/'.join(self.repo_folder.split('/')[0:-1])
@@ -91,7 +91,7 @@ class Projectable():
 
 def main():
     # setup
-    folder = '{}/Development/client/workspace/project/branch/repo'.format(os.environ['HOME'])
+    folder = '{}/Development/client/workspace/lb_project/branch/repo'.format(os.environ['HOME'])
     expected = '{}/Development/client'.format(os.environ['HOME'])
     repo_folder_name = 'repo'
     os.makedirs(folder, exist_ok=True)
@@ -104,13 +104,13 @@ def main():
     assert (Example().setRepoFolder(folder).getClientFolder() == '{}/Development/client'.format(os.environ['HOME']))
     assert (Example().setRepoFolder(folder).getWorkspaceFolder() == '{}/Development/client/workspace'.format(os.environ['HOME']))
     assert (Example().setRepoFolder(folder).getDevelopmentFolder() == '{}/Development'.format(os.environ['HOME']))
-    assert (Example().setRepoFolder(folder).getProjectFolder() == '{}/Development/client/workspace/project'.format(os.environ['HOME']))
-    assert (Example().setRepoFolder(folder).getBranchFolder() == '{}/Development/client/workspace/project/branch'.format(os.environ['HOME']))
-    assert (Example().setRepoFolder(folder).getRepoFolder() == '{}/Development/client/workspace/project/branch/repo'.format(os.environ['HOME']))
+    assert (Example().setRepoFolder(folder).getProjectFolder() == '{}/Development/client/workspace/lb_project'.format(os.environ['HOME']))
+    assert (Example().setRepoFolder(folder).getBranchFolder() == '{}/Development/client/workspace/lb_project/branch'.format(os.environ['HOME']))
+    assert (Example().setRepoFolder(folder).getRepoFolder() == '{}/Development/client/workspace/lb_project/branch/repo'.format(os.environ['HOME']))
 
     assert (Example().setRepoFolder(folder).getClientName() == 'client')
     assert (Example().setRepoFolder(folder).getWorkspaceName() == 'workspace')
-    assert (Example().setRepoFolder(folder).getProjectName() == 'project')
+    assert (Example().setRepoFolder(folder).getProjectName() == 'lb_project')
     assert (Example().setRepoFolder(folder).getBranchName() == 'branch')
     assert (Example().setRepoFolder(folder).getRepoName() == 'repo')
 
