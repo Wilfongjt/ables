@@ -1,4 +1,5 @@
-
+from able.name_value_pairs import NameValuePairs
+from able.string_key import KeyString
 # settings {'dup': True}
 # Insert means append new-line to the end when settings {'dup': True}
 # Update means find and replace all found lines settings {'dup': True}
@@ -10,101 +11,6 @@
 # Update means find and replace first found line
 # Upsert means find and replace first found line otherwise append new-line
 # Delete means find and remove single found
-
-class KeyString(str):
-    def __new__(cls, str_value='', break_on='='):
-        # A -> A
-        # A=a -> 'A='
-
-        contents = str_value.split(break_on)
-        if len(contents)>1:
-            contents = '{}{}'.format(contents[0],break_on)
-            #contents = contents[0]
-        else:
-            contents = contents[0]
-
-        instance = super().__new__(cls, contents)
-        return instance
-
-def test_keystring():
-
-    assert(KeyString() == '')
-    assert(KeyString('') == '')
-    assert(KeyString('A') == 'A')
-    assert(KeyString('    A') == '    A')
-    assert(KeyString('A=B') == 'A=')
-
-class ValueString(str):
-    def __new__(cls, str_value='', break_on='='):
-        # A -> A
-        # A=a -> 'A=a'
-        contents = str_value
-        '''
-        contents = str_value.split(break_on)
-        if len(contents)>1:
-            contents = '{}'.format(contents[1])
-        else:
-            contents = contents[0]
-        '''
-        instance = super().__new__(cls, contents)
-        return instance
-
-def test_valuestring():
-
-    assert(ValueString() == '')
-    assert(ValueString('') == '')
-    assert(ValueString('A') == 'A')
-    assert(ValueString('    A') == '    A')
-    assert(ValueString('A=B') == 'A=B')
-
-#class ThisRow(str):
-#class ThatValue(str):
-
-class NameValuePairs(list):
-    def __init__(self, multi_line_string='', break_on='='):
-        # use cases
-        # A         -> [{name:A, value:A}]
-        # A\nB      -> [{name:A, value:A}, {name:B, value:B}]
-        # A=a\nB=b  -> [{name:A=, value:a}, {name:B=, value:b}]
-        # A\nB=b    -> [{name:A, value:A}, {name:B=, value:b}]
-
-        if multi_line_string:
-            multi_line_string = multi_line_string.split('\n')
-            for item in multi_line_string:
-                # item = item.split(break_on)
-                self.append({'name': KeyString(item, break_on), 'value': ValueString(item, break_on)})
-                if break_on in item:
-                    self[-1]['op']=break_on
-                '''
-                if len(item) > 1:
-                    # A=a
-                    # A=a\nB=b
-                    self.append({'name': KeyString(item, break_on), 'value': ValueString(item, break_on), 'op': break_on})
-                    # self.append({'name': '{}{}'.format(item[0], break_on), 'value': '{}{}{}'.format(item[0],break_on,item[1])})
-                    # self.append({'name': '{}{}'.format(item[0], break_on), 'value': '{}{}{}'.format(item[0],break_on,item[1])})
-                else: #
-                    if item[0]!='':
-                        # A
-                        # A\nB
-                        self.append({'name': item[0], 'value': item[0]})
-                '''
-        # print('name value pairs', self)
-
-def test_name_value_pairs():
-    # DONT USE '==='  this doesnt work ... too confusing on the front end
-    # print('name value pairs',NameValuePairs())
-    assert(NameValuePairs() == [])
-    assert(NameValuePairs('') == [])
-    assert(NameValuePairs(None) == [])
-
-    assert(NameValuePairs('A B') == [{'name': 'A B', 'value': 'A B'}])
-    assert(NameValuePairs('A B\nC D') == [{'name': 'A B', 'value': 'A B'}, {'name': 'C D', 'value': 'C D'}])
-    # print(NameValuePairs('A=B'))
-    assert(NameValuePairs('A=B') == [{'name': 'A=', 'value': 'A=B', 'op': '='}])
-
-    assert(NameValuePairs('A=B\nC D') == [{'name': 'A=', 'value': 'A=B', 'op': '='}, {'name': 'C D', 'value': 'C D'}])
-    assert(NameValuePairs('A=B\nC=D') == [{'name': 'A=', 'value': 'A=B', 'op': '='}, {'name': 'C=', 'value': 'C=D', 'op': '='}])
-
 
 class DataString(str):
     def __init__(self, str_value='', settings={'dup':False, 'hard_fail': True}):
@@ -690,9 +596,6 @@ def test_data_string_dups():
 
 def main():
 
-    test_keystring()
-    test_valuestring()
-    test_name_value_pairs()
 
     test_data_string_init()
     test_data_string_delete()
