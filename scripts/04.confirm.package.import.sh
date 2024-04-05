@@ -41,13 +41,18 @@ python3 -c "from able.string_data import DataString"
 python3 -c "from able.string_deleter import DeleterString"
 python3 -c "from able.string_env import EnvString"
 python3 -c "from able.string_json import JSONString"
+python3 -c "from able.string_key import KeyString"
 
 python3 -c "from able.string_merger import MergerString"
+python3 -c "from able.name_value_pairs import NameValuePairs"
+
 python3 -c "from able.string_normal import NormalString"
 python3 -c "from able.string_reader import StringReader"
 python3 -c "from able.string_template import TemplateString"
 python3 -c "from able.string_template_validator import TemplateStringValidator"
 python3 -c "from able.string_updater import UpdaterString"
+python3 -c "from able.string_value import ValueString"
+
 python3 -c "from able.string_writer import StringWriter"
 
 python3 -c "from able.taskable import Taskable"
