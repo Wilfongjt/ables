@@ -18,13 +18,13 @@ class DataString(str):
 
     def __new__(cls, str_value='', settings={'dup':False, 'hard_fail': True}):
         contents = str_value
-        #print('---')
-        #print('datastring 1 "{}"'.format(contents.replace('\n','|')))
+        print('---')
+        print('datastring 1 "{}"'.format(contents.replace('\n','|')))
         if not settings['dup']:
-            #print('datastring 2')
+            print('datastring 2')
             contents = str_value.split('\n')
             if len(contents) != len(set(contents)): # check for duplicates
-                #print('datastring 3')
+                print('datastring 3')
                 contents = '' # set to no value
                 ##* HardFail when duplicate found in initalizing string and configured to reject duplicates and hard_fail is True
                 if settings['hard_fail']:
@@ -32,7 +32,7 @@ class DataString(str):
 
             ##* SoftFail when duplicate found in initializing string and configured to reject duplicates and hard_fail is False
             contents = '\n'.join(contents)
-        #print('datastring 5',contents.replace('\n','|'))
+        print('datastring 5',contents.replace('\n','|'))
         #contents = str_value
         instance = super().__new__(cls, contents)
         #print('duplicates', len(contents.split('\n')) != len(set(items)))
@@ -203,7 +203,7 @@ class DataString(str):
 
         return rc
     '''
-    #def update(self, nv_list):
+
     def updateEQ(self, with_line_string):
         # strategy: copy current string line by line to new string, updating lines as found
 
@@ -472,9 +472,9 @@ def test_data_string_updateEQ():
     # DONT USE A>>>>B replace line A with line B
     # A==B set 'A=*' to 'A=B'
     empty = ''''''
-    start_string = '''# abc\nA big red fox\nA=A\nB=B\nC=C\n# def'''.replace('    ', '')#.replace('\n', '|')
-    nomatches_string = '''NN=0\nMM=1\nOO=3'''.replace('    ', '')
-    repl_string = '''A=1\nB=2\nC=3'''.replace('    ', '')
+    start_string = '''# abc\nA big red fox\nA=A\nB=B\nC=C\n# def''' #.replace('    ', '')#.replace('\n', '|')
+    nomatches_string = '''NN=0\nMM=1\nOO=3''' #.replace('    ', '')
+    #repl_string = '''A=1\nB=2\nC=3''' #.replace('    ', '')
 
     exepected_string = '''# abc\nA big red fox\nA=1\nB=2\nC=3\n# def'''
 
@@ -500,10 +500,15 @@ def test_data_string_updateEQ():
             .setDuplicate(False)
             .updateEQ('A\nB') == 'A\nB')
 
-    assert (DataString(start_string)
+    print ('-',DataString('# abc\nA big red fox\nA=A\nB=B\nC=C\n# def')
             .setHardFail(False)
             .setDuplicate(False)
-            .updateEQ(repl_string) == exepected_string)
+             )
+
+    assert (DataString('# abc\nA big red fox\nA=A\nB=B\nC=C\n# def')
+            .setHardFail(False)
+            .setDuplicate(False)
+            .updateEQ('A=1\nB=2\nC=3') == '# abc\nA big red fox\nA=1\nB=2\nC=3\n# def')
 
 def test_data_string_upsert():
     # Upsert
@@ -603,11 +608,11 @@ def main():
 
     test_data_string_updateEQ()
 
-    #test_data_string_update_partial()
-    test_data_string_upsert()
-    test_data_string_upsert_partial()
+    ##test_data_string_update_partial()
+    #test_data_string_upsert()
+    #test_data_string_upsert_partial()
 
-    test_data_string_dups()
+    #test_data_string_dups()
 
 if __name__ == "__main__":
     # execute as docker

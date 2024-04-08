@@ -1,6 +1,27 @@
 import os
 import shutil
 import re
+class StringReader1(str):
+    ##
+    ## __StringReader__
+    ##
+    ## Read the contents of a text file
+    def __new__(cls, folder_filename_list):
+        contents = None
+        if type(folder_filename_list) == str:
+            ##* convert single strings into list of folders and filenames
+            folder_filename_list = [folder_filename_list]
+        # handle a list of filenames
+        for folder_filename in folder_filename_list:
+            file_contents = None
+            if os.path.isfile(folder_filename):  # file exists
+                with open(folder_filename, 'r') as f:
+                    file_contents = f.read()
+
+        # handle multiple files
+        print('new ', contents)
+        instance = super().__new__(cls, contents)
+        return instance
 
 class StringReader(str):
     ##
@@ -8,20 +29,20 @@ class StringReader(str):
     ##
     ## Read the contents of github file into github string
     def __new__(cls, folder_filename_list):
-
+        # return None on fail
         if type(folder_filename_list) == str:
             ##* convert single strings into list of folders and filenames
             folder_filename_list = [folder_filename_list]
 
         contents=None
-
+        # handle a list of filenames
         for folder_filename in folder_filename_list:
             ##* Fail when file doesnt exist
             file_contents=None
-            fileExists = os.path.isfile(folder_filename)
-            if fileExists:
+            if os.path.isfile(folder_filename): # file exists
                 with open(folder_filename, 'r') as f:
                     file_contents = f.read()
+
             if not contents:
                 # handle initialize with first text
                 contents = file_contents
@@ -69,36 +90,43 @@ class StringReader(str):
         instance = super().__new__(cls, contents)
         return instance
 
-'''
-class StringReader(str):
-    ##
-    ##__StringReader__
-    ##
-    ## Read the contents of github file into github string
-    def __new__(cls, folder_filename):
-        ##* Fail when file doesnt exist
-        fileExists = os.path.isfile(folder_filename)
+def isStringNone(str_object):
 
-        #if not fileExists:
-        #    raise Exception('File Not Found {}'.format(folder_filename))
-        contents=''
-        if fileExists:
-            with open(folder_filename, 'r') as f:
-                contents = f.read()
+    rc = str_object
 
-        instance = super().__new__(cls, contents)
-        return instance
-'''
+    if str_object == None:
+        rc = None
+    elif str_object == 'None':
+        rc = None
+
+    return rc
+
+def test_init():
+    print('1 init',type(StringReader('xxx')))
+    print('2 init',StringReader('xxx'))
+    print('3 init', StringReader('xxx') == None)
+    print('4 init', str(StringReader('xxx')) == 'None')
+    print('5 init', str(StringReader('xxx')) )
+    print('6 init', StringReader('xxx').replace('',''))
+    print('7 init', str(None))
+    print('8 init', type(str(None)))
+    print('9 init', str('')=='')
+
+    assert (isStringNone(StringReader('not_a_file')) == None)
 
 def test_singleton(folder):
+    #print('cwd', __file__)
     print('StringReader test_singleton', end='')
+
     folder_filename_singleton = '{}/reader.txt.c-u-.tmpl'.format(folder)
+
     text1append = 'A=a\nB=b'
     # make a singleton file
     with open(folder_filename_singleton, 'w') as f:
         f.write(text1append)
         # singleton
-
+    print('folder_filename_singleton',folder_filename_singleton)
+    print('StringReader(folder_filename_singleton)',StringReader(folder_filename_singleton))
     assert (StringReader(folder_filename_singleton) == text1append)
     print('...ok')
 
@@ -164,7 +192,8 @@ def test_overlap(folder):
 def main():
     folder = '{}/Development/Temp/reader_string'.format(os.environ['HOME'])
     os.makedirs(folder, exist_ok=True)
-
+    # assert(StringReader(os.getcwd()))
+    test_init()
     test_singleton(folder)
     test_append(folder)
     test_overlap(folder)
