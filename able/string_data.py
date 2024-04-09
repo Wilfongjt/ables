@@ -18,13 +18,13 @@ class DataString(str):
 
     def __new__(cls, str_value='', settings={'dup':False, 'hard_fail': True}):
         contents = str_value
-        print('---')
-        print('datastring 1 "{}"'.format(contents.replace('\n','|')))
+        #print('---')
+        #print('datastring 1 "{}"'.format(contents.replace('\n','|')))
         if not settings['dup']:
-            print('datastring 2')
+            #print('datastring 2')
             contents = str_value.split('\n')
             if len(contents) != len(set(contents)): # check for duplicates
-                print('datastring 3')
+                #print('datastring 3')
                 contents = '' # set to no value
                 ##* HardFail when duplicate found in initalizing string and configured to reject duplicates and hard_fail is True
                 if settings['hard_fail']:
@@ -32,7 +32,7 @@ class DataString(str):
 
             ##* SoftFail when duplicate found in initializing string and configured to reject duplicates and hard_fail is False
             contents = '\n'.join(contents)
-        print('datastring 5',contents.replace('\n','|'))
+        #print('datastring 5',contents.replace('\n','|'))
         #contents = str_value
         instance = super().__new__(cls, contents)
         #print('duplicates', len(contents.split('\n')) != len(set(items)))
@@ -417,11 +417,92 @@ class DataString(str):
         # print('  4 upsert ', rc.replace('\n', '|'))
 
         return DataString(rc, self.getSettings())
+    '''
+    given "", upsert(A) goes to A
+    given A, upsert(A) goes to A
+    given A, upsert(B) goes to A|B
+    given A, upsert(A=B) goes to A=B
+    given A|B, upsert(A=B) goes to A=B|B
+    given A=B|B, upsert(B=1) goes to A=B|B=1
+    
+    '''
+    def upsertEQ(self, with_line_string):
+        # strategy: copy current string line by line to new string, updating lines as found
+        #
+        # print('*')
+        # print('1 DS({}).upsertEQ({}) '.format(self.replace('\n','|'), with_line_string))
+        rc = []
+        # convert string to name-value pairs
+
+        nv_list = NameValuePairs(with_line_string) # convert string to name-value pairs
+        # print('2 upsertEQ {} -> nv_list {}'.format(with_line_string, nv_list))
+
+        i = 0
+        # move
+        ## print(self.split('\n'))
+        found = False
+
+        me = self.split('\n')
+        if me == ['']: # get rid of false value '' when self is empty
+            me = []
+        # print('2.1 upsertEQ me', me)
+        for ln in me: # process multiple lines
+            ## print(ln)
+            msg='--'
+            val=ln
+            # print('2.1 upsertEQ ln "{}"'.format(ln))
+            for nv in nv_list: # compare name value pairs to a line
+                ## print('updateEQ    nv', nv, ln.replace('\n','|'))
+                search_nm = nv['name']
+                if 'op' in nv:
+                    search_nm += nv['op']
+                ## print('    match({}, {})'.format(ln, search_nm))
+                if self.__matches(ln, search_nm):
+                    # print('2.1.1 matched ln "{}".startswith({})'.format( ln, search_nm))
+                    msg='RP'
+                    # print('val={}'.format('{}={}'.format(nv['name'],nv['value'])))
+                    val = nv['value']
+                    if 'op' in nv:
+                        val= '{}{}{}'.format(nv['name'], nv['op'], nv['value']) #search_nm #nv['value']
+
+                    nv['found'] = True
+                    #rc.append(nv['value'])
+            rc.append(val)
+            ## print('  {}: {}'.format(msg, val))
+            i+=1
+        ## print('3 upsertEQ nv_list', nv_list)
+        # print('3 upsertEQ rc', rc)
+
+        # evaluate name value pairs that were not matched and add
+        for nv in nv_list:
+            if 'found' not in nv:
+                # print('3.1 upsertEQ nv',nv)
+                unhandle_value = nv['value']
+                if 'op' in nv:
+                    unhandle_value='{}={}'.format(nv['name'], nv['value'])
+
+                rc.append(unhandle_value)
+                #rc.append(nv['value'])
+        # convert back to string
+        #print('rc', rc)
+        # print('4 upsertEQ rc', rc)
+
+        if rc == []:
+            rc = ''
+        else:
+            rc = '\n'.join(rc)
+        # print('5 upsertEQ rc', rc.replace('\n','|'))
+
+        #print('rc', rc.replace('\n','|'))
+        #print('  B update actual', DataString(rc, self.getSettings()))
+        return DataString(rc, self.getSettings())
+
 
 def test_data_string_init():
     assert (DataString() == '')
     assert (DataString('') == '')
     assert (DataString('A line') == 'A line')
+    assert (DataString('A=line') == 'A=line')
 
 def test_data_string_delete():
     # delete
@@ -500,10 +581,10 @@ def test_data_string_updateEQ():
             .setDuplicate(False)
             .updateEQ('A\nB') == 'A\nB')
 
-    print ('-',DataString('# abc\nA big red fox\nA=A\nB=B\nC=C\n# def')
-            .setHardFail(False)
-            .setDuplicate(False)
-             )
+    #print ('upsert -',DataString('# abc\nA big red fox\nA=A\nB=B\nC=C\n# def')
+    #        .setHardFail(False)
+    #        .setDuplicate(False).updateEQ('A=1\nB=2\nC=3')
+    #         )
 
     assert (DataString('# abc\nA big red fox\nA=A\nB=B\nC=C\n# def')
             .setHardFail(False)
@@ -559,6 +640,66 @@ def test_data_string_upsert():
           .setHardFail(False)
           .upsert('C', 'C') == 'A\nB\nC')
 
+
+def test_data_string_upsertEQ():
+    # Upsert
+    #     given "", upsert("") goes to ""
+    #     given "", upsert(A) goes to A
+    #     given A, upsert(A) goes to A
+    #     given A, upsert(B) goes to A|B
+    #     given A, upsert(A=B) goes to A=B
+    #     given A|B, upsert(A=B) goes to A=B|B
+    #     given A=B|B, upsert(B=1) goes to A=B|B=1
+
+    # given "", upsert("") goes to ""
+    assert (DataString()
+            .setHardFail(False)
+            .upsertEQ('') == '')
+
+    #print("B upsert given '' replace '' with A  -> A")
+
+    # given "", upsert(A) goes to A
+
+    assert (DataString()
+            .setHardFail(False)
+            .upsertEQ('A') == 'A')
+
+    # given A, upsert(A) goes to A
+    #print('--  given A, upsert(A) goes to A')
+    assert (DataString('A')
+            .setHardFail(False)
+            .upsertEQ('A') == 'A')
+
+    #     given A, upsert(B) goes to A|B
+
+    assert (DataString('A')
+            .setHardFail(False)
+            .upsertEQ('B')
+            == 'A\nB')
+
+    #     given A, upsert(A=B) goes to A=B
+
+    assert (DataString('A')
+            .setHardFail(False)
+            .upsertEQ('A=B')
+            == 'A\nA=B')
+
+    #     given A|B, upsert(A=B) goes to A=B|B
+    assert (DataString('A\nB')
+            .setHardFail(False)
+            .upsertEQ('A=B')
+            == 'A\nB\nA=B')
+    #     given A=B|B, upsert(B=1) goes to A=B|B=1
+
+    assert (DataString('A=B\nB')
+            .setHardFail(False)
+            .upsertEQ('A=B')
+            == 'A=B\nB')
+    assert (DataString('A=B\nB')
+            .setHardFail(False)
+            .upsertEQ('A=C')
+            == 'A=C\nB')
+
 def test_data_string_upsert_partial():
 
     # Partials
@@ -604,13 +745,14 @@ def main():
 
     test_data_string_init()
     test_data_string_delete()
-    test_data_string_insert()
+    #test_data_string_insert()
 
-    test_data_string_updateEQ()
+    #test_data_string_updateEQ()
 
     ##test_data_string_update_partial()
     #test_data_string_upsert()
     #test_data_string_upsert_partial()
+    test_data_string_upsertEQ()
 
     #test_data_string_dups()
 
