@@ -483,6 +483,7 @@ class DataString(str):
 
                 rc.append(unhandle_value)
                 #rc.append(nv['value'])
+
         # convert back to string
         #print('rc', rc)
         # print('4 upsertEQ rc', rc)

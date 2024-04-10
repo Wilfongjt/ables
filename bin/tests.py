@@ -22,6 +22,7 @@ def main():
 
     able.level.main()
 
+    able.matchable.main()
     able.mergeable.main()
     # able.model_project.main()
     # able.model_resource.main()
@@ -51,7 +52,7 @@ def main():
 
     able.taskable.main()
     able.template_list_latest.main()
-
+    able.upsertable.main()
     able.urlable_gh.main()
     able.userable_gh.main()
     print('good enough')
