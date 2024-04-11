@@ -81,6 +81,8 @@ fi
 echo "-- pushing"
 git push origin "${GH_BRANCH}"
 # open github browser for convenience
-open -a "Google Chrome" "https://github.com/${GH_USER}/${GH_PROJECT}"
+open -a "open" "https://github.com/${GH_USER}/${GH_PROJECT}"
+# open -a "Google Chrome" "https://github.com/${GH_USER}/${GH_PROJECT}"
+
 # giv user some feedback
 git status
