@@ -58,6 +58,7 @@ python3 -c "from able.string_writer import StringWriter"
 python3 -c "from able.taskable import Taskable"
 
 python3 -c "from able.template_list_latest import TemplateList_Latest"
+python3 -c "from able.upsertable import Upsertable"
 python3 -c "from able.urlable_gh import Urlable_GH"
 python3 -c "from able.userable_gh import Userable_GH"
 

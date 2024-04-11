@@ -1,4 +1,4 @@
-__version__ = '1.13.2'
+__version__ = '1.13.3'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
@@ -14,6 +14,7 @@ from .is_array import IsArray
 from .is_object import IsObject
 from .lb_util import LbUtil
 from .level import Level
+from .matchable import Matchable
 from .mergeable import Mergeable
 # from .model_project import ProjectModel
 # from .model_resource import ResourceModel
@@ -33,6 +34,7 @@ from .string_env_var import EnvVarString
 
 from .string_json import JSONString
 from .string_key import KeyString
+from .matchable import Matchable
 from .string_merger import MergerString
 
 from .string_normal import NormalString
@@ -47,5 +49,6 @@ from .recordable import Recordable
 from .taskable import Taskable
 from .template_list_latest import TemplateList_Latest
 #from .template_map import TemplateMap
+from .upsertable import Upsertable
 from .userable_gh import Userable_GH
 from .urlable_gh import Urlable_GH

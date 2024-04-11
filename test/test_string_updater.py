@@ -1,7 +1,7 @@
 import os
 import unittest
 import shutil
-from able.string_updater import UpdaterString
+from able.string_updater import UpserterString
 
 class TestUpdaterString(unittest.TestCase):
 
@@ -23,7 +23,7 @@ class TestUpdaterString(unittest.TestCase):
 
     def test_init(self):
         ##*__UpdaterString__ initialization testapi
-        assert (UpdaterString(self.str_value) == self.expected_1)
+        assert (UpserterString(self.str_value) == self.expected_1)
         ##*__UpdaterString__ update entire string testapi
     def test_updateAll(self):
         # updateAll
@@ -39,16 +39,16 @@ class TestUpdaterString(unittest.TestCase):
 
             '''.replace('  ', '')  # remove leading spaces
         expected_2 = new_value
-        assert (UpdaterString(str_value) == expected_1)
-        assert (UpdaterString(self.str_value).updateAll(self.new_value) == self.expected_2)
+        assert (UpserterString(str_value) == expected_1)
+        assert (UpserterString(self.str_value).updateAll(self.new_value) == self.expected_2)
 
     def test_updates(self):
         d1 = '# 1sample\nA=github'
         d2 = '\n# 2sample\nD=d\n \nE=e'
         d3 = '\n# 3sample\nF=f\n \nF=g'
-        assert (UpdaterString(d1) == d1)
-        assert (UpdaterString(d2) == d2)
-        assert (UpdaterString(d3) == d3)
+        assert (UpserterString(d1) == d1)
+        assert (UpserterString(d2) == d2)
+        assert (UpserterString(d3) == d3)
 
 
         m1 = '# m1'
@@ -75,14 +75,14 @@ class TestUpdaterString(unittest.TestCase):
         #print('e4    ', e4.split('\n'))
 
         # e4 = '\n'.join(e4)
-        assert (UpdaterString(s1) == e1)
-        assert (UpdaterString(s1).updates(s2) == e2)
-        assert (UpdaterString(s1).updates(s2).updates(s3) == e3)
+        assert (UpserterString(s1) == e1)
+        assert (UpserterString(s1).updates(s2) == e2)
+        assert (UpserterString(s1).updates(s2).upserts(s3) == e3)
 
         #print('e4    ', e4.replace('\n', '|'))
-        #print('actual', UpdaterString(s1).updates(s2).updates(s3).replace('\n', '|'))
-        assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4) == e4)
-        assert (UpdaterString(s1).updates(s2).updates(s3).updates(s4).updates(B1) == e4)
+        #print('actual', UpserterString(s1).updates(s2).updates(s3).replace('\n', '|'))
+        assert (UpserterString(s1).updates(s2).upserts(s3).upserts(s4) == e4)
+        assert (UpserterString(s1).updates(s2).upserts(s3).upserts(s4).upserts(B1) == e4)
 
 
 if __name__ == '__main__':
