@@ -1,4 +1,4 @@
-__version__ = '1.13.3'
+__version__ = '1.13.4'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
@@ -42,6 +42,7 @@ from .string_reader import StringReader
 from .string_template import TemplateString
 from .string_template_validator import TemplateStringValidator
 from .string_updater import UpdaterString # update entire string
+from .string_upserter import UpserterString
 from .string_value import ValueString
 from .string_writer import StringWriter
 
