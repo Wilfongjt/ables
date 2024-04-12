@@ -31,6 +31,10 @@ class UpserterString(str):
         instance = super().__new__(cls, contents)
         return instance
 
+    def setSettings(self, settings):
+        self.settings = settings
+        return self
+
     def depupdateAll(self, string_value):
         ##* Update entire string with github new string
         return UpserterString(string_value)
@@ -54,7 +58,6 @@ class UpserterString(str):
 
     def upsert(self, contents_new):
         contents_new = Upsertable()\
-                        .setSettings(self.settings)\
                         .upsert(str(self), contents_new)
         return UpserterString(contents_new)
 
