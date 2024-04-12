@@ -59,7 +59,7 @@ class UpserterString(str):
     def upsert(self, contents_new):
         contents_new = Upsertable()\
                         .upsert(str(self), contents_new)
-        return UpserterString(contents_new)
+        return UpserterString(contents_new,settings=self.settings)
 
     '''
     def upserts(self, contents_new):
