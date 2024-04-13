@@ -32,6 +32,7 @@ def main():
 
     able.recordable.main()
     able.resultable.main()
+    able.logger_runtime.main()
 
     able.stack.main()
     able.state.main()
