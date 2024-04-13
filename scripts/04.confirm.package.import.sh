@@ -23,6 +23,7 @@ python3 -c "from able.is_object import IsObject"
 
 python3 -c "from able.lb_util import LbUtil"
 python3 -c "from able.level import Level"
+python3 -c "from able.logger_runtime import RuntimeLogger"
 
 python3 -c "from able.mergeable import Mergeable"
 #python3 -c "from able.model_project import ProjectModel"

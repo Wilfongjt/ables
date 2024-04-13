@@ -1,4 +1,4 @@
-__version__ = '1.13.5'
+__version__ = '1.14.0'
 from .appendable import Appendable
 from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
@@ -35,6 +35,7 @@ from .string_env_var import EnvVarString
 from .string_json import JSONString
 from .string_key import KeyString
 from .matchable import Matchable
+from .logger_runtime import RuntimeLogger
 from .string_merger import MergerString
 
 from .string_normal import NormalString
