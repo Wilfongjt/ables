@@ -49,6 +49,8 @@ def main():
     assert(Recordable().addRecord('A').addRecord('B').getRecording()==expected)
     assert(Recordable().addRecord('A').addRecord('B').getDiagram()==expected_diagram)
 
+    print(Recordable().addRecord('A').addRecord('B').addRecord('B').getRecording())
+    print(Recordable().addRecord('A').addRecord('B').addRecord('B').getDiagram())
 
 if __name__ == "__main__":
     # execute as docker

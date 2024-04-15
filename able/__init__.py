@@ -48,6 +48,7 @@ from .string_value import ValueString
 from .string_writer import StringWriter
 
 from .recordable import Recordable
+from .recorder import Recorder
 from .taskable import Taskable
 from .template_list_latest import TemplateList_Latest
 #from .template_map import TemplateMap

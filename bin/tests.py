@@ -31,6 +31,7 @@ def main():
     able.projectable.main()
 
     able.recordable.main()
+    able.recorder.main()
     able.resultable.main()
     able.logger_runtime.main()
 
