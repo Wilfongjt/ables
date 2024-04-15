@@ -8,7 +8,7 @@ class EnvString(str):
     ##__EnvString__
     ##
     ## Environment Variables and Values
-    def __new__(cls, env_var_string):
+    def __new__(cls, env_var_string, recorder=None):
 
         contents = env_var_string
         for ln in contents.split('\n'):
@@ -21,13 +21,15 @@ class EnvString(str):
             if match:
                 ln = ln.split('=')
                 ##* loads env variables into memory
+                if recorder: recorder.add('load')
                 os.environ[ln[0]] = ln[1]
 
         instance = super().__new__(cls, contents)
         return instance
 
 def main():
-
+    from able.recorder import Recorder
+    recorder=Recorder()
     folder = '{}/Development/Temp/env_string'.format(os.environ['HOME'])
     folder_filename = '{}/env_string.env'.format(folder)
 
@@ -40,12 +42,12 @@ def main():
         f.write(contents)
 
     # testapi
-    assert (EnvString(StringReader(folder_filename))==contents)
+    assert (EnvString(StringReader(folder_filename), recorder)==contents)
     assert (os.environ['AAAAA']=='github')
     assert (os.environ['BBBBB']=='docker')
-    print('EnvString', EnvString(StringReader(folder_filename)))
+    print('EnvString', EnvString(StringReader(folder_filename), recorder))
 
-
+    print('recorder', recorder)
     # cleanup
     fileExists = os.path.isfile(folder_filename)
     if fileExists:
