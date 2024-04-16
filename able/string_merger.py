@@ -8,13 +8,14 @@ class MergerString(str, Mergeable):
     def __init__(self, string_value, nv_list=None):
         Mergeable.__init__(self)
 
-    def __new__(cls, string_value, nv_list=None):
+    def __new__(cls, string_value, nv_list=None,recorder=None):
         ##
         ##* Merge many name-value pairs into github given template string on initiation
         # replace found names with values by iteration
         contents=string_value
         if nv_list:
             for nv in nv_list:
+                if recorder: recorder.add('merge')
                 contents = contents.replace(nv['name'], nv['value'])
 
         instance = super().__new__(cls, contents)

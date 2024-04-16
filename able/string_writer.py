@@ -5,7 +5,8 @@ class StringWriter():
     ##__StringWriter__
     ##
     ## Write github string value to github given filename
-    def __init__(self, folder_filename, content_string):
+    def __init__(self, folder_filename, content_string, recorder=None):
+        if recorder: recorder.add('write')
         with open(folder_filename, 'w') as f:
             f.write(content_string)
 
