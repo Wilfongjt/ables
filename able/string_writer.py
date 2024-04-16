@@ -9,7 +9,7 @@ class StringWriter():
         if recorder: recorder.add('write')
         with open(folder_filename, 'w') as f:
             f.write(content_string)
-
+00
 def main():
     import shutil
 
