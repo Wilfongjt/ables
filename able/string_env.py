@@ -8,6 +8,7 @@ class EnvString(str):
     ##__EnvString__
     ##
     ## Environment Variables and Values
+    ## Load env variables into memory
     def __new__(cls, env_var_string, recorder=None):
 
         contents = env_var_string
@@ -21,7 +22,7 @@ class EnvString(str):
             if match:
                 ln = ln.split('=')
                 ##* loads env variables into memory
-                if recorder: recorder.add('load')
+                if recorder: recorder.add('load-env')
                 os.environ[ln[0]] = ln[1]
 
         instance = super().__new__(cls, contents)

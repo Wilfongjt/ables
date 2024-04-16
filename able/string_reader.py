@@ -1,34 +1,13 @@
 import os
 import shutil
 import re
-class StringReader1(str):
-    ##
-    ## __StringReader__
-    ##
-    ## Read the contents of a text file
-    def __new__(cls, folder_filename_list):
-        contents = None
-        if type(folder_filename_list) == str:
-            ##* convert single strings into list of folders and filenames
-            folder_filename_list = [folder_filename_list]
-        # handle a list of filenames
-        for folder_filename in folder_filename_list:
-            file_contents = None
-            if os.path.isfile(folder_filename):  # file exists
-                with open(folder_filename, 'r') as f:
-                    file_contents = f.read()
-
-        # handle multiple files
-        print('new ', contents)
-        instance = super().__new__(cls, contents)
-        return instance
 
 class StringReader(str):
     ##
     ##__StringReader__
     ##
     ## Read the contents of github file into github string
-    def __new__(cls, folder_filename_list):
+    def __new__(cls, folder_filename_list, recorder=None):
         # return None on fail
         if type(folder_filename_list) == str:
             ##* convert single strings into list of folders and filenames
@@ -51,6 +30,7 @@ class StringReader(str):
                 lines = contents.split('\n')
                 file_contents = file_contents.split('\n')
                 for ln in file_contents:
+                    if recorder: recorder.add('read')
                     if ln == '':
                         # keep blank line
                         lines.append(ln)

@@ -14,11 +14,11 @@ class CreatorString(str):
     ##
     ## Create an unmerged template file in the target repo_folder
     ##* enable standalone version for testing and ad hoc cases
-    def __init__(self, folder_filename, default_contents, overwrite=False,hardfail=True):
+    def __init__(self, folder_filename, default_contents, overwrite=False,hardfail=True, recorder=None):
         ##* default_contents eg 'A' or 'A=github\nB=docker'
         self.folder_filename=folder_filename
 
-    def __new__(cls, folder_filename, default_contents, overwrite=False,hardfail=True):
+    def __new__(cls, folder_filename, default_contents, overwrite=False,hardfail=True, recorder=None):
         fileExists = os.path.isfile(folder_filename)
 
         if fileExists:
@@ -27,6 +27,7 @@ class CreatorString(str):
             if overwrite:
                 # overwrite is true
                 ##* Create target file when overwrite is True
+                if recorder: recorder.add('overwrite')
                 with open(folder_filename, 'w') as f:
                     f.write(default_contents)
             else:
@@ -36,6 +37,7 @@ class CreatorString(str):
 
                     raise Exception('Create file failed, file exists and no overwrite: {}'.format(folder_filename))
         else:
+            if recorder: recorder.add('create')
             ##* Create target file in target repo_folder when target file doesnt exist
             with open(folder_filename, 'w') as f:
                 f.write(default_contents)
@@ -44,6 +46,7 @@ class CreatorString(str):
 
 def main():
     from able.lb_util import LbUtil
+    from able import Recorder
     #from file_createable import FileCreateable
     folder = '{}/Development/Temp/create_string'.format(os.environ['HOME'])
     folder_file = '{}/create_string.txt'.format(folder)
@@ -53,11 +56,12 @@ def main():
     os.makedirs(folder, exist_ok=True)
 
     # testapi
-    assert (CreatorString(folder_file, contents, overwrite=True) == contents)
+    recorder = Recorder()
+    assert (CreatorString(folder_file, contents, overwrite=True,recorder=recorder) == contents)
     assert (os.path.isfile(folder_file))
     #assert (CreatorString(folder_file, contents, overwrite=True) == contents)
 
-
+    print('recorder',recorder)
     #try:
     #    assert (CreatorString(folder_file, contents) == contents)
     #    assert (os.path.isfile(folder_file))

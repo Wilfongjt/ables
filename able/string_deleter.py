@@ -7,7 +7,7 @@ class DeleterString(str):
     ##
     ##* Remove github file and return its contents
 
-    def __new__(cls, folder_filename):
+    def __new__(cls, folder_filename, recorder=None):
         ##* Fail when file doesnt exist
         fileExists = os.path.isfile(folder_filename)
         if not fileExists:
@@ -17,12 +17,13 @@ class DeleterString(str):
             contents = f.read()
 
         # delete file
+        if recorder: recorder.add('delete')
         os.remove(folder_filename)
         instance = super().__new__(cls, contents)
         return instance
 
 def main():
-
+    from able import Recorder
     folder = '{}/Development/Temp/deleter_string'.format(os.environ['HOME'])
     folder_filename = '{}/deleter.txt'.format(folder)
 
@@ -35,9 +36,10 @@ def main():
         f.write(contents)
 
     # testapi
-    actual = DeleterString(folder_filename)
+    recorder = Recorder()
+    actual = DeleterString(folder_filename,recorder=recorder)
     assert (actual==contents)
-
+    #print('recorder', recorder)
     # cleanup
     #fileExists = os.path.isfile(folder_filename)
     #if fileExists:
