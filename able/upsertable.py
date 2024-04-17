@@ -2,7 +2,7 @@ from able.name_value_pairs import NameValuePairs
 from able.matchable import Matchable
 class Upsertable():
 
-    def upsert(self, contents, contents_new):
+    def upsert(self, contents, contents_new, recorder=None):
         ## Strategy: evaluate self, one line at a time, to a new string
         # contents has zero or more lines of text
         rc = []
@@ -31,6 +31,7 @@ class Upsertable():
                         val = '{}{}{}'.format(nv['name'], nv['op'], nv['value'])  # search_nm #nv['value']
 
                     nv['found'] = True
+                    if recorder: recorder.add('update')
             rc.append(val)
         # handle inserts
         for nv in nv_list:
@@ -40,6 +41,7 @@ class Upsertable():
                     unhandle_value = '{}={}'.format(nv['name'], nv['value'])
 
                 rc.append(unhandle_value)
+                if recorder: recorder.add('insert')
 
         if rc == []:
             rc = ''
@@ -48,12 +50,17 @@ class Upsertable():
         return rc
 
 def main():
+    from able import Recorder
     contents = ''''''
+    recorder = Recorder()
     assert (Upsertable())
     assert (Upsertable().upsert('A', '') == 'A' )
     assert (Upsertable().upsert('A', 'B') == 'A\nB')
     assert (Upsertable().upsert('A=B', 'A=b') == 'A=b')
     assert (Upsertable().upsert('A=B\nC=c', 'A=b') == 'A=b\nC=c')
+    assert (Upsertable().upsert('A=B\nC=c', 'A=b\nD=d', recorder=recorder) == 'A=b\nC=c\nD=d')
+
+    print('recorder', recorder)
 
 if __name__ == "__main__":
     # execute as docker

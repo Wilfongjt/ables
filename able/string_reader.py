@@ -19,6 +19,8 @@ class StringReader(str):
             ##* Fail when file doesnt exist
             file_contents=None
             if os.path.isfile(folder_filename): # file exists
+
+                if recorder: recorder.add('read ({})'.format(str(folder_filename)).split('/')[-1])
                 with open(folder_filename, 'r') as f:
                     file_contents = f.read()
 
@@ -30,7 +32,7 @@ class StringReader(str):
                 lines = contents.split('\n')
                 file_contents = file_contents.split('\n')
                 for ln in file_contents:
-                    if recorder: recorder.add('read')
+                    #if recorder: recorder.add('read')
                     if ln == '':
                         # keep blank line
                         lines.append(ln)
@@ -82,6 +84,9 @@ def isStringNone(str_object):
     return rc
 
 def test_init():
+    from able import Recorder
+    recorder = Recorder()
+    '''
     print('1 init',type(StringReader('xxx')))
     print('2 init',StringReader('xxx'))
     print('3 init', StringReader('xxx') == None)
@@ -91,12 +96,15 @@ def test_init():
     print('7 init', str(None))
     print('8 init', type(str(None)))
     print('9 init', str('')=='')
-
-    assert (isStringNone(StringReader('not_a_file')) == None)
+    '''
+    assert (isStringNone(StringReader('not_a_file',recorder=recorder)) == None)
+    #print('recorder', recorder)
 
 def test_singleton(folder):
+    from able import Recorder
+    recorder = Recorder()
     #print('cwd', __file__)
-    print('StringReader test_singleton', end='')
+    #print('StringReader test_singleton', end='')
 
     folder_filename_singleton = '{}/reader.txt.c-u-.tmpl'.format(folder)
 
@@ -105,13 +113,15 @@ def test_singleton(folder):
     with open(folder_filename_singleton, 'w') as f:
         f.write(text1append)
         # singleton
-    print('folder_filename_singleton',folder_filename_singleton)
-    print('StringReader(folder_filename_singleton)',StringReader(folder_filename_singleton))
+    #print('folder_filename_singleton',folder_filename_singleton)
+    #print('StringReader(folder_filename_singleton)',StringReader(folder_filename_singleton))
     assert (StringReader(folder_filename_singleton) == text1append)
-    print('...ok')
+    #print('...ok')
 
 def test_append(folder):
-    print('StringReader test_append', end='')
+    from able import Recorder
+    recorder = Recorder()
+    #print('StringReader test_append', end='')
     # setup
     text1append = 'A=a\nB=b'
     text2append = 'W=w'
@@ -135,10 +145,12 @@ def test_append(folder):
     # append multiple
 
     assert (StringReader(append_folder_filename_list) == text1append + '\n' + text2append + '\n' + text3append)
-    print('...ok')
+    #print('...ok')
 
 def test_overlap(folder):
-    print('StringReader test_overlap', end='')
+    from able import Recorder
+    recorder = Recorder()
+    #print('StringReader test_overlap')
 
     # setup
     text1overlap = 'A=x'
@@ -165,19 +177,59 @@ def test_overlap(folder):
     # overlap multiple
     #print (StringReader(overlap_folder_filename_list))
 
-    assert (StringReader(overlap_folder_filename_list) == textoverlap)
+    assert (StringReader(overlap_folder_filename_list, recorder=recorder) == textoverlap)
+    #print('recorder', recorder)
+    #print('...ok')
 
-    print('...ok')
+def test_distributed(folder):
+    from able import Recorder
+    recorder = Recorder()
+    #print('StringReader test_overlap')
+
+    # setup
+    text1overlap = 'A=x'
+    text2overlap = 'A=a\nB=b\nC=x'
+    text3overlap = 'C=C'
+
+    content_overlap_list = [
+        text1overlap,
+        text2overlap,
+        text3overlap
+    ]
+    textoverlap = 'A=a\nB=b\nC=C'
+    overlap_folder_filename_list = ['{}/a/reader.txt.c-u-.tmpl'.format(folder),
+                                    '{}/b/reader.txt.c-u-.tmpl'.format(folder),
+                                    '{}/c/reader.txt.c-u-.tmpl'.format(folder)]
+    i = 0
+    fl = ['a','b','c']
+    for folder_filename in overlap_folder_filename_list:
+        # create github file to read
+        contents = content_overlap_list[i]
+        with open(folder_filename, 'w') as f:
+            f.write(contents)
+        i += 1
+
+    # overlap multiple
+    # print (StringReader(overlap_folder_filename_list))
+
+    assert (StringReader(overlap_folder_filename_list, recorder=recorder) == textoverlap)
+    assert (recorder == {'step_list': [{'msg': '[*]', 'count': 1}, {'msg': '-> reader.txt.c-u-.tmpl)', 'count': 3}]})
+    #print('recorder', recorder)
 
 def main():
     folder = '{}/Development/Temp/reader_string'.format(os.environ['HOME'])
     os.makedirs(folder, exist_ok=True)
+    os.makedirs('{}/a'.format(folder), exist_ok=True)
+    os.makedirs('{}/b'.format(folder), exist_ok=True)
+    os.makedirs('{}/c'.format(folder), exist_ok=True)
+
+
     # assert(StringReader(os.getcwd()))
     test_init()
     test_singleton(folder)
     test_append(folder)
     test_overlap(folder)
-
+    test_distributed(folder)
     # cleanup
 
     fileExists = os.path.isdir(folder)
