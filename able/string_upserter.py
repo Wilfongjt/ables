@@ -11,16 +11,18 @@ class UpserterString(str):
     ##
     ## Upsert string with another string
     ##
-    def __init__(self, str_value='', settings={'dup': False, 'hard_fail': True}):
-        Upsertable.__init__(self)
+    def __init__(self, str_value='', settings={'dup': False, 'hard_fail': True}, recorder=None):
+        #Upsertable.__init__(self)
         self.settings = settings
+        self.recorder = recorder
 
-    def __new__(cls, str_value='', settings={'dup':False, 'hard_fail': True}):
+    def __new__(cls, str_value='', settings={'dup':False, 'hard_fail': True}, recorder=None):
         contents = str_value
         if not settings['dup']:
             contents = str_value.split('\n')
             if len(contents) != len(set(contents)):  # check for duplicates
                 contents = ''  # set to no value
+                recorder.add('fail(dups)')
                 ##* HardFail when duplicate found in initalizing string and configured to reject duplicates and hard_fail is True
                 if settings['hard_fail']:
                     raise Exception('Initial string ({}) has duplicates!'.format(str_value.replace('\n', '|')))
@@ -59,7 +61,7 @@ class UpserterString(str):
     def upsert(self, contents_new):
         contents_new = Upsertable()\
                         .upsert(str(self), contents_new)
-        return UpserterString(contents_new,settings=self.settings)
+        return UpserterString(contents_new,settings=self.settings, recorder=self.recorder)
 
     '''
     def upserts(self, contents_new):
