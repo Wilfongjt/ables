@@ -18,7 +18,7 @@ class RuntimeLogger(str):
         os.makedirs(project_folder, exist_ok=True)
 
         contents = '{}/{}.log'.format(project_folder, project_name)
-        print('contents', contents)
+        #print('contents', contents)
         instance = super().__new__(cls, contents)
         return instance
 
