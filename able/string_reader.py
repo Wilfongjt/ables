@@ -20,7 +20,7 @@ class StringReader(str):
             file_contents=None
             if os.path.isfile(folder_filename): # file exists
 
-                if recorder: recorder.add('read ({})'.format(str(folder_filename)).split('/')[-1])
+                if recorder: recorder.add('read ({})'.format(str(folder_filename).split('/')[-1]))
                 with open(folder_filename, 'r') as f:
                     file_contents = f.read()
 
@@ -213,8 +213,9 @@ def test_distributed(folder):
     # print (StringReader(overlap_folder_filename_list))
 
     assert (StringReader(overlap_folder_filename_list, recorder=recorder) == textoverlap)
-    assert (recorder == {'step_list': [{'msg': '[*]', 'count': 1}, {'msg': '-> reader.txt.c-u-.tmpl)', 'count': 3}]})
     #print('recorder', recorder)
+    assert (recorder == {'step_list': [{'msg': '[*]', 'count': 1}, {'msg': '-> read (reader.txt.c-u-.tmpl)', 'count': 3}]})
+    # assert (recorder == {'step_list': [{'msg': '[*]', 'count': 1}, {'msg': '-> read', 'count': 3}]})
 
 def main():
     folder = '{}/Development/Temp/reader_string'.format(os.environ['HOME'])
