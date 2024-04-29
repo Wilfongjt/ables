@@ -1,5 +1,7 @@
 from able.name_value_pairs import NameValuePairs
 from able.matchable import Matchable
+
+# Upsert (document_string).set(b).when(a)
 class Upsertable():
 
     def upsert(self, contents, contents_new, recorder=None):

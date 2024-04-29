@@ -69,10 +69,10 @@ class TemplateList_Latest(dict):
 def main():
     from pprint import pprint
     template_path = '{}/template/testapi'.format(os.getcwd().replace('/bin','/able'))
-
-    #pprint(TemplateList_Latest(template_path))
+    #template_path = '/Users/jameswilfong/Development/lyttlebit/00_converters/md2_a/v1_0_0/md2_a/source/template/github'
+    pprint(TemplateList_Latest(folder_path=template_path))
     print('TemplateListLatest',end='')
-    assert(TemplateList_Latest(template_path))
+    assert(TemplateList_Latest(folder_path=template_path))
     print('...ok')
 
 if __name__ == "__main__":
