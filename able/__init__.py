@@ -4,6 +4,7 @@ from .classnameable import ClassNameable
 from .cloneable_gh import Cloneable_GH
 from .clone_repo import CloneRepo
 from .constants import Const
+from .recorder import DiagramString
 from .datable import Datable
 from .exception_cloning import ExceptionCloning
 from .failable import Failable

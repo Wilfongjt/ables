@@ -38,6 +38,8 @@ python3 -c "from able.resultable import Resultable"
 python3 -c "from able.stack import Stack"
 python3 -c "from able.state import State"
 python3 -c "from able.string_creator import CreatorString"
+python3 -c "from able.recorder import DiagramString"
+
 python3 -c "from able.string_data import DataString"
 python3 -c "from able.string_deleter import DeleterString"
 python3 -c "from able.string_env import EnvString"
