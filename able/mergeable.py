@@ -18,7 +18,7 @@ class Mergeable():
         if isinstance(self, str):
             self.merged_value = self
         for nv in nv_list:
-            self.merged_value = self.merged_value.replace(nv['name'], nv['value'])
+            self.merged_value = self.merged_value.replace(nv['name'], '{}'.format(nv['value']))
 
         return self.create_instance()
 
